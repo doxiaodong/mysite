@@ -31,7 +31,7 @@
 				// show sign model
 				window.XD.modules.Model.show("#SIGN");
 
-				func.sign("SIGNIN", "SIGNOUT");
+				func.sign("SIGNIN", "REGISTER");
 
 			},
 			initModules: function() {

@@ -2,8 +2,6 @@
 @import 'partless/layout_import';
 @import 'pages/_pages_layout';
 
-// xd modules
-@import 'partless/_xd_model';
 // header article footer
 // nav list
 .slider(@num) when (@num >= 0) {
@@ -88,12 +86,20 @@ footer.footer {
     }
 }
 
-#SIGNIN, #SIGNOUT {
-    position: absolute;
+#SIGN {
+    .xd-container {
+        background-color: transparent;
+    }
+}
+
+#SIGNIN, #REGISTER{
+    position: relative;
     width: 100%;
     background-color: #fff;
     z-index: 1;
     opacity: 0;
+    height: 0;
+    overflow: hidden;
     .transition(0.5s);
     .transform-rotate3d(0, 180deg, 0);
     -webkit-transition-property: opacity, -webkit-transform;
@@ -101,6 +107,7 @@ footer.footer {
     &.active {
         z-index: 2;
         opacity: 1;
+        height: auto;
         .transform-rotate3d(0, 0, 0);
     }
 }
