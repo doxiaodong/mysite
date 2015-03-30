@@ -1,0 +1,37 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html ng-app>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta charset="UTF-8">
+	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/web-app/touch-icon-iphone-retina.png' %}">
+	<link rel="apple-touch-startup-image" href="{% static 'img/web-app/startup.png' }">
+	<link rel="stylesheet" href="{% static 'fonts/ionicons-2.0.0/css/ionicons.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/layout.css' %}">
+	{% block css %}
+	{% endblock %}
+</head>
+<body>
+	<header class="header">
+		<ul id="header_nav" class="nav-list clearfix">
+			<li class="slider-nav"></li>
+			<li class="each-nav" data-index="0">春江潮水</li>
+			<li class="each-nav" data-index="1">春江潮水</li>
+			<li class="each-nav" data-index="2">春江潮水</li>
+			<li class="each-nav" data-index="3">春江潮水</li>
+		</ul>
+	</header>
+	<article class="container">
+		{% block content %}
+		{% endblock %}
+	</article>
+	<footer class="footer">
+		copyright jjccdd
+	</footer>
+	<script data-main="{% static 'js/main' %}" src="{% static 'js/require.js' %}"></script>
+	{% block js %}
+	{% endblock %}
+</body>
+</html>

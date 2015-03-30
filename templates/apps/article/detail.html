@@ -1,0 +1,56 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+
+{% block css %}
+{% endblock %}
+
+{% block content %}
+<div class="pages">
+	<div class="page-block">
+		<div class="each-header">
+			<span class="full-title big-size">萧萧梧叶送秋声</span>
+			<div class="changes">2015-1-13</div>
+		</div>
+		<div class="each-inner">
+			<div class="each-article" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
+				<p>云和山的彼端</p>	
+			</div>
+		</div>
+	</div>
+	<div class="page-block">
+		<div class="each-header">
+			5回复
+		</div>
+		<div class="each-inner">
+			<ul class="replys">
+				<li class="each-reply" ng-repeat="floor in [1,2,3,4,5]">
+					<img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">
+					<div class="right">
+						<div class="word">
+							<div class="user">杜小东</div>
+							<div class="mes">
+								<span ng-repeat="i in [1,2,3,4]">山东菜太山</span>
+							</div>
+						</div>
+						<div class="message">
+							<span class="time">2015年12月23日</span>
+							<span class="pointer icon ion-reply">回复</span>
+							<span class="pointer icon ion-android-share" xd-model="#id_model">转发</span>
+							<span class="floor">{% templatetag openvariable %}floor{% templatetag closevariable %}楼</span>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>	
+</div>
+
+<div id="id_model" class="xd-model">
+	<div class="xd-container">
+		<header class="xd-header">head</header>
+		<article class="xd-article">article</article>
+		<footer class="xd-footer">footer</footer>
+		<i class="xd-close">close</i>
+	</div>
+</div>
+{% endblock %}

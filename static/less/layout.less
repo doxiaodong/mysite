@@ -1,0 +1,95 @@
+// @import 'partless/each_import';
+@import 'partless/layout_import';
+@import 'pages/_pages_layout';
+
+// xd modules
+@import 'partless/_xd_model';
+// header article footer
+// nav list
+.slider(@num) when (@num >= 0) {
+    .slider(@num - 1);
+    .nav-list[index='@{num}'] {
+        .slider-nav {
+            .transform-translate3d(@num*100%, 0, 0);
+        }
+    }
+}
+.slider(3);
+header.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+
+    overflow: hidden;
+
+    width: 100%;
+    height: @header_height;
+
+    -webkit-transition-property: -webkit-transform, opacity;
+    -moz-transition-property: -moz-transform, opacity;
+    -ms-transition-property: -ms-transform, opacity;
+    -o-transition-property: -o-transform, opacity;
+    transition-property: transform, opacity;
+
+    .background-gradient(top, #333, #333);
+    .nav-list {
+        height: 100%;
+        max-width: @max-width;
+        margin: auto;
+        position: relative;
+        .each-nav {
+            float: left;
+            cursor: pointer;
+            color: rgb(255, 255, 255);
+            width: 25%;
+            height: 100%;
+            line-height: @header_height;
+            text-align: center;
+        }
+        .slider-nav {
+            background-color: @header-active;
+            width: 25%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0.5;
+            .transition(@base_duration);
+            -webkit-transition-property: -webkit-transform;
+            -moz-transition-property: -moz-transform;
+            -ms-transition-property: -ms-transform;
+            -o-transition-property: -o-transform;
+            transition-property: transform;
+        }
+    }
+}
+article.container {
+    padding: @header_height 0 5px 0;
+    background-color: @bg_base;
+}
+.pjaxloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.2);
+    .preloader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        margin: -10px 0 0 -10px;
+    }
+}
+footer.footer {
+    min-height: 50px;
+    background-color: @bg-page;
+    .content {
+        max-width: @max-width;
+        margin: 0 auto;
+        text-align: center;
+        line-height: 50px;
+    }
+}
