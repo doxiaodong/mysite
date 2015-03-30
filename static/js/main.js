@@ -14,9 +14,10 @@
 				window.XD = {
 					modules: {}
 				};
-				this.initLayout();
 				this.initModules();
 				this.initPages();
+
+				this.initLayout();
 			},
 			initLayout: function() {
 				var c = func.$id("header_nav");
@@ -26,6 +27,12 @@
 	                    this.setAttribute('index', index);
 	                }
 	            });
+
+				// show sign model
+				window.XD.modules.Model.show("#SIGN");
+
+				func.sign("SIGNIN", "SIGNOUT");
+
 			},
 			initModules: function() {
 				module.init();

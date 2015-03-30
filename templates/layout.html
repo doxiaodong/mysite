@@ -30,8 +30,28 @@
 	<footer class="footer">
 		copyright jjccdd
 	</footer>
+
+	<div id="SIGN" class="xd-model">
+		<div class="xd-container">
+			<div id="SIGNIN">
+				<header class="xd-header">head</header>
+				<article class="xd-article">article</article>
+				<footer class="xd-footer">footer</footer>
+				<i class="xd-close icon ion-ios-close-empty"></i>
+			</div>
+			<div id="SIGNOUT" class="active">
+				<header class="xd-header">head</header>
+				<article class="xd-article">article</article>
+				<footer class="xd-footer">footer</footer>
+				<i class="xd-close icon ion-ios-close-empty"></i>
+			</div>
+		</div>
+	</div>
+
 	<script data-main="{% static 'js/main' %}" src="{% static 'js/require.js' %}"></script>
 	{% block js %}
 	{% endblock %}
+
+	
 </body>
 </html>

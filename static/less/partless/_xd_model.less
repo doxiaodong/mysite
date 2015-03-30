@@ -49,10 +49,22 @@
             border-top: 1px solid #eee;
         }
         .xd-close {
+
+            @size: 34px;
             position: absolute;
             top: 0;
             right: 0;
-            .pointer;
+            padding: 0;
+            font-size: @size;
+            height: @size;
+            width: @size;
+            z-index: 9999;
+            cursor: pointer;
+
+            .transition(0.5s);
+            &:hover {
+                .transform-rotate3d(0, 0, 360deg);
+            }
         }
     }
 }

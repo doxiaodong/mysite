@@ -1,2 +1,4 @@
 .DS_Store
-*.DS_Store
+
+static/css/pages/
+static/css/partcss/

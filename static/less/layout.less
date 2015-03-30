@@ -27,9 +27,6 @@ header.header {
     height: @header_height;
 
     -webkit-transition-property: -webkit-transform, opacity;
-    -moz-transition-property: -moz-transform, opacity;
-    -ms-transition-property: -ms-transform, opacity;
-    -o-transition-property: -o-transform, opacity;
     transition-property: transform, opacity;
 
     .background-gradient(top, #333, #333);
@@ -57,9 +54,6 @@ header.header {
             opacity: 0.5;
             .transition(@base_duration);
             -webkit-transition-property: -webkit-transform;
-            -moz-transition-property: -moz-transform;
-            -ms-transition-property: -ms-transform;
-            -o-transition-property: -o-transform;
             transition-property: transform;
         }
     }
@@ -91,5 +85,22 @@ footer.footer {
         margin: 0 auto;
         text-align: center;
         line-height: 50px;
+    }
+}
+
+#SIGNIN, #SIGNOUT {
+    position: absolute;
+    width: 100%;
+    background-color: #fff;
+    z-index: 1;
+    opacity: 0;
+    .transition(0.5s);
+    .transform-rotate3d(0, 180deg, 0);
+    -webkit-transition-property: opacity, -webkit-transform;
+    transition-property: opacity, transform;
+    &.active {
+        z-index: 2;
+        opacity: 1;
+        .transform-rotate3d(0, 0, 0);
     }
 }
