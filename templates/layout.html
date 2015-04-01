@@ -16,11 +16,16 @@
 <body>
 	<header class="header">
 		<ul id="header_nav" class="nav-list clearfix">
+			{% if user.is_authenticated %}
+			<li class="a back-index">{{user.username}}</li>
+			{% else %}
+			<li class="a back-index" xd-model="#SIGN">登录</li>
+			{% endif %}
 			<li class="slider-nav"></li>
-			<li class="each-nav" data-index="0">春江潮水</li>
-			<li class="each-nav" data-index="1">春江潮水</li>
-			<li class="each-nav" data-index="2">春江潮水</li>
-			<li class="each-nav" data-index="3">春江潮水</li>
+			<li class="each-nav a" data-index="0">春江潮水</li>
+			<li class="each-nav a" data-index="1">春江潮水</li>
+			<li class="each-nav a" data-index="2">春江潮水</li>
+			<li class="each-nav a" data-index="3">春江潮水</li>
 		</ul>
 	</header>
 	<article class="container">
@@ -33,26 +38,42 @@
 
 	<div id="SIGN" class="xd-model">
 		<div class="xd-container">
-			<div id="SIGNIN" class="active">
+			<form id="SIGNIN" class="form active" ajax-action="{% url 'account:signin' %}">
+				{% csrf_token %}
 				<header class="xd-header">登录</header>
 				<article class="xd-article">
-					<form action="">
-						<div class="form-group">
-							<label for="account"></label>
-							<input class="form-control" id="account" name="account" type="text" placeholder="用户名或邮箱">
-						</div>
-						<div class="form-group">
-							<input class="form-control" type="password" placeholder="密码">
-						</div>
-					</form>
+					<div class="form-group">
+						<label for="username"></label>
+						<input class="form-control" id="username" name="username" type="text" placeholder="用户名或邮箱">
+					</div>
+					<div class="form-group">
+						<input class="form-control" name="password" type="password" placeholder="密码">
+					</div>
 				</article>
+				<footer class="xd-footer">
+					<button class="signin-button main btn" type="submit">登录</button>
+					<span class="a aside other-side">注册</span>
+					<span onclick="alert('加油加油')" class="a aside">忘记密码</span>
+				</footer>
 				<i class="xd-close icon ion-ios-close-empty"></i>
-			</div>
-			<div id="REGISTER">
+			</form>
+			<form id="REGISTER" class="form">
 				<header class="xd-header">注册</header>
-				<article class="xd-article">article</article>
+				<article class="xd-article">
+					<div class="form-group">
+						<label for="account"></label>
+						<input class="form-control" id="account" name="account" type="text" placeholder="用户名">
+					</div>
+					<div class="form-group">
+						<input class="form-control" type="password" placeholder="密码">
+					</div>
+				</article>
+				<footer class="xd-footer">
+					<button class="main btn">注册</button>
+					<span class="a aside other-side">登录</span>
+				</footer>
 				<i class="xd-close icon ion-ios-close-empty"></i>
-			</div>
+			</form>
 		</div>
 	</div>
 

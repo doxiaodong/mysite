@@ -1,11 +1,9 @@
 @import 'partless/each_import';
 @import 'partless/layout_import';
-
 @import 'pages/_pages_layout';
-
 // header article footer
 // nav list
-.slider(@num) when (@num >= 0) {
+.slider(@num) when (@num >=0) {
     .slider(@num - 1);
     .nav-list[index='@{num}'] {
         .slider-nav {
@@ -13,21 +11,31 @@
         }
     }
 }
+
 .slider(3);
+// *::selection, *::-moz-selection, *::-webkit-selection {
+//     background: darken(@active_color, 10%);
+//     color: #fff;
+// }
+::selection{
+    background: lighten(@active_color, 10%);
+    color: #fff;
+}
+::-moz-selection{
+    background: lighten(@active_color, 10%);
+    color: #fff;
+}
+
 header.header {
     position: fixed;
     top: 0;
     left: 0;
     z-index: 999;
-
     overflow: hidden;
-
     width: 100%;
     height: @header_height;
-
     -webkit-transition-property: -webkit-transform, opacity;
     transition-property: transform, opacity;
-
     .background-gradient(top, #333, #333);
     .nav-list {
         height: 100%;
@@ -42,6 +50,9 @@ header.header {
             height: 100%;
             line-height: @header_height;
             text-align: center;
+            &:hover {
+                color: @active_color;
+            }
         }
         .slider-nav {
             background-color: @header-active;
@@ -55,12 +66,33 @@ header.header {
             -webkit-transition-property: -webkit-transform;
             transition-property: transform;
         }
+        .back-index {
+            position: absolute;
+            width: 50px;
+            height: 100%;
+            text-align: center;
+            line-height: 50px;
+            color: rgb(255, 255, 255);
+            left: 100%;
+            cursor: pointer;
+            &:hover {
+                color: @active_color;
+            }
+        }
+        @media screen and (max-width: 1124px) {
+            .back-index {
+                visibility: hidden;
+                width: 0;
+            }
+        }
     }
 }
+
 article.container {
     padding: @header_height 0 5px 0;
     background-color: @bg_base;
 }
+
 .pjaxloader {
     position: fixed;
     top: 0;
@@ -76,6 +108,7 @@ article.container {
         margin: -10px 0 0 -10px;
     }
 }
+
 footer.footer {
     min-height: 50px;
     background-color: @bg-page;
@@ -93,7 +126,8 @@ footer.footer {
     }
 }
 
-#SIGNIN, #REGISTER{
+#SIGNIN,
+#REGISTER {
     position: relative;
     width: 100%;
     background-color: #fff;
@@ -110,5 +144,23 @@ footer.footer {
         opacity: 1;
         height: auto;
         .transform-rotate3d(0, 0, 0);
+    }
+    .form-group {
+        width: 80%;
+        margin: 10px auto;
+    }
+    .xd-footer {
+        .aside {
+            margin-left: 20px;
+        }
+    }
+    .btn {
+        &.main {
+            padding: 6px 40px;
+        }
+        &:hover {
+            color: #fff;
+            background-color: darken(@active_color, 10%);
+        }
     }
 }

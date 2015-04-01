@@ -27,7 +27,11 @@ menu,
 nav,
 section,
 table,
-img {
+img,
+input,
+label,
+textarea {
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-touch-callout: none;
@@ -90,13 +94,22 @@ ol,
 li {
   list-style: none;
 }
-a {
+a,
+.a {
   text-decoration: none;
   color: gray;
+  cursor: pointer;
+  -webkit-transition: color 0.2s;
+  -moz-transition: color 0.2s;
+  -o-transition: color 0.2s;
+  transition: color 0.2s;
 }
 a:hover,
 a:focus,
-a:active {
+a:active,
+.a:hover,
+.a:focus,
+.a:active {
   color: #ff6347;
 }
 .preloader {
@@ -304,6 +317,54 @@ a:active {
   -ms-transform: rotateX(0) rotateY(0) rotateZ(360deg);
   transform: rotateX(0) rotateY(0) rotateZ(360deg);
 }
+.form-control {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, -webkit-box-shadow ease-in-out 0.15s;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+.form-control:focus {
+  border-color: #ff6347;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(102, 175, 233, 0.6);
+}
+.btn {
+  display: inline-block;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 1px solid transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  background-color: #ff6347;
+  color: #fff;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+}
 .sr-only {
   width: 0;
   height: 0;
@@ -399,9 +460,6 @@ a:active {
 }
 .pages .page-block .each-inner .replys .each-reply > .right .message > span:before {
   margin-right: 2px;
-}
-.pages .page-block .each-inner .replys .each-reply > .right .message > span.pointer:hover {
-  color: #6a6a6a;
 }
 .pages .page-block .each-inner .replys .each-reply + .each-reply {
   border-top: 1px solid #ccc;
@@ -598,6 +656,14 @@ a:active {
   -ms-transform: translate3d(300%, 0, 0);
   transform: translate3d(300%, 0, 0);
 }
+::selection {
+  background: #ff8e7a;
+  color: #fff;
+}
+::-moz-selection {
+  background: #ff8e7a;
+  color: #fff;
+}
 header.header {
   position: fixed;
   top: 0;
@@ -631,6 +697,9 @@ header.header .nav-list .each-nav {
   line-height: 50px;
   text-align: center;
 }
+header.header .nav-list .each-nav:hover {
+  color: #ff6347;
+}
 header.header .nav-list .slider-nav {
   background-color: #ff6347;
   width: 25%;
@@ -645,6 +714,25 @@ header.header .nav-list .slider-nav {
   transition: 0.5s;
   -webkit-transition-property: -webkit-transform;
   transition-property: transform;
+}
+header.header .nav-list .back-index {
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  text-align: center;
+  line-height: 50px;
+  color: #ffffff;
+  left: 100%;
+  cursor: pointer;
+}
+header.header .nav-list .back-index:hover {
+  color: #ff6347;
+}
+@media screen and (max-width: 1124px) {
+  header.header .nav-list .back-index {
+    visibility: hidden;
+    width: 0;
+  }
 }
 article.container {
   padding: 50px 0 5px 0;
@@ -709,5 +797,23 @@ footer.footer .content {
   -o-transform: rotateX(0) rotateY(0) rotateZ(0);
   -ms-transform: rotateX(0) rotateY(0) rotateZ(0);
   transform: rotateX(0) rotateY(0) rotateZ(0);
+}
+#SIGNIN .form-group,
+#REGISTER .form-group {
+  width: 80%;
+  margin: 10px auto;
+}
+#SIGNIN .xd-footer .aside,
+#REGISTER .xd-footer .aside {
+  margin-left: 20px;
+}
+#SIGNIN .btn.main,
+#REGISTER .btn.main {
+  padding: 6px 40px;
+}
+#SIGNIN .btn:hover,
+#REGISTER .btn:hover {
+  color: #fff;
+  background-color: #ff3814;
 }
 /*# sourceMappingURL=layout.css.map */

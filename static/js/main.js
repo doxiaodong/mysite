@@ -28,10 +28,10 @@
 	                }
 	            });
 
-				// show sign model
-				window.XD.modules.Model.show("#SIGN");
-
 				func.sign("SIGNIN", "REGISTER");
+
+				// signin
+				func.ajaxSign();
 
 			},
 			initModules: function() {
