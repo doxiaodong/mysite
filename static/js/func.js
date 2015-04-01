@@ -104,7 +104,7 @@ define([], function() {
 
 	        	var url = signin.getAttribute('ajax-action');
         		var data = self.getFormData('#SIGNIN');
-	        	self.extend(self.getCookie('csrftoken'), data);
+	        	// self.extend(self.getCookie('csrftoken'), data);
 	        	data = JSON.stringify(data);
 	        	
         		self.ajax({
