@@ -26,7 +26,13 @@ define([], function() {
         	var dataObj = formDom.querySelectorAll('[name]');
         	var len = dataObj.length;
         	for (var i = 0; i < len; i++) {
-        		result[dataObj[i].name] = dataObj[i].value;
+                var curr = dataObj[i];
+                if (curr.getAttribute('type') === 'radio' || curr.getAttribute('type') === 'checkbox') {
+                    if (!curr.checked) {
+                        continue;
+                    }
+                }
+        		result[curr.name] = curr.value;
         	}
         	return result;
         },
