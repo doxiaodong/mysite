@@ -31,7 +31,9 @@
 				func.sign("SIGNIN", "REGISTER");
 
 				// signin
-				func.ajaxSign();
+				func.ajaxSignin();
+				// signout
+				func.ajaxSignout();
 
 			},
 			initModules: function() {

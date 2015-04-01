@@ -17,7 +17,7 @@
 	<header class="header">
 		<ul id="header_nav" class="nav-list clearfix">
 			{% if user.is_authenticated %}
-			<li class="a back-index">{{user.username}}</li>
+			<li id="USER" class="back-index"><span>{{user.username}}</span><span class="signout a" ajax-out="{% url 'account:signout' %}">退出</span></li>
 			{% else %}
 			<li class="a back-index" xd-model="#SIGN">登录</li>
 			{% endif %}
@@ -38,8 +38,8 @@
 
 	<div id="SIGN" class="xd-model">
 		<div class="xd-container">
-			<form id="SIGNIN" class="form active" ajax-action="{% url 'account:signin' %}">
-				{% csrf_token %}
+			<form id="SIGNIN" class="form active" action="{% url 'account:signin' %}" method="POST">
+				{#{% csrf_token %}#}
 				<header class="xd-header">登录</header>
 				<article class="xd-article">
 					<div class="form-group">

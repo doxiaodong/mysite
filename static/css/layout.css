@@ -717,16 +717,15 @@ header.header .nav-list .slider-nav {
 }
 header.header .nav-list .back-index {
   position: absolute;
-  width: 50px;
+  width: 200px;
   height: 100%;
-  text-align: center;
   line-height: 50px;
   color: #ffffff;
   left: 100%;
   cursor: pointer;
 }
-header.header .nav-list .back-index:hover {
-  color: #ff6347;
+header.header .nav-list .back-index .signout {
+  margin-left: 5px;
 }
 @media screen and (max-width: 1124px) {
   header.header .nav-list .back-index {
