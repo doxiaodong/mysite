@@ -111,12 +111,13 @@ define([], function() {
 	        	var url = signin.getAttribute('ajax-action');
         		var data = self.getFormData('#SIGNIN');
 	        	// self.extend(self.getCookie('csrftoken'), data);
-	        	data = JSON.stringify(data);
+                data = JSON.stringify(data);
 	        	
         		self.ajax({
         			method: 'POST',
         			url: url,
         			data: data,
+                    contentType: 'application/json;charset=UTF-8',
         			complete: function(response, status, xhr) {
         				console.log('===ajax complete===');
         			}
