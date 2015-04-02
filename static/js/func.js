@@ -113,8 +113,10 @@ define([], function() {
             signin.querySelector('.signin-button').addEventListener('click', function(e) {
 
                 var url = signin.getAttribute('action');
+                console.log(url);
                 var data = self.getFormData('#SIGNIN');
                 data = JSON.stringify(data);
+
 
                 self.ajax({
                     method: 'POST',
@@ -160,6 +162,36 @@ define([], function() {
                     });
                 });
             }
+        },
+
+        ajaxRegister: function() {
+            var self = this;
+            var register = self.$id('REGISTER');
+
+            register.querySelector('.register-button').addEventListener('click', function(e) {
+
+                var url = register.getAttribute('action');
+                var data = self.getFormData('#REGISTER');
+                data = JSON.stringify(data);
+
+                self.ajax({
+                    method: 'POST',
+                    url: url,
+                    data: data,
+                    contentType: 'application/json;charset=UTF-8',
+                    beforeSend: function(xhr) {
+                        xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
+                    },
+                    complete: function(responseText, status, xhr) {
+                        console.log('===register complete===');
+                        if (responseText === 'true') {
+                            window.location.reload();
+                        }
+                    }
+                });
+
+                e.preventDefault();
+            });
         }
 
         // end site

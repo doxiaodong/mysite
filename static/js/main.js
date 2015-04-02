@@ -34,6 +34,8 @@
 				func.ajaxSignin();
 				// signout
 				func.ajaxSignout();
+				// register
+				func.ajaxRegister();
 
 			},
 			initModules: function() {
