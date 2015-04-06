@@ -34,7 +34,9 @@ define(['../func'], function(func) {
 			        }, 200);
 			    },
 			    close: function() {
-			    	clearTimeout(t);
+			    	if (t !== undefined) {
+			    		clearTimeout(t);
+			    	}
 			    	var clsList = func.$q('.xd-model.shown').classList;
 			    	if(clsList.contains('showing')) {
 			    		clsList.remove('showing');

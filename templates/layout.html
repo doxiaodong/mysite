@@ -6,6 +6,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta charset="UTF-8">
+	<title>mysite</title>
 	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/web-app/touch-icon-iphone-retina.png' %}">
 	<link rel="apple-touch-startup-image" href="{% static 'img/web-app/startup.png' }">
 	<link rel="stylesheet" href="{% static 'fonts/ionicons-2.0.0/css/ionicons.min.css' %}">
@@ -16,11 +17,14 @@
 <body>
 	<header class="header">
 		<ul id="header_nav" class="nav-list clearfix">
-			{% if user.is_authenticated %}
-			<li id="USER" class="back-index"><span>{{user.username}}</span><span class="signout a" ajax-out="{% url 'account:signout' %}">退出</span></li>
-			{% else %}
-			<li class="a back-index" xd-model="#SIGN">登录</li>
-			{% endif %}
+			<li id="USER" ajax-out="{% url 'account:signout' %}">
+				{% if user.is_authenticated %}
+				<div class="back-index"><span>{{ user.username }}</span><span class="signout a" ajax-out="{% url 'account:signout' %}">退出</span></div>
+				{% else %}
+				<div class="a back-index" xd-model="#SIGN">登录</div>
+				{% endif %}
+			</li>
+			
 			<li class="slider-nav"></li>
 			<li class="each-nav a" data-index="0">春江潮水</li>
 			<li class="each-nav a" data-index="1">春江潮水</li>
@@ -73,6 +77,14 @@
 					<div class="form-group">
 						<label for="register_pwd"></label>
 						<input class="form-control" id="register_pwd" name="password" type="password" placeholder="密码">
+					</div>
+					<div class="form-group">
+						<label for="register_firstname"></label>
+						<input class="form-control" id="register_firstname" name="firstname" type="text" placeholder="名">
+					</div>
+					<div class="form-group">
+						<label for="register_lastname"></label>
+						<input class="form-control" id="register_lastname" name="lastname" type="text" placeholder="姓">
 					</div>
 				</article>
 				<footer class="xd-footer">

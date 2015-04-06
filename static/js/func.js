@@ -59,7 +59,7 @@ define([], function() {
 
             xhr.onreadystatechange = function() {
                 if (xhr.readyState == 4 && xhr.status == 200) {
-                    options.complete(xhr.responseText, xhr.status, xhr);
+                    options.complete(JSON.parse(xhr.response), xhr.status, xhr);
                 }
             }
 
@@ -75,6 +75,18 @@ define([], function() {
         // end normal
 
         // the site
+        afterSignin: function(username) {
+            var c = this.$id('USER');
+            var signoutUrl = c.getAttribute('ajax-out');
+            c.innerHTML = '<div class="back-index"><span>' + username + '</span><span class="signout a" ajax-out="' + signoutUrl + '">退出</span></div>';
+            window.XD.modules.Model.close();
+        },
+
+        afterSignout: function() {
+            var c = this.$id('USER');
+            c.innerHTML = '<div class="a back-index" xd-model="#SIGN">登录</div>';
+        },
+
         sign: function(e1, e2) {
             var t1 = this.$id(e1),
                 t2 = this.$id(e2);
@@ -113,7 +125,6 @@ define([], function() {
             signin.querySelector('.signin-button').addEventListener('click', function(e) {
 
                 var url = signin.getAttribute('action');
-                console.log(url);
                 var data = self.getFormData('#SIGNIN');
                 data = JSON.stringify(data);
 
@@ -126,10 +137,11 @@ define([], function() {
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
                     },
-                    complete: function(responseText, status, xhr) {
+                    complete: function(response, status, xhr) {
                         console.log('===signin complete===');
-                        if (responseText === 'true') {
-                            window.location.reload();
+                        console.log(response.data)
+                        if (response.status === true) {
+                            self.afterSignin(response.data.username);
                         }
                     }
                 });
@@ -140,12 +152,12 @@ define([], function() {
 
         ajaxSignout: function() {
             var self = this;
-            var signout = self.$q('.signout');
+            var user = self.$id('USER');
 
-            if (signout !== null) {
-                signout.addEventListener('click', function(e) {
-
-                    var url = this.getAttribute('ajax-out');
+            user.addEventListener('click', function(e) {
+                var dom = e.target;
+                if (dom.classList.contains('signout')) {
+                    var url = dom.getAttribute('ajax-out');
 
                     self.ajax({
                         method: 'POST',
@@ -153,15 +165,15 @@ define([], function() {
                         beforeSend: function(xhr) {
                             xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
                         },
-                        complete: function(responseText, status, xhr) {
+                        complete: function(response, status, xhr) {
                             console.log('===signout complete===');
-                            if (responseText === 'true') {
-                                window.location.reload();
+                            if (response.status === true) {
+                                self.afterSignout();
                             }
                         }
                     });
-                });
-            }
+                }
+            });
         },
 
         ajaxRegister: function() {
@@ -182,10 +194,10 @@ define([], function() {
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
                     },
-                    complete: function(responseText, status, xhr) {
+                    complete: function(response, status, xhr) {
                         console.log('===register complete===');
-                        if (responseText === 'true') {
-                            window.location.reload();
+                        if (response.status === true) {
+                            self.afterSignin(response.data.username);
                         }
                     }
                 });
