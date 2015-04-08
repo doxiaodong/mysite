@@ -129,6 +129,7 @@ define([], function() {
                     },
                     complete: function(response, status, xhr) {
                         console.log('===signin complete===');
+                        var response = JSON.parse(response);
                         if (response.status === true) {
                             self.afterSignin(response.data.user);
                         } else {
@@ -167,6 +168,7 @@ define([], function() {
                         },
                         complete: function(response, status, xhr) {
                             console.log('===signout complete===');
+                            var response = JSON.parse(response);
                             if (response.status === true) {
                                 self.afterSignout();
                             }
@@ -201,6 +203,7 @@ define([], function() {
                     },
                     complete: function(response, status, xhr) {
                         console.log('===register complete===');
+                        var response = JSON.parse(response);
                         if (response.status === true) {
                             self.afterSignin(response.data.user);
                         }

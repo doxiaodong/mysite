@@ -4,8 +4,8 @@ from django.core.urlresolvers import reverse
 from apps.learn.models import Band
 from apps.learn.models import Question, Choice
 
-# Create your views here.
 
+# Create your views here.
 def band_listing(request):
     """A view of all bands."""
     bands = Band.objects.all()
@@ -17,9 +17,10 @@ def index(request):
 
     template = 'apps/learn/band_listing.html'
     context = {
-    	'latest_question_list': latest_question_list,
+        'latest_question_list': latest_question_list,
     }
     return render(request, template, context)
+
 
 def detail(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
@@ -43,6 +44,7 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse('learn:results', args=(p.id,)))
+
 
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

@@ -12,7 +12,8 @@
 		var app = {
 			init: function() {
 				window.XD = {
-					modules: {}
+					modules: {},
+                    angular: {}
 				};
 				this.initModules();
 				this.initPages();
@@ -20,6 +21,9 @@
 				this.initLayout();
 			},
 			initLayout: function() {
+                window.XD.angular.app = angular.module('myApp', []);
+                window.XD.angular.app.run();
+
 				var c = func.$id("header_nav");
 				c.addEventListener('click', function(e) {
 	                var index = e.target.getAttribute('data-index');
