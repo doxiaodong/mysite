@@ -24,6 +24,8 @@ define(['../func'], function(func) {
 	            xhr.onreadystatechange = function() {
 	                if (xhr.readyState == 4 && xhr.status == 200) {
 	                    options.complete(JSON.parse(xhr.response), xhr.status, xhr);
+	                } else {
+	                	console.log(xhr.status, xhr.readyState);
 	                }
 	            }
 
@@ -31,9 +33,7 @@ define(['../func'], function(func) {
 	            if (options.beforeSend) {
 	                options.beforeSend(xhr);
 	            }
-	            if (options.data) {
-	                xhr.setRequestHeader('Content-Type', options.contentType);
-	            }
+	            xhr.setRequestHeader('Content-Type', options.contentType);
 	            xhr.send(options.data);
 			};
 
