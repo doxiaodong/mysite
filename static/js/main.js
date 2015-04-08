@@ -1,3 +1,5 @@
+'use strict';
+
 (function() {
 	require.config({
 		paths: {

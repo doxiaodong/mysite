@@ -1,3 +1,5 @@
+'use strict';
+
 // xd.device
 define(['../func'], function(func) {
 	var xdPlatform = {

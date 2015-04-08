@@ -1,3 +1,5 @@
+'use strict';
+
 // xd.confirm
 define(['../func'], function(func) {
 	var xdConfirm = {

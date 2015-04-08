@@ -1,4 +1,12 @@
-define(['pages/page1', 'pages/page2'], function(page1, page2) {
+'use strict';
+
+define([
+    'pages/page1',
+    'pages/page2'
+], function(
+    page1,
+    page2
+) {
 	var page = {
 		
 		init: function() {

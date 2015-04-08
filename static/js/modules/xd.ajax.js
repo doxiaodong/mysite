@@ -1,3 +1,5 @@
+'use strict';
+
 // xd.ajax
 define(['../func'], function(func) {
     var xdAjax = {

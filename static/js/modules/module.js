@@ -1,3 +1,5 @@
+'use strict';
+
 define([
     'modules/xd.ajax',
     'modules/xd.alert',

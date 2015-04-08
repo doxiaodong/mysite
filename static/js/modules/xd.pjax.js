@@ -1,3 +1,5 @@
+'use strict';
+
 // xd.pjax
 define(['../func'], function(func) {
 	var xdPjax = {

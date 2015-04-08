@@ -1,3 +1,5 @@
+'use strict';
+
 // xd.alert
 define(['../func'], function(func) {
 	var xdAlert = {

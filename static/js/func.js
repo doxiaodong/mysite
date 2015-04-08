@@ -1,3 +1,5 @@
+'use strict';
+
 define([], function() {
     var func = {
         // normal
@@ -117,7 +119,7 @@ define([], function() {
                 var data = self.getFormData('#SIGNIN');
                 
                 
-                postData = JSON.stringify(data);
+                var postData = JSON.stringify(data);
 
                 window.XD.ajax({
                     method: 'POST',
@@ -191,7 +193,7 @@ define([], function() {
 
                 var url = register.getAttribute('action');
                 var data = self.getFormData('#REGISTER');
-                postData = JSON.stringify(data);
+                var postData = JSON.stringify(data);
 
                 window.XD.ajax({
                     method: 'POST',

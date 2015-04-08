@@ -1,3 +1,5 @@
+'use strict';
+
 // page2
 define(['../func'], function(func) {
 	var page2 = {

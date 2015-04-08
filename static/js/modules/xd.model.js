@@ -1,3 +1,5 @@
+'use strict';
+
 // xd.model
 define(['../func'], function(func) {
 	var xdModel = {
