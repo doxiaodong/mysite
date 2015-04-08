@@ -34,58 +34,42 @@ define([], function() {
                 }
                 result[curr.name] = curr.value;
             }
-            return result;
-        },
-
-        ajax: function(options) {
-            var self = this;
-            var defaults = {
-                method: 'GET',
-                data: '',
-                url: '',
-                async: true,
-                dataType: 'text',
-                contentType: 'application/x-www-form-urlencoded',
-                beforeSend: function() {},
-                complete: function() {}
-            };
-            // Merge options and defaults
-            self.extend(defaults, options);
-
-            var _method = options.method.toUpperCase();
-
-            // Create XHR
-            var xhr = new XMLHttpRequest();
-
-            xhr.onreadystatechange = function() {
-                if (xhr.readyState == 4 && xhr.status == 200) {
-                    options.complete(JSON.parse(xhr.response), xhr.status, xhr);
+            var stringResult = JSON.stringify(result);
+            if (formDom.classList.contains('xd-form-store') && stringResult !== window.localStorage.getItem('XD.form-' + formDom.id)) {
+                var r = confirm('允许浏览器记住用户名和密码？');
+                if (r) {
+                    window.localStorage.setItem('XD.form-' + formDom.id, stringResult);
                 }
             }
 
-            xhr.open(_method, options.url, options.async);
-            if (options.beforeSend) {
-                options.beforeSend(xhr);
+            return result;
+        },
+
+        setFormData: function() {
+            var self = this;
+
+            var formDomAll = self.$qa('.xd-form-store');
+
+            var len = formDomAll.length;
+            for (var i = 0; i < len; i++) {
+                var localData = window.localStorage.getItem('XD.form-' + formDomAll[i].id);
+                if (localData !== null) {
+                    localData = JSON.parse(localData);
+                    var dataObj = formDomAll[i].querySelectorAll('[name]');
+                    for (var j = 0; j < dataObj.length; j++) {
+                        var curr = dataObj[j];
+                        if (curr.getAttribute('type') === 'radio' || curr.getAttribute('type') === 'checkbox') {
+                            // 暂时不写。。。
+                        } else {
+                            curr.value = localData[curr.name];
+                        }
+                    }
+                }
             }
-            if (options.data) {
-                xhr.setRequestHeader('Content-Type', options.contentType);
-            }
-            xhr.send(options.data);
         },
         // end normal
 
         // the site
-        afterSignin: function(username) {
-            var c = this.$id('USER');
-            var signoutUrl = c.getAttribute('ajax-out');
-            c.innerHTML = '<div class="back-index"><span>' + username + '</span><span class="signout a" ajax-out="' + signoutUrl + '">退出</span></div>';
-            window.XD.modules.Model.close();
-        },
-
-        afterSignout: function() {
-            var c = this.$id('USER');
-            c.innerHTML = '<div class="a back-index" xd-model="#SIGN">登录</div>';
-        },
 
         sign: function(e1, e2) {
             var t1 = this.$id(e1),
@@ -122,32 +106,48 @@ define([], function() {
             var self = this;
             var signin = self.$id('SIGNIN');
 
+            var localData = window.localStorage.getItem('XD.signin');
+            if (localData !== null) {
+
+            }
+
             signin.querySelector('.signin-button').addEventListener('click', function(e) {
 
                 var url = signin.getAttribute('action');
                 var data = self.getFormData('#SIGNIN');
-                data = JSON.stringify(data);
+                
+                
+                postData = JSON.stringify(data);
 
-
-                self.ajax({
+                window.XD.ajax({
                     method: 'POST',
                     url: url,
-                    data: data,
+                    data: postData,
                     contentType: 'application/json;charset=UTF-8',
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
                     },
                     complete: function(response, status, xhr) {
                         console.log('===signin complete===');
-                        console.log(response.data)
                         if (response.status === true) {
-                            self.afterSignin(response.data.username);
+                            self.afterSignin(response.data.user);
+                        } else {
+                            window.XD.alert(response.data.error, {
+                                title: '登录出错',
+                                ok: '确认'
+                            });
                         }
                     }
                 });
 
                 e.preventDefault();
             });
+        },
+
+        afterSignin: function(user) {
+            var c = this.$id('USER');
+            c.innerHTML = '<div class="header-side"><span>' + user + '</span><span class="signout a">退出</span></div>';
+            window.XD.modules.Model.close();
         },
 
         ajaxSignout: function() {
@@ -157,9 +157,9 @@ define([], function() {
             user.addEventListener('click', function(e) {
                 var dom = e.target;
                 if (dom.classList.contains('signout')) {
-                    var url = dom.getAttribute('ajax-out');
+                    var url = this.getAttribute('ajax-out');
 
-                    self.ajax({
+                    window.XD.ajax({
                         method: 'POST',
                         url: url,
                         beforeSend: function(xhr) {
@@ -176,6 +176,11 @@ define([], function() {
             });
         },
 
+        afterSignout: function() {
+            var c = this.$id('USER');
+            c.innerHTML = '<div class="a header-side" xd-model="#SIGN">登录</div>';
+        },
+
         ajaxRegister: function() {
             var self = this;
             var register = self.$id('REGISTER');
@@ -184,12 +189,12 @@ define([], function() {
 
                 var url = register.getAttribute('action');
                 var data = self.getFormData('#REGISTER');
-                data = JSON.stringify(data);
+                postData = JSON.stringify(data);
 
-                self.ajax({
+                window.XD.ajax({
                     method: 'POST',
                     url: url,
-                    data: data,
+                    data: postData,
                     contentType: 'application/json;charset=UTF-8',
                     beforeSend: function(xhr) {
                         xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
@@ -197,7 +202,7 @@ define([], function() {
                     complete: function(response, status, xhr) {
                         console.log('===register complete===');
                         if (response.status === true) {
-                            self.afterSignin(response.data.username);
+                            self.afterSignin(response.data.user);
                         }
                     }
                 });

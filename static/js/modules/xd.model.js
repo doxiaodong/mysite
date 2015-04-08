@@ -12,7 +12,7 @@ define(['../func'], function(func) {
 	        });
             document.addEventListener('click', function(e) {
             	
-                if (e.target.classList.contains('xd-close')) {
+                if (e.target.classList.contains('xd-model-close')) {
                     window.XD.modules.Model.close();
                 }
             });

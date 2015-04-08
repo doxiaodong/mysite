@@ -29,6 +29,9 @@
 	            });
 
 				func.sign("SIGNIN", "REGISTER");
+				
+				// localStorage
+				func.setFormData();
 
 				// signin
 				func.ajaxSignin();

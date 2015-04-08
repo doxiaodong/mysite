@@ -4,6 +4,16 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 import json
 
+# functions
+
+def loginShow(user):
+	user_show = user.username
+	if user.first_name is not None:
+		user_show = user.last_name + user.first_name
+	respose = {'status': True, 'data': {'user': user_show}}
+	respose = json.dumps(respose)
+	return respose
+
 # Create your views here.
 def register(request):
 	if request.method == "POST":
@@ -23,10 +33,8 @@ def register(request):
 		user.save()
 
 		i_user = authenticate(username=r_username, password=r_password)
-		login(request, i_user)
-
-		respose = {'status': True, 'data': {'username': i_user.username}}
-		respose = json.dumps(respose)
+		login(request, user)
+		respose = loginShow(i_user)
 		return HttpResponse(respose)
 
 def signin(request):
@@ -39,13 +47,14 @@ def signin(request):
 		if user is not None:
 			if user.is_active:
 				login(request, user)
-				respose = {'status': True, 'data': {'username': username}}
-				respose = json.dumps(respose)
+				respose = loginShow(user)
 				return HttpResponse(respose)
 			else:
 				pass
 		else:
-			pass
+			respose = {'status': False, 'data': {'error': '用户名或密码错误！'}}
+			respose = json.dumps(respose)
+			return HttpResponse(respose)
 
 def signout(request):
 	if request.method == "POST":

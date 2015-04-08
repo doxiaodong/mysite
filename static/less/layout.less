@@ -27,6 +27,11 @@
 }
 
 header.header {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
     position: fixed;
     top: 0;
     left: 0;
@@ -66,7 +71,7 @@ header.header {
             -webkit-transition-property: -webkit-transform;
             transition-property: transform;
         }
-        .back-index {
+        .header-side {
             position: absolute;
             width: 200px;
             height: 100%;
@@ -74,6 +79,7 @@ header.header {
             color: rgb(255, 255, 255);
             left: 100%;
             cursor: pointer;
+            margin-left: 5px;
             &:hover {
                 // color: @active_color;
             }
@@ -82,7 +88,7 @@ header.header {
             }
         }
         @media screen and (max-width: 1124px) {
-            .back-index {
+            .header-side {
                 visibility: hidden;
                 width: 0;
             }

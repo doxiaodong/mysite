@@ -1,6 +1,6 @@
 // @import '../each_import';
-// xd-model
-.xd-model {
+// xd-alert
+.xd-alert, .xd-confirm{
     position: fixed;
     .transition(opacity, 0.5s);
     .opacity(0);
@@ -22,7 +22,7 @@
     &>.xd-container {
         @height: 50px;
         position: relative;
-        max-width: 500px;
+        max-width: 400px;
         width: 100%;
         // min-height: 500px;
         background-color: #fff;
@@ -39,6 +39,7 @@
         }
         .xd-article {
             width: 100%;
+            min-height: 100px;
             padding-bottom: @height + 1px;
         }
         .xd-footer {
@@ -48,8 +49,15 @@
             position: absolute;
             bottom: 0;
             border-top: 1px solid #eee;
+            .btn {
+                padding: 6px 40px;
+                margin: 0 5px;
+                &.btn-side {
+                    background-color: lighten(@active_color, 10%)
+                }
+            }
         }
-        .xd-model-close{
+        .xd-alert-close, .xd-confirm-close {
 
             @size: 34px;
             position: absolute;

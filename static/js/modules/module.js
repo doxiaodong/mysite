@@ -1,9 +1,13 @@
-define(['modules/xd.platform', 'modules/xd.model'], function(xdPlatform, xdModel) {
+define(['modules/xd.ajax', 'modules/xd.alert', 'modules/xd.confirm', 'modules/xd.model', 'modules/xd.pjax', 'modules/xd.platform'], function(xdAjax, xdAlert, xdConfirm, xdModel, xdPjax, xdPlatform) {
 	var module = {
 		
 		init: function() {
-			xdPlatform.init();
-			xdModel.init();			
+			xdAjax.init();
+			xdAlert.init();
+			xdConfirm.init();
+			xdModel.init();
+			xdPjax.init();
+			xdPlatform.init();	
 		}
 	};
 	return module;

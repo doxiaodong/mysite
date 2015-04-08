@@ -8,19 +8,19 @@
 {% block content %}
 <div class="pages">
 	<div class="page-block">
-			<div class="each-header">
-				<span class="big-size">文章列表</span>
-			</div>
-			<div class="each-inner">
-				<ul class="articles">
-					<li class="article" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
-						<div class="title">
-							<a href="{% url 'article_detail' %}">萧萧梧叶送秋声</a>
-						</div>
-						<div class="time">2015-1-13</div>
-					</li>
-				</ul>
-			</div>
-		</div>	
+		<div class="each-header">
+			<span class="big-size">文章列表</span>
+		</div>
+		<div class="each-inner">
+			<ul class="articles">
+				<li class="article" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
+					<div class="title">
+						<a class="xd-pjax" href="{% url 'article:article_detail' %}">萧萧梧叶送秋声</a>
+					</div>
+					<div class="time">2015-1-13</div>
+				</li>
+			</ul>
+		</div>
+	</div>
 </div>
 {% endblock %}
