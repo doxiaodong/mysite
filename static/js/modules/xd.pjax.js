@@ -1,15 +1,19 @@
 // xd.pjax
 define(['../func'], function(func) {
 	var xdPjax = {
-		init: function() {
+		init: function(ele) {
             // first page state
-            window.history.replaceState({url: window.location.href}, 'first', window.location.href);
+            window.history.replaceState({
+                url: window.location.href,
+                time: new Date().getTime(),
+                container: ele
+            }, 'first', window.location.href);
 
-			var container = func.$id('PJAX_CONTAINER');
+			//var container = func.$q(ele);
 			document.addEventListener('click', function(e) {
 				var dom = e.target;
 				if (dom.classList.contains('xd-pjax')) {
-					var pjaxContainer = func.$q(dom.getAttribute('pjax-container')) || container;
+					var pjaxContainerString = dom.getAttribute('pjax-container') || ele;
 					var href = dom.getAttribute('href');
 
 					window.XD.modules.Ajax({
@@ -19,11 +23,12 @@ define(['../func'], function(func) {
 							xhr.setRequestHeader('XD-PJAX', 'true');
 						},
 						complete: function(response, status, xhr) {
-							pjaxContainer.innerHTML = response;
+							func.$q(pjaxContainerString).innerHTML = response;
                             //window.localStorage.setItem('XD.page-' + href, response);
                             window.history.pushState({
                                 url: href,
-                                time: new Date().getTime()
+                                time: new Date().getTime(),
+                                container: pjaxContainerString
                             }, '', href);
 						}
 					});
@@ -48,11 +53,9 @@ define(['../func'], function(func) {
                         xhr.setRequestHeader('XD-PJAX', 'true');
                     },
                     complete: function(response, status, xhr) {
-                        // user container now
-                        container.innerHTML = response;
+                        func.$q(state.container).innerHTML = response;
                     }
                 });
-                console.log(e);
             });
 
 		}

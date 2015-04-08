@@ -1,13 +1,27 @@
-define(['modules/xd.ajax', 'modules/xd.alert', 'modules/xd.confirm', 'modules/xd.model', 'modules/xd.pjax', 'modules/xd.platform'], function(xdAjax, xdAlert, xdConfirm, xdModel, xdPjax, xdPlatform) {
+define([
+    'modules/xd.ajax',
+    'modules/xd.alert',
+    'modules/xd.confirm',
+    'modules/xd.model',
+    'modules/xd.pjax',
+    'modules/xd.platform'
+], function(
+    xdAjax,
+    xdAlert,
+    xdConfirm,
+    xdModel,
+    xdPjax,
+    xdPlatform
+) {
 	var module = {
-		
+
 		init: function() {
 			xdAjax.init();
 			xdAlert.init();
 			xdConfirm.init();
 			xdModel.init();
-			xdPjax.init();
-			xdPlatform.init();	
+			xdPjax.init('#PJAX_CONTAINER');
+			xdPlatform.init();
 		}
 	};
 	return module;
