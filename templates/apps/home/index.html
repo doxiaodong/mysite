@@ -13,12 +13,20 @@
 		</div>
 		<div class="each-inner">
 			<ul class="articles">
-				<li class="article" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
+{#				<li class="article" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">#}
+{#					<div class="title">#}
+{#						<a class="xd-pjax" href="{% url 'article:article_detail' %}">萧萧梧叶送秋声</a>#}
+{#					</div>#}
+{#					<div class="time">2015-1-13</div>#}
+{#				</li>#}
+                {% for article in hot_article %}
+                <li class="article">
 					<div class="title">
-						<a class="xd-pjax" href="{% url 'article:article_detail' %}">萧萧梧叶送秋声</a>
+						<a class="xd-pjax" href="{% url 'article:article_detail' article.category.url article.id %}">{{ article.title }}</a>
 					</div>
 					<div class="time">2015-1-13</div>
 				</li>
+                {% endfor %}
 			</ul>
 		</div>
 	</div>

@@ -8,12 +8,12 @@
 <div class="pages">
 	<div class="page-block">
 		<div class="each-header">
-			<span class="full-title big-size">萧萧梧叶送秋声</span>
-			<div class="changes">2015-1-13</div>
+			<span class="full-title big-size">{{ article.title }}</span>
+			<div class="changes">{{ article.create_time }}</div>
 		</div>
 		<div class="each-inner">
-			<div class="each-article" ng-repeat="i in [1,2,3,4,5,6,7,8,9,10]">
-				<p>云和山的彼端</p>	
+			<div class="each-article">
+				{{ article.content }}
 			</div>
 		</div>
 	</div>

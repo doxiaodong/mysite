@@ -3,5 +3,5 @@ from apps.article import views
 
 urlpatterns = patterns(
     '',
-    url(r'^detail$', views.detail, name='article_detail'),
+    url(r'^detail/(?P<category>\w+)/(?P<pk>\d+)/$', views.detail, name='article_detail'),
 )
