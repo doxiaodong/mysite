@@ -2,6 +2,7 @@
 {% load staticfiles %}
 
 {% block css %}
+    <link rel="stylesheet" href="{% static 'ueditor/third-party/SyntaxHighlighter/shCoreDefault.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -13,7 +14,9 @@
 		</div>
 		<div class="each-inner">
 			<div class="each-article">
+                {% autoescape off %}
 				{{ article.content }}
+                {% endautoescape %}
 			</div>
 		</div>
 	</div>
@@ -53,4 +56,8 @@
 		<i class="xd-model-close icon ion-ios-close-empty"></i>
 	</div>
 </div>
+{% endblock %}
+
+{% block js %}
+
 {% endblock %}

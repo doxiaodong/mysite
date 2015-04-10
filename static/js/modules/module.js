@@ -22,7 +22,9 @@ define([
 			xdAlert.init();
 			xdConfirm.init();
 			xdModel.init();
-			xdPjax.init('#PJAX_CONTAINER');
+			xdPjax.init('#PJAX_CONTAINER', function(page) {
+                page.init();
+            });
 			xdPlatform.init();
 		}
 	};

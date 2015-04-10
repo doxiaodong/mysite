@@ -12,8 +12,10 @@
 	<link rel="apple-touch-startup-image" href="{% static 'img/web-app/startup.png' %}">
 	<link rel="stylesheet" href="{% static 'fonts/ionicons-2.0.0/css/ionicons.min.css' %}">
 	<link rel="stylesheet" href="{% static 'css/layout.css' %}">
+{% endif %}
 	{% block css %}
 	{% endblock %}
+{% if not_pjax %}
 </head>
 <body>
 	<header class="header">
@@ -35,8 +37,8 @@
 			
 			<li class="slider-nav"></li>
 			<li><a class="each-nav a xd-pjax" data-index="0" href="{% url 'home:home_index' %}">春江潮水</a></li>
-			<li><a class="each-nav a" data-index="1" href="#">春江潮水</a></li>
-			<li><a class="each-nav a" data-index="2" href="#">春江潮水</a></li>
+			<li><a class="each-nav a xd-pjax" data-index="1" href="{% url 'article:article_view' %}">文章列表</a></li>
+			<li><a class="each-nav a" data-index="2" href="#">sssssss</a></li>
 			<li><a class="each-nav a" data-index="3" href="#">春江潮水</a></li>
 		</ul>
 	</header>
@@ -108,10 +110,15 @@
 	</div>
 
 	<script data-main="{% static 'js/main' %}" src="{% static 'js/require.js' %}"></script>
-	{% block js %}
-	{% endblock %}
-
-	
+    <script src="{% static 'ueditor/third-party/SyntaxHighlighter/shCore.js' %}"></script>
+    <script>
+        SyntaxHighlighter.all();
+    </script>
+{% endif %}
+    {% block js %}
+{#        js用require加载,不要用在这里#}
+    {% endblock %}
+{% if not_pjax %}
 </body>
 </html>
 {% endif %}

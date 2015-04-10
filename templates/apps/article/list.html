@@ -2,18 +2,21 @@
 {% load staticfiles %}
 
 {% block css %}
-<link rel="stylesheet" href="{% static 'css/pages/home/index.css' %}">
 {% endblock %}
 
 {% block content %}
 <div class="pages">
 	<div class="page-block">
 		<div class="each-header">
-			<span class="big-size">热门文章</span>
+			<span class="big-size">文章列表</span>
+            <a class="xd-pjax" href="{% url 'article:article_view' %}">全部分类</a>
+            {% for category in articleCategory %}
+                <a class="xd-pjax" href="{% url 'article:article_list' category.url %}">{{ category.name }}类</a>
+            {% endfor %}
 		</div>
 		<div class="each-inner">
 			<ul class="articles">
-                {% for article in hot_article %}
+                {% for article in articles %}
                 <li class="article">
 					<div class="title">
 						<a class="xd-pjax" href="{% url 'article:article_detail' article.category.url article.id %}">{{ article.title }}</a>

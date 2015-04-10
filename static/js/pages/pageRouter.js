@@ -2,20 +2,22 @@
 
 define([
     'pages/page1',
-    'pages/page2'
+    'pages/home/home',
+    'pages/article/detail'
 ], function(
     page1,
-    page2
+    page_home,
+    page_article_detail
 ) {
 	var page = {
 		
 		init: function() {
 			var pathname = window.location.pathname;
-			if (pathname === '/article/detail') {
-				page1.init();
+			if (pathname.match(/^\/article\/detail/)) {
+				page_article_detail.init();
 			}
 			if (pathname === '/') {
-				page2.init();
+				page_home.init();
 			}
 		}
 	};

@@ -1,9 +1,9 @@
 'use strict';
 
 // xd.pjax
-define(['../func'], function(func) {
+define(['../pages/pageRouter', '../func'], function(page, func) {
 	var xdPjax = {
-		init: function(ele) {
+		init: function(ele, callback) {
             // first page state
             window.history.replaceState({
                 url: window.location.href,
@@ -32,6 +32,8 @@ define(['../func'], function(func) {
                                 time: new Date().getTime(),
                                 container: pjaxContainerString
                             }, '', href);
+
+                            callback(page);
 						}
 					});
 
@@ -56,6 +58,7 @@ define(['../func'], function(func) {
                     },
                     complete: function(response, status, xhr) {
                         func.$q(state.container).innerHTML = response;
+                        callback(page);
                     }
                 });
             });
