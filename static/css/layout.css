@@ -348,7 +348,7 @@ a:active,
   -ms-transform: rotateX(0) rotateY(0) rotateZ(360deg);
   transform: rotateX(0) rotateY(0) rotateZ(360deg);
 }
-.xd-model {
+.xd-modal {
   position: fixed;
   -webkit-transition: opacity 0.5s;
   -moz-transition: opacity 0.5s;
@@ -366,40 +366,40 @@ a:active,
   font-size: 0;
   text-align: center;
 }
-.xd-model.showing {
+.xd-modal.showing {
   filter: alpha(opacity=100);
   opacity: 1;
 }
-.xd-model.shown {
+.xd-modal.shown {
   filter: alpha(opacity=100);
   opacity: 1;
   z-index: 99999999;
 }
-.xd-model:after {
+.xd-modal:after {
   content: "";
   height: 100%;
 }
-.xd-model:after,
-.xd-model .xd-container {
+.xd-modal:after,
+.xd-modal .xd-container {
   display: inline-block;
   vertical-align: middle;
 }
-.xd-model .xd-container {
+.xd-modal .xd-container {
   font-size: 14px;
 }
-.xd-model > .xd-container {
+.xd-modal > .xd-container {
   position: relative;
   max-width: 500px;
   width: 100%;
   background-color: #fff;
 }
-.xd-model > .xd-container .xd-header,
-.xd-model > .xd-container .xd-article,
-.xd-model > .xd-container .xd-footer,
-.xd-model > .xd-container .xd-close {
+.xd-modal > .xd-container .xd-header,
+.xd-modal > .xd-container .xd-article,
+.xd-modal > .xd-container .xd-footer,
+.xd-modal > .xd-container .xd-close {
   padding: 5px;
 }
-.xd-model > .xd-container .xd-header {
+.xd-modal > .xd-container .xd-header {
   width: 100%;
   height: 50px;
   line-height: 40px;
@@ -407,11 +407,11 @@ a:active,
   font-size: 20px;
   background-color: #f6f6f6;
 }
-.xd-model > .xd-container .xd-article {
+.xd-modal > .xd-container .xd-article {
   width: 100%;
   padding-bottom: 51px;
 }
-.xd-model > .xd-container .xd-footer {
+.xd-modal > .xd-container .xd-footer {
   width: 100%;
   height: 50px;
   line-height: 40px;
@@ -419,7 +419,7 @@ a:active,
   bottom: 0;
   border-top: 1px solid #eee;
 }
-.xd-model > .xd-container .xd-model-close {
+.xd-modal > .xd-container .xd-modal-close {
   position: absolute;
   top: 0;
   right: 0;
@@ -434,7 +434,7 @@ a:active,
   -o-transition: 0.5s;
   transition: 0.5s;
 }
-.xd-model > .xd-container .xd-model-close:hover {
+.xd-modal > .xd-container .xd-modal-close:hover {
   -webkit-transform: rotateX(0) rotateY(0) rotateZ(360deg);
   -moz-transform: rotateX(0) rotateY(0) rotateZ(360deg);
   -o-transform: rotateX(0) rotateY(0) rotateZ(360deg);

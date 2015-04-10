@@ -1,30 +1,30 @@
 'use strict';
 
-// xd.model
+// xd.modal
 define(['../func'], function(func) {
-	var xdModel = {
+	var xdModal = {
 		init: function() {
 			this.define();
 
 			document.addEventListener('click', function(e) {
-	            var tar = e.target.getAttribute('xd-model');
+	            var tar = e.target.getAttribute('xd-modal');
 	            if(tar !== null) {
-	     			window.XD.modules.Model.show(tar);
+	     			window.XD.modules.Modal.show(tar);
 	     		}
 	        });
             document.addEventListener('click', function(e) {
             	
-                if (e.target.classList.contains('xd-model-close')) {
-                    window.XD.modules.Model.close();
+                if (e.target.classList.contains('xd-modal-close')) {
+                    window.XD.modules.Modal.close();
                 }
             });
 		},
 		define: function() {
 			var t;
-			window.XD.modules.Model = {
+			window.XD.modules.Modal = {
 			    show: function(tar) {
 			    	var self = this;
-		    		if (func.$q('.xd-model.shown') !== null ) {
+		    		if (func.$q('.xd-modal.shown') !== null ) {
 			    		self.close();
 			    	}
 
@@ -39,7 +39,7 @@ define(['../func'], function(func) {
 			    	if (t !== undefined) {
 			    		clearTimeout(t);
 			    	}
-			    	var clsList = func.$q('.xd-model.shown').classList;
+			    	var clsList = func.$q('.xd-modal.shown').classList;
 			    	if(clsList.contains('showing')) {
 			    		clsList.remove('showing');
 			    	}
@@ -48,5 +48,5 @@ define(['../func'], function(func) {
 			};
 		}
 	};
-	return xdModel;
+	return xdModal;
 });

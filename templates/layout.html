@@ -19,7 +19,7 @@
 </head>
 <body>
 	<header class="header">
-		<ul id="header_nav" class="nav-list clearfix">
+		<ul id="header_nav" class="nav-list clearfix" index="{% ifequal request.path.0 '/' %}0{% endifequal %}{% ifequal request.path.0 'article' %}0{% endifequal %}">
 			<li id="USER" ajax-out="{% url 'account:signout' %}">
 				{% if user.is_authenticated %}
 				<div class="header-side">
@@ -31,12 +31,12 @@
 					<span class="signout a">退出</span>
 				</div>
 				{% else %}
-				<div class="a header-side" xd-model="#SIGN">登录</div>
+				<div class="a header-side" xd-modal="#SIGN">登录</div>
 				{% endif %}
 			</li>
 			
 			<li class="slider-nav"></li>
-			<li><a class="each-nav a xd-pjax" data-index="0" href="{% url 'home:home_index' %}">春江潮水</a></li>
+			<li><a class="each-nav a xd-pjax" data-index="0" href="{% url 'home:home_index' %}">春江潮水{{ PATH.0 }}</a></li>
 			<li><a class="each-nav a xd-pjax" data-index="1" href="{% url 'article:article_view' %}">文章列表</a></li>
 			<li><a class="each-nav a" data-index="2" href="#">sssssss</a></li>
 			<li><a class="each-nav a" data-index="3" href="#">春江潮水</a></li>
@@ -52,7 +52,7 @@
 		copyright jjccdd
 	</footer>
 
-	<div id="SIGN" class="xd-model">
+	<div id="SIGN" class="xd-modal">
 		<div class="xd-container">
 			<!-- use xd-form-store to store form data -->
 			<form id="SIGNIN" class="form active xd-form-store" action="{% url 'account:signin' %}">
@@ -73,7 +73,7 @@
 					<span class="a aside other-side">注册</span>
 					<span onclick="XD.alert('加油加油')" class="a aside">忘记密码</span>
 				</footer>
-				<i class="xd-model-close icon ion-ios-close-empty"></i>
+				<i class="xd-modal-close icon ion-ios-close-empty"></i>
 			</form>
 			<form id="REGISTER" class="form" action="{% url 'account:register' %}">
 				{% csrf_token %}
@@ -104,7 +104,7 @@
 					<button class="register-button main btn" type="submit">注册</button>
 					<span class="a aside other-side">登录</span>
 				</footer>
-				<i class="xd-model-close xd-close icon ion-ios-close-empty"></i>
+				<i class="xd-modal-close xd-close icon ion-ios-close-empty"></i>
 			</form>
 		</div>
 	</div>

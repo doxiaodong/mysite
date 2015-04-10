@@ -150,7 +150,7 @@ define([], function() {
         afterSignin: function(user) {
             var c = this.$id('USER');
             c.innerHTML = '<div class="header-side"><span>' + user + '</span><span class="signout a">退出</span></div>';
-            window.XD.modules.Model.close();
+            window.XD.modules.Modal.close();
         },
 
         ajaxSignout: function() {
@@ -182,7 +182,7 @@ define([], function() {
 
         afterSignout: function() {
             var c = this.$id('USER');
-            c.innerHTML = '<div class="a header-side" xd-model="#SIGN">登录</div>';
+            c.innerHTML = '<div class="a header-side" xd-modal="#SIGN">登录</div>';
         },
 
         ajaxRegister: function() {

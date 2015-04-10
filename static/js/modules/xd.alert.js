@@ -33,7 +33,9 @@ define(['../func'], function(func) {
 				container.addEventListener('click', function(e) {
 	                if (e.target.classList.contains('xd-alert-close') || e.target.classList.contains('xd-alert-close-button')) {
 	                    func.$q('body').removeChild(container);
-	                    callbackOk();
+                        if (callbackOk) {
+                            callbackOk();
+                        }
 	                }
 		        });
 			};
