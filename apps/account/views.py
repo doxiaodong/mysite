@@ -3,7 +3,6 @@ from django.http import JsonResponse, HttpResponseNotAllowed
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
-import forms
 
 # functions
 def login_show(user):
@@ -37,6 +36,7 @@ def register(request):
         respose = login_show(i_user)
         return JsonResponse(respose)
 
+
 def signin(request):
     if request.method == "POST":
         post_data = eval(request.body)
@@ -54,6 +54,7 @@ def signin(request):
         else:
             respose = {'status': False, 'data': {'error': '用户名或密码错误！'}}
             return JsonResponse(respose)
+
 
 def signout(request):
     if request.method == "POST":
