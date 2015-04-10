@@ -1,9 +1,9 @@
 from django.shortcuts import render
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import JsonResponse, HttpResponseNotAllowed
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-import json
 
+import forms
 
 # functions
 def login_show(user):
@@ -11,7 +11,6 @@ def login_show(user):
     if user.first_name is not None:
         user_show = user.last_name + user.first_name
     respose = {'status': True, 'data': {'user': user_show}}
-    respose = json.dumps(respose)
     return respose
 
 
@@ -36,8 +35,7 @@ def register(request):
         i_user = authenticate(username=r_username, password=r_password)
         login(request, user)
         respose = login_show(i_user)
-        return HttpResponse(respose)
-
+        return JsonResponse(respose)
 
 def signin(request):
     if request.method == "POST":
@@ -50,18 +48,15 @@ def signin(request):
             if user.is_active:
                 login(request, user)
                 respose = login_show(user)
-                return HttpResponse(respose)
+                return JsonResponse(respose)
             else:
                 pass
         else:
             respose = {'status': False, 'data': {'error': '用户名或密码错误！'}}
-            respose = json.dumps(respose)
-            return HttpResponse(respose)
-
+            return JsonResponse(respose)
 
 def signout(request):
     if request.method == "POST":
         logout(request)
         respose = {'status': True, 'data': {}}
-        respose = json.dumps(respose, ensure_ascii=False)
-        return HttpResponse(respose)
+        return JsonResponse(respose)
