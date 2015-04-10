@@ -21,7 +21,7 @@
 					<div class="title">
 						<a class="xd-pjax" href="{% url 'article:article_detail' article.category.url article.id %}">{{ article.title }}</a>
 					</div>
-					<div class="time">2015-1-13</div>
+					<div class="time">{{ article.create_time|date:'Y-m-d' }}</div>
 				</li>
                 {% endfor %}
 			</ul>
