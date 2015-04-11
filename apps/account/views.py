@@ -18,11 +18,11 @@ def register(request):
     if request.method == "POST":
         post_data = eval(request.body)
 
-        r_username = post_data.get('username')
-        r_email = post_data.get('email')
-        r_password = post_data.get('password')
-        r_firstname = post_data.get('firstname')
-        r_lastname = post_data.get('lastname')
+        r_username = post_data.get('username', None)
+        r_email = post_data.get('email', None)
+        r_password = post_data.get('password', None)
+        r_firstname = post_data.get('firstname', None)
+        r_lastname = post_data.get('lastname', None)
 
         # create_user(username, email=None, password=None, **extra_fields)
         user = User.objects.create_user(r_username, r_email, r_password)
@@ -41,8 +41,8 @@ def signin(request):
     if request.method == "POST":
         post_data = eval(request.body)
 
-        username = post_data.get('username')
-        password = post_data.get('password')
+        username = post_data.get('username', None)
+        password = post_data.get('password', None)
         user = authenticate(username=username, password=password)
         if user is not None:
             if user.is_active:

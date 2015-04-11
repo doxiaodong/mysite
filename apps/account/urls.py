@@ -1,5 +1,5 @@
 from django.conf.urls import patterns, include, url
-from apps.account import views
+from . import views
 
 urlpatterns = [
     # url(r'^(?P<question_id>\d+)/$', views.detail, name='learn_detail'),

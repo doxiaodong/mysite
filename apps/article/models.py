@@ -3,6 +3,7 @@ from django.utils import timezone
 from DjangoUeditor.models import UEditorField
 from django.db import models
 
+
 # Create your models here.
 
 
@@ -19,7 +20,7 @@ class Article(models.Model):
     title = models.CharField("标题", max_length=255)
     content = UEditorField("内容", "100%", 120, imagePath="images/", filePath="files/", null=True, blank=True)
     create_time = models.DateTimeField("发布时间")
-    pic = models.ImageField("图片", null=True, blank=True)
+    pic = models.ImageField("图片", null=True, blank=True, upload_to='article/')
     hot = models.BooleanField("热门")
 
     def __str__(self):
@@ -31,3 +32,4 @@ class Article(models.Model):
     was_created_recently.admin_order_field = "create_time"
     was_created_recently.boolean = True
     was_created_recently.short_description = "最近发布"
+

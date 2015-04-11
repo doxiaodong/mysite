@@ -19,10 +19,10 @@
 </head>
 <body>
 	<header class="header">
-		<ul id="header_nav" class="nav-list clearfix" index="{% ifequal request.path.0 '/' %}0{% endifequal %}{% ifequal request.path.0 'article' %}0{% endifequal %}">
-			<li id="USER" ajax-out="{% url 'account:signout' %}">
+		<nav id="header_nav" class="nav" index="{% ifequal PATH.1 '' %}0{% endifequal %}{% ifequal PATH.1 'article' %}1{% endifequal %}{% ifequal PATH.1 'account' %}2{% endifequal %}{% ifequal PATH.1 'about' %}3{% endifequal %}">
+			<div id="USER" ajax-out="{% url 'account:signout' %}">
 				{% if user.is_authenticated %}
-				<div class="header-side">
+                <div class="header-side">
 					{% if user.first_name %}
 					<span>{{ user.last_name }}{{ user.first_name }}</span>
 					{% else %}
@@ -33,14 +33,16 @@
 				{% else %}
 				<div class="a header-side" xd-modal="#SIGN">登录</div>
 				{% endif %}
-			</li>
-			
-			<li class="slider-nav"></li>
-			<li><a class="each-nav a xd-pjax" data-index="0" href="{% url 'home:home_index' %}">春江潮水{{ PATH.0 }}</a></li>
-			<li><a class="each-nav a xd-pjax" data-index="1" href="{% url 'article:article_view' %}">文章列表</a></li>
-			<li><a class="each-nav a" data-index="2" href="#">sssssss</a></li>
-			<li><a class="each-nav a" data-index="3" href="#">春江潮水</a></li>
-		</ul>
+			</div>
+			<ul class="nav-list clearfix">
+                <li class="slider-nav"></li>
+                <li><a class="each-nav a xd-pjax" data-index="0" href="{% url 'home:home_index' %}">首页</a></li>
+                <li><a class="each-nav a xd-pjax" data-index="1" href="{% url 'article:article_view' %}">文章列表</a></li>
+                <li><a class="each-nav a" data-index="2" href="#">账户中心</a></li>
+                <li><a class="each-nav a" data-index="3" href="#">关于我</a></li>
+            </ul>
+
+		</nav>
 	</header>
 	<article class="container" id="PJAX_CONTAINER">
 {% endif %}
@@ -108,12 +110,8 @@
 			</form>
 		</div>
 	</div>
-
-	<script data-main="{% static 'js/main' %}" src="{% static 'js/require.js' %}"></script>
     <script src="{% static 'ueditor/third-party/SyntaxHighlighter/shCore.js' %}"></script>
-    <script>
-        SyntaxHighlighter.all();
-    </script>
+    <script data-main="{% static 'js/main' %}" src="{% static 'js/require.js' %}"></script>
 {% endif %}
     {% block js %}
 {#        js用require加载,不要用在这里#}

@@ -1,5 +1,8 @@
 from django.conf.urls import patterns, include, url
+from django.conf.urls.static import static
 from django.contrib import admin
+from . import settings
+
 
 urlpatterns = patterns(
     '',
@@ -12,4 +15,8 @@ urlpatterns = patterns(
     url(r'^article/', include('apps.article.urls', namespace="article")),
     url(r'^learn/', include('apps.learn.urls', namespace="learn")),
     url(r'^account/', include('apps.account.urls', namespace="account")),
-)
+    url(r'^comments/', include('apps.comments.urls', namespace="comments")),
+
+
+    # url(r'^comments/', include('django_comments.urls', namespace="comments")),
+) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,7 +1,7 @@
 'use strict';
 
 // xd.ajax
-define(['../func'], function(func) {
+define(['../func'], function (func) {
     var xdAjax = {
         init: function () {
 
@@ -15,6 +15,12 @@ define(['../func'], function(func) {
                     beforeSend: function () {
                     },
                     complete: function () {
+                    },
+                    success: function () {
+
+                    },
+                    error: function () {
+                        window.XD.alert('请求出错，请重新尝试。');
                     }
                 };
                 // Merge options and defaults
@@ -26,8 +32,16 @@ define(['../func'], function(func) {
                 var xhr = new XMLHttpRequest();
 
                 xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4 && xhr.status == 200) {
+                    if (xhr.readyState == 4) {
                         options.complete(xhr.response, xhr.status, xhr);
+                    }
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        options.success(xhr.response, xhr.status, xhr);
+                    }
+                    if (xhr.readyState == 4) {
+                        if (xhr.status >= 400) {
+                            options.error(xhr.response, xhr.status, xhr);
+                        }
                     }
                 };
 
@@ -43,5 +57,5 @@ define(['../func'], function(func) {
 
         }
     };
-	return xdAjax;
+    return xdAjax;
 });

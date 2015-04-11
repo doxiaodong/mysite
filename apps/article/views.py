@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import *
+from apps.comments.models import *
 
 
 # Create your views here.
@@ -10,12 +11,14 @@ def detail(request, category, pk):
             not_pjax = False
 
     category = ArticleCategory.objects.get(url=category)
+    article = Article.objects.get(id=pk)
 
     context = {
         'not_pjax': not_pjax,
         'articleCategory': ArticleCategory.objects.all(),
-        'article': Article.objects.get(id=pk),
-        'category': category
+        'article': article,
+        'category': category,
+        'replys': Comment.objects.all().filter(article=article)
     }
     template = 'apps/article/detail.html'
     return render(request, template, context)

@@ -1,19 +1,19 @@
 'use strict';
 
-define([], function() {
+define([], function () {
     var func = {
         // normal
-        $id: function(ele) {
+        $id: function (ele) {
             return document.getElementById(ele);
         },
-        $q: function(ele) {
+        $q: function (ele) {
             return document.querySelector(ele);
         },
-        $qa: function(ele) {
+        $qa: function (ele) {
             return document.querySelectorAll(ele);
         },
 
-        extend: function(old, add) {
+        extend: function (old, add) {
             for (var i in old) {
                 if (!(i in add)) {
                     add[i] = old[i];
@@ -21,7 +21,7 @@ define([], function() {
             }
         },
 
-        getFormData: function(form) {
+        getFormData: function (form) {
             var self = this;
             var result = {};
             var formDom = self.$q(form);
@@ -38,16 +38,24 @@ define([], function() {
             }
             var stringResult = JSON.stringify(result);
             if (formDom.classList.contains('xd-form-store') && stringResult !== window.localStorage.getItem('XD.form-' + formDom.id)) {
-                var r = confirm('允许浏览器记住用户名和密码？');
-                if (r) {
+                //var r = confirm('允许浏览器记住用户名和密码？');
+                window.XD.confirm('允许浏览器记住用户名和密码？', {
+                    title: '确认信息',
+                    ok: '确认',
+                    cancel: '取消'
+                }, function () {
+                    // OK
                     window.localStorage.setItem('XD.form-' + formDom.id, stringResult);
-                }
+                }, function () {
+                    // Cancel
+                });
+
             }
 
             return result;
         },
 
-        setFormData: function() {
+        setFormData: function () {
             var self = this;
 
             var formDomAll = self.$qa('.xd-form-store');
@@ -73,16 +81,16 @@ define([], function() {
 
         // the site
 
-        sign: function(e1, e2) {
+        sign: function (e1, e2) {
             var t1 = this.$id(e1),
                 t2 = this.$id(e2);
-            t1.addEventListener('click', function(e) {
+            t1.addEventListener('click', function (e) {
                 if (e.target.classList.contains('other-side')) {
                     this.classList.remove('active');
                     t2.classList.add('active');
                 }
             });
-            t2.addEventListener('click', function(e) {
+            t2.addEventListener('click', function (e) {
                 if (e.target.classList.contains('other-side')) {
                     this.classList.remove('active');
                     t1.classList.add('active');
@@ -90,11 +98,11 @@ define([], function() {
             });
         },
 
-        getCookie: function(key) {
+        getCookie: function (key) {
             var n = key.length;
             var cookieArr = document.cookie.split('; ');
             var result = {};
-            cookieArr.forEach(function(self) {
+            cookieArr.forEach(function (self) {
                 if (key === self.slice(0, n)) {
                     result[key] = self.slice(n + 1);
                     return;
@@ -104,7 +112,7 @@ define([], function() {
 
         },
 
-        ajaxSignin: function() {
+        ajaxSignin: function () {
             var self = this;
             var signin = self.$id('SIGNIN');
 
@@ -113,12 +121,12 @@ define([], function() {
 
             }
 
-            signin.querySelector('.signin-button').addEventListener('click', function(e) {
+            signin.querySelector('.signin-button').addEventListener('click', function (e) {
 
                 var url = signin.getAttribute('action');
                 var data = self.getFormData('#SIGNIN');
-                
-                
+
+
                 var postData = JSON.stringify(data);
 
                 window.XD.ajax({
@@ -126,10 +134,10 @@ define([], function() {
                     url: url,
                     data: postData,
                     contentType: 'application/json;charset=UTF-8',
-                    beforeSend: function(xhr) {
+                    beforeSend: function (xhr) {
                         xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
                     },
-                    complete: function(response, status, xhr) {
+                    success: function (response, status, xhr) {
                         console.log('===signin complete===');
                         var response = JSON.parse(response);
                         if (response.status === true) {
@@ -147,17 +155,17 @@ define([], function() {
             });
         },
 
-        afterSignin: function(user) {
+        afterSignin: function (user) {
             var c = this.$id('USER');
             c.innerHTML = '<div class="header-side"><span>' + user + '</span><span class="signout a">退出</span></div>';
             window.XD.modules.Modal.close();
         },
 
-        ajaxSignout: function() {
+        ajaxSignout: function () {
             var self = this;
             var user = self.$id('USER');
 
-            user.addEventListener('click', function(e) {
+            user.addEventListener('click', function (e) {
                 var dom = e.target;
                 if (dom.classList.contains('signout')) {
                     var url = this.getAttribute('ajax-out');
@@ -165,10 +173,10 @@ define([], function() {
                     window.XD.ajax({
                         method: 'POST',
                         url: url,
-                        beforeSend: function(xhr) {
+                        beforeSend: function (xhr) {
                             xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
                         },
-                        complete: function(response, status, xhr) {
+                        complete: function (response, status, xhr) {
                             console.log('===signout complete===');
                             var response = JSON.parse(response);
                             if (response.status === true) {
@@ -180,16 +188,16 @@ define([], function() {
             });
         },
 
-        afterSignout: function() {
+        afterSignout: function () {
             var c = this.$id('USER');
             c.innerHTML = '<div class="a header-side" xd-modal="#SIGN">登录</div>';
         },
 
-        ajaxRegister: function() {
+        ajaxRegister: function () {
             var self = this;
             var register = self.$id('REGISTER');
 
-            register.querySelector('.register-button').addEventListener('click', function(e) {
+            register.querySelector('.register-button').addEventListener('click', function (e) {
 
                 var url = register.getAttribute('action');
                 var data = self.getFormData('#REGISTER');
@@ -200,10 +208,10 @@ define([], function() {
                     url: url,
                     data: postData,
                     contentType: 'application/json;charset=UTF-8',
-                    beforeSend: function(xhr) {
+                    beforeSend: function (xhr) {
                         xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
                     },
-                    complete: function(response, status, xhr) {
+                    success: function (response, status, xhr) {
                         console.log('===register complete===');
                         var response = JSON.parse(response);
                         if (response.status === true) {

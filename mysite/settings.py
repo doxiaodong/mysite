@@ -43,10 +43,10 @@ LOCAL_APPS = (
     'apps.article',
     'apps.learn',
     'apps.account',
+    'apps.comments',
 )
 
 THIRD_APPS = (
-
 )
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_APPS
@@ -100,6 +100,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+AUTH_PROFILE_MODULE = 'apps.account.profile.Profile'
 
 # Template
 TEMPLATE_DIRS = (
