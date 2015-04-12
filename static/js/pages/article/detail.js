@@ -41,10 +41,28 @@ define(['../../func'], function (func) {
                         xhr.setRequestHeader('X-CSRFToken', func.getCookie('csrftoken'));
                     },
                     success: function (response, status, xhr) {
-                        console.log('===signin complete===');
                         var response = JSON.parse(response);
                         if (response.status === true) {
-                            console.log(response);
+
+                            window.XD.showIndicator();
+                            window.XD.ajax({
+                                url: window.location.pathname,
+                                contentType: 'text/html;charset=utf-8',
+                                beforeSend: function (xhr) {
+                                    xhr.setRequestHeader('XD-PJAX', 'true');
+                                },
+                                success: function (response, status, xhr) {
+
+                                    window.XD.hideIndicator();
+
+                                    func.$q('#PJAX_CONTAINER').innerHTML = response;
+                                    page_article_detail.init();
+                                },
+                                error: function(response, status, xhr) {
+                                    window.location.reload();
+                                    window.XD.alert('请求出错，请重新尝试。');
+                                }
+                            });
                         } else {
                             window.XD.alert(response.data.error, {
                                 title: '出错啦',

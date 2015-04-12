@@ -20,13 +20,18 @@ def add_reply(request, article):
         else:
             url = timezone.now().strftime('%Y%m%d%H%M%S')
             reply_time = timezone.now()
-            user = User.objects.filter(username=request.user)
+            user = User.objects.get(username=request.user)
             article = Article.objects.get(url=article)
-            comment = Comment(url=url,
-                              article=article,
-                              reply_user=user,
-                              content=content,
-                              reply_time=reply_time)
+
+            try:
+                comment = Comment(url=url,
+                                  article=article,
+                                  reply_user=user,
+                                  content=content,
+                                  reply_time=reply_time)
+            except Exception as err:
+                print(err)
+
             comment.save()
             respose = {'status': True, 'data': {'error': '成功！'}}
             return JsonResponse(respose)
