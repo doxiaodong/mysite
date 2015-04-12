@@ -50,9 +50,9 @@ def add_sub_reply(request, head):
             return JsonResponse(respose)
         else:
             reply_time = timezone.now()
-            user = User.objects.filter(username=request.user)
+            user = User.objects.get(username=request.user)
 
-            reply_object = User.objects.filter(username=reply_object_str)
+            reply_object = User.objects.get(username=reply_object_str)
             head = Comment.objects.filter(url=head)
 
             sub_comment = SubComment(head=head,
