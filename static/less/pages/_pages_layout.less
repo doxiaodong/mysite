@@ -66,6 +66,16 @@
         .each-reply {
           padding: 10px 0;
           .left-right(50px);
+          .sub-reply {
+            margin-top: 10px;
+            padding-left: 60px;
+            .each-reply {
+              border-top: 1px solid #ccc;
+              &:first-child {
+                padding-top: 10px;
+              }
+            }
+          }
           & > .right {
             .word {
               .user {
@@ -94,6 +104,21 @@
           &:last-child {
             padding-bottom: 0;
           }
+        }
+      }
+      .reply-button {
+        margin-top: 5px;
+        float: right;
+      }
+      .reply-textarea {
+        margin-top: 5px;
+        height: 100px;
+        resize: vertical;
+      }
+      .reply-floor {
+        display: none;
+        &.show {
+          display: block;
         }
       }
     }

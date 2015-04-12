@@ -20,4 +20,7 @@
   background-color: @active_color;
   color: #fff;
   .transition(0.5s);
+  &:hover, &:focus, &:active, &.active {
+    background-color: lighten(@active_color, 10%);
+  }
 }

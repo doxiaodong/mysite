@@ -22,27 +22,11 @@
 	</div>
 	<div class="page-block">
 		<div class="each-header">
-			<span class="active-color">{{ replys.count }}</span>回复
+			<span class="active-color count-replys" count="{{ replys.count }}{% for head, sub in subreplys.items %}+{{ sub.count }}{% endfor %}">
+            </span>回复
 		</div>
 		<div class="each-inner">
 			<ul class="replys">
-{#				<li class="each-reply" ng-repeat="floor in [1,2,3,4,5]">#}
-{#					<img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">#}
-{#					<div class="right">#}
-{#						<div class="word">#}
-{#							<div class="user">杜小东</div>#}
-{#							<div class="mes">#}
-{#								<span ng-repeat="i in [1,2,3,4]">山东菜太山</span>#}
-{#							</div>#}
-{#						</div>#}
-{#						<div class="message">#}
-{#							<span class="time">2015年12月23日</span>#}
-{#							<span class="pointer icon ion-reply a">回复</span>#}
-{#							<span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
-{#							<span class="floor">{% templatetag openvariable %}floor{% templatetag closevariable %}楼</span>#}
-{#						</div>#}
-{#					</div>#}
-{#				</li>#}
                 {% for reply in replys %}
                 <li class="each-reply">
 					<img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">
@@ -64,17 +48,82 @@
 						</div>
 						<div class="message">
 							<span class="time">{{ reply.reply_time|date:'Y年m月d日' }}</span>
-							<span class="pointer icon ion-reply a">回复</span>
-							<span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>
-							<span class="floor">{{ reply.id }}楼</span>
+							<span class="pointer icon ion-reply a" reply-object="{{ reply.reply_user.username }}" floor="{{ forloop.counter }}">回复</span>
+{#							<span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
+							<span class="floor">{{ forloop.counter }}楼</span>
 						</div>
 					</div>
+                    <ul class="sub-reply">
+                    {% with floor=forloop.counter %}
+                        {% for head, sub in subreplys.items %}
+                            {% ifequal head reply  %}
+                                {% for sub_reply in sub %}
+                                    <li class="each-reply">
+                                        <img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">
+                                        <div class="right">
+                                            <div class="word">
+                                                <div class="user">
+                                                    {% with r_user=sub_reply.reply_user %}
+                                                        {{ user_profile.pic }}
+                                                        {% if r_user.first_name %}
+                                                            {{ r_user.last_name }}{{ r_user.first_name }}
+                                                        {% else %}
+                                                            {{ r_user.username }}
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                    <span style="color: #000011">回复</span>
+                                                    {% with r_user=sub_reply.reply_object %}
+                                                        {{ user_profile.pic }}
+                                                        {% if r_user.first_name %}
+                                                            {{ r_user.last_name }}{{ r_user.first_name }}
+                                                        {% else %}
+                                                            {{ r_user.username }}
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </div>
+                                                <div class="mes">
+                                                    {{ sub_reply.content }}
+                                                </div>
+                                            </div>
+                                            <div class="message">
+                                                <span class="time">{{ sub_reply.reply_time|date:'Y年m月d日' }}</span>
+                                                <span class="pointer icon ion-reply a" reply-object="{{ sub_reply.reply_user.username }}" floor="{{ floor }}">回复</span>
+{#                                                <span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                                <li class="floor-{{ floor }} reply-floor">
+                                    <form class="form" action="{% url 'comments:add_sub_reply' head.url %}">
+                                        {% csrf_token %}
+                                        <div class="form-group clearfix">
+                                            <textarea class="form-control reply-textarea" name="content" type="text" placeholder="来交流下吧～" required></textarea>
+                                            <button class="add-subreply-button main btn reply-button" type="submit">回复</button>
+                                        </div>
+                                    </form>
+                                </li>
+                            {% endifequal %}
+                        {% endfor %}
+                    {% endwith %}
+                    </ul>
 				</li>
                 {% endfor %}
 			</ul>
 		</div>
-	</div>	
+        <div class="each-inner">
+            <p>发表评论：</p>
+            <form id="REPLY_ARTICLE" class="form" action="{% url 'comments:add_reply' article.url  %}">
+                {% csrf_token %}
+                <div class="form-group clearfix">
+                    <label for="add_content"></label>
+                    <textarea class="form-control reply-textarea" id="add_content" cols="30" rows="10" name="content" type="text" placeholder="来交流下吧～" autofocus required></textarea>
+                    <button id="ADD_REPLY_BUTTON" class="main btn reply-button" type="submit">发布</button>
+                </div>
+            </form>
+        </div>
+	</div>
 </div>
+
 {% endblock %}
 
 {% block js %}

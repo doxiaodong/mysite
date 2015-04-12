@@ -18,5 +18,4 @@ urlpatterns = patterns(
     url(r'^comments/', include('apps.comments.urls', namespace="comments")),
 
 
-    # url(r'^comments/', include('django_comments.urls', namespace="comments")),
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

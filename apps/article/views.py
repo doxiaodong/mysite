@@ -13,12 +13,20 @@ def detail(request, category, pk):
     category = ArticleCategory.objects.get(url=category)
     article = Article.objects.get(id=pk)
 
+    comment = Comment.objects.filter(article=article)
+    subreplys = {}
+
+    for head in comment:
+        sub = SubComment.objects.filter(head=head)
+        subreplys[head] = sub
+
     context = {
         'not_pjax': not_pjax,
         'articleCategory': ArticleCategory.objects.all(),
         'article': article,
         'category': category,
-        'replys': Comment.objects.all().filter(article=article)
+        'replys': comment,
+        'subreplys': subreplys
     }
     template = 'apps/article/detail.html'
     return render(request, template, context)

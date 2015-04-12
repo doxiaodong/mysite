@@ -31,7 +31,9 @@
                 var c = func.$id("header_nav");
                 c.addEventListener('click', function (e) {
                     var index = e.target.getAttribute('data-index');
-                    if (index !== null) {
+                    if (e.target.hasAttribute('disabled')) {
+                        window.XD.alert('等等哟～');
+                    } else if (index !== null) {
                         this.setAttribute('index', index);
                     }
                 });

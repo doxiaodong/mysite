@@ -107,9 +107,11 @@ a,
 a:hover,
 a:focus,
 a:active,
+a.active,
 .a:hover,
 .a:focus,
-.a:active {
+.a:active,
+.a.active {
   color: #ff6347;
 }
 .active-color {
@@ -528,6 +530,12 @@ a:active,
   -o-transition: 0.5s;
   transition: 0.5s;
 }
+.btn:hover,
+.btn:focus,
+.btn:active,
+.btn.active {
+  background-color: #ff8e7a;
+}
 body::-webkit-scrollbar {
   width: 10px;
 }
@@ -552,6 +560,9 @@ body::-webkit-resizer {
 .sr-only {
   width: 0;
   height: 0;
+}
+.hide {
+  display: none;
 }
 .pages {
   position: relative;
@@ -636,6 +647,16 @@ body::-webkit-resizer {
   width: 100%;
   padding-left: 60px;
 }
+.pages .page-block .each-inner .replys .each-reply .sub-reply {
+  margin-top: 10px;
+  padding-left: 60px;
+}
+.pages .page-block .each-inner .replys .each-reply .sub-reply .each-reply {
+  border-top: 1px solid #ccc;
+}
+.pages .page-block .each-inner .replys .each-reply .sub-reply .each-reply:first-child {
+  padding-top: 10px;
+}
 .pages .page-block .each-inner .replys .each-reply > .right .word {
   min-height: 50px;
 }
@@ -661,6 +682,21 @@ body::-webkit-resizer {
 }
 .pages .page-block .each-inner .replys .each-reply:last-child {
   padding-bottom: 0;
+}
+.pages .page-block .each-inner .reply-button {
+  margin-top: 5px;
+  float: right;
+}
+.pages .page-block .each-inner .reply-textarea {
+  margin-top: 5px;
+  height: 100px;
+  resize: vertical;
+}
+.pages .page-block .each-inner .reply-floor {
+  display: none;
+}
+.pages .page-block .each-inner .reply-floor.show {
+  display: block;
 }
 .pages .view-left,
 .pages .view-right {

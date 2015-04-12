@@ -9,7 +9,7 @@ from django.db import models
 
 class ArticleCategory(models.Model):
     name = models.CharField("文章类型", max_length=255)
-    url = models.CharField("URL地址", max_length=100)
+    url = models.CharField("文章类型URL地址", max_length=100)
 
     def __str__(self):
         return self.name
@@ -17,6 +17,7 @@ class ArticleCategory(models.Model):
 
 class Article(models.Model):
     category = models.ForeignKey(ArticleCategory)
+    url = models.CharField("文章URL地址", max_length=100)
     title = models.CharField("标题", max_length=255)
     content = UEditorField("内容", "100%", 120, imagePath="images/", filePath="files/", null=True, blank=True)
     create_time = models.DateTimeField("发布时间")
