@@ -1,4 +1,7 @@
 .DS_Store
+__pycache__
+migrations
+media
 
 static/css/pages/_pages_layout.css
 static/css/partcss/
