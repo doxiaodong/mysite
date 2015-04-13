@@ -11,10 +11,10 @@
 		<div class="each-header">
 			<span class="big-size">热门文章</span>
 		</div>
-		<div class="each-inner" ng-app="test">
+		<div class="each-inner">
 			<ul class="articles">
                 {% for article in hot_article %}
-                <li class="article" ng-repeat="i in [1,2,3]">
+                <li class="article">
 					<div class="title">
 						<a class="xd-pjax" href="{% url 'article:article_detail' article.category.url article.id %}">{{ article.title }}</a>
 					</div>

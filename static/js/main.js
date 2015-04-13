@@ -24,9 +24,10 @@
                 this.initLayout();
             },
             initLayout: function () {
-                //window.XD.angular.app = angular.module('mainApp', []);
-                //window.XD.angular.app.run();
+                //window.XD.angular.mainApp = angular.module('mainApp', []);
+                //window.XD.angular.mainApp.run();
 
+                angular.bootstrap(func.$id("SIGN"));
 
                 var c = func.$id("header_nav");
                 c.addEventListener('click', function (e) {

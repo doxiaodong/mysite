@@ -13,6 +13,14 @@ define(['pages/pageRouter', '../../func'], function (pages, func) {
             this.replyArticle();
             this.replyComment();
 
+
+
+            // angular
+            function ReplyCtrl($scope) {
+                $scope.show = function() {
+
+                }
+            }
         },
         countReply: function() {
             if (angular) {
@@ -81,15 +89,12 @@ define(['pages/pageRouter', '../../func'], function (pages, func) {
             var replys = func.$q('.replys');
             replys.addEventListener('click', function(e) {
                 var tar = e.target;
-                /*if (tar.getAttribute('reply-object')) {
+                if (tar.getAttribute('reply-object')) {
                     var floor = tar.getAttribute('floor');
-                    var replyObject = tar.getAttribute('reply-object');
                     var floorObj = func.$q('.floor-'+floor);
 
-                    floorObj.querySelector('.reply-textarea').setAttribute('placeholder', '回复'+replyObject);
                     if (floorObj.classList.contains('show')) {
                         //floorObj.classList.remove('show');
-
                     } else {
                         var showR = func.$qa('.reply-floor.show');
                         var len = showR.length;
@@ -100,7 +105,7 @@ define(['pages/pageRouter', '../../func'], function (pages, func) {
                         }
                         floorObj.classList.add('show');
                     }
-                }*/
+                }
                 //if (tar.classList.contains('add-subreply-button')) {
                 //    var url = id.getAttribute('action');
                 //    var data = func.getFormData('#REPLY_ARTICLE');

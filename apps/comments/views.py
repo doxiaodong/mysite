@@ -14,26 +14,32 @@ def add_reply(request, article):
 
         content = post_data.get('content', None)
 
-        if content == '':
-            respose = {'status': False, 'data': {'error': '回复不能为空！'}}
-            return JsonResponse(respose)
+        if request.user.username:
+
+            if content == '':
+                respose = {'status': False, 'data': {'error': '回复不能为空！'}}
+                return JsonResponse(respose)
+
+            else:
+                url = timezone.now().strftime('%Y%m%d%H%M%S')
+                reply_time = timezone.now()
+                user = User.objects.get(username=request.user.username)
+                article = Article.objects.get(url=article)
+
+                try:
+                    comment = Comment(url=url,
+                                      article=article,
+                                      reply_user=user,
+                                      content=content,
+                                      reply_time=reply_time)
+                except Exception as err:
+                    print(err)
+
+                comment.save()
+                respose = {'status': True, 'data': {'error': '成功！'}}
+                return JsonResponse(respose)
         else:
-            url = timezone.now().strftime('%Y%m%d%H%M%S')
-            reply_time = timezone.now()
-            user = User.objects.get(username=request.user)
-            article = Article.objects.get(url=article)
-
-            try:
-                comment = Comment(url=url,
-                                  article=article,
-                                  reply_user=user,
-                                  content=content,
-                                  reply_time=reply_time)
-            except Exception as err:
-                print(err)
-
-            comment.save()
-            respose = {'status': True, 'data': {'error': '成功！'}}
+            respose = {'status': False, 'data': {'error': '请先登录！'}}
             return JsonResponse(respose)
 
 
