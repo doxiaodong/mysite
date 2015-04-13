@@ -41,7 +41,6 @@ DEFAULT_APPS = (
 LOCAL_APPS = (
     'apps.home',
     'apps.article',
-    'apps.learn',
     'apps.account',
     'apps.comments',
 )

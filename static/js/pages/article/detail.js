@@ -1,7 +1,7 @@
 'use strict';
 
 // page_article_detail
-define(['../../func'], function (func) {
+define(['pages/pageRouter', '../../func'], function (pages, func) {
     var page_article_detail = {
         init: function () {
             console.log("==this is page_article_detail==");
@@ -9,15 +9,17 @@ define(['../../func'], function (func) {
                 SyntaxHighlighter.highlight();
             }
 
-
             this.countReply();
             this.replyArticle();
             this.replyComment();
 
         },
         countReply: function() {
+            if (angular) {
+                return
+            }
             var count = func.$q('.count-replys');
-            var num = count.getAttribute('count').replace(/ /g, '').split('+');
+            var num = count.getAttribute('ng-init').replace(/ /g, '').replace('count=', '').split('+');
             var res = 0;
             for (var i in num) {
                 res += (num[i]-0);
@@ -56,7 +58,7 @@ define(['../../func'], function (func) {
                                     window.XD.hideIndicator();
 
                                     func.$q('#PJAX_CONTAINER').innerHTML = response;
-                                    page_article_detail.init();
+                                    pages.init();
                                 },
                                 error: function(response, status, xhr) {
                                     window.location.reload();
@@ -79,7 +81,7 @@ define(['../../func'], function (func) {
             var replys = func.$q('.replys');
             replys.addEventListener('click', function(e) {
                 var tar = e.target;
-                if (tar.getAttribute('reply-object')) {
+                /*if (tar.getAttribute('reply-object')) {
                     var floor = tar.getAttribute('floor');
                     var replyObject = tar.getAttribute('reply-object');
                     var floorObj = func.$q('.floor-'+floor);
@@ -98,7 +100,7 @@ define(['../../func'], function (func) {
                         }
                         floorObj.classList.add('show');
                     }
-                }
+                }*/
                 //if (tar.classList.contains('add-subreply-button')) {
                 //    var url = id.getAttribute('action');
                 //    var data = func.getFormData('#REPLY_ARTICLE');

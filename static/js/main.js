@@ -24,8 +24,8 @@
                 this.initLayout();
             },
             initLayout: function () {
-                window.XD.angular.app = angular.module('myApp', []);
-                window.XD.angular.app.run();
+                //window.XD.angular.app = angular.module('mainApp', []);
+                //window.XD.angular.app.run();
 
 
                 var c = func.$id("header_nav");

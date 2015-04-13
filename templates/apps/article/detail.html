@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="pages">
+<div class="pages" id="MAIN_APP">
 	<div class="page-block">
 		<div class="each-header">
 			<span class="full-title big-size">{{ article.title }}</span>
@@ -22,7 +22,8 @@
 	</div>
 	<div class="page-block">
 		<div class="each-header">
-			<span class="active-color count-replys" count="{{ replys.count }}{% for head, sub in subreplys.items %}+{{ sub.count }}{% endfor %}">
+			<span class="active-color count-replys" ng-init="count={{ replys.count }}{% for head, sub in subreplys.items %}+{{ sub.count }}{% endfor %}">
+            {% templatetag openvariable %}count{% templatetag closevariable %}
             </span>回复
 		</div>
 		<div class="each-inner">
@@ -48,7 +49,7 @@
 						</div>
 						<div class="message">
 							<span class="time">{{ reply.reply_time|date:'Y年m月d日' }}</span>
-							<span class="pointer icon ion-reply a" reply-object="{{ reply.reply_user.username }}" floor="{{ forloop.counter }}">回复</span>
+							<span ng-click="show{{ forloop.counter }}=true;placeholder{{ forloop.counter }}='{% with r_user=reply.reply_user %}{{ user_profile.pic }}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ reply.reply_user.username }}" floor="{{ forloop.counter }}">回复</span>
 {#							<span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
 							<span class="floor">{{ forloop.counter }}楼</span>
 						</div>
@@ -87,7 +88,7 @@
                                             </div>
                                             <div class="message">
                                                 <span class="time">{{ sub_reply.reply_time|date:'Y年m月d日' }}</span>
-                                                <span class="pointer icon ion-reply a" reply-object="{{ sub_reply.reply_user.username }}" floor="{{ floor }}">回复</span>
+                                                <span ng-click="show{{ forloop.counter }}=true;placeholder{{ floor }}='{% with r_user=sub_reply.reply_user %}{{ user_profile.pic }}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ sub_reply.reply_user.username }}" floor="{{ floor }}">回复</span>
 {#                                                <span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
                                             </div>
                                         </div>
@@ -97,7 +98,7 @@
                                     <form class="form" action="{% url 'comments:add_sub_reply' head.url %}">
                                         {% csrf_token %}
                                         <div class="form-group clearfix">
-                                            <textarea class="form-control reply-textarea" name="content" type="text" placeholder="来交流下吧～" required></textarea>
+                                            <textarea class="form-control reply-textarea" name="content" type="text" ng-init="placeholder{{ floor }}='交流'" placeholder="回复{% templatetag openvariable %}placeholder{{ floor }}{% templatetag closevariable %}" required></textarea>
                                             <button class="add-subreply-button main btn reply-button" type="submit">回复</button>
                                         </div>
                                     </form>
@@ -116,7 +117,7 @@
                 {% csrf_token %}
                 <div class="form-group clearfix">
                     <label for="add_content"></label>
-                    <textarea class="form-control reply-textarea" id="add_content" cols="30" rows="10" name="content" type="text" placeholder="来交流下吧～" autofocus required></textarea>
+                    <textarea class="form-control reply-textarea" id="add_content" cols="30" rows="10" name="content" type="text" placeholder="来交流下吧～" required></textarea>
                     <button id="ADD_REPLY_BUTTON" class="main btn reply-button" type="submit">发布</button>
                 </div>
             </form>

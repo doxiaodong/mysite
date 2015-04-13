@@ -9,3 +9,6 @@ static/css/partcss/
 node_modules/
 env/
 .idea/
+
+
+dist/
