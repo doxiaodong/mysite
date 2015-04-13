@@ -34,14 +34,15 @@
 				<div class="a header-side" xd-modal="#SIGN">登录</div>
 				{% endif %}
 			</div>
-			<ul class="nav-list clearfix">
-                <li class="slider-nav"></li>
-                <li><a class="each-nav a xd-pjax" data-index="0" href="{% url 'home:home_index' %}">首页</a></li>
-                <li><a class="each-nav a xd-pjax" data-index="1" href="{% url 'article:article_view' %}">文章列表</a></li>
-                <li><a class="each-nav a" data-index="2" href="#" disabled>账户中心</a></li>
-                <li><a class="each-nav a" data-index="3" href="#" disabled>关于我</a></li>
-            </ul>
-
+            <div class="nav-list-container">
+                <div class="slider-nav"></div>
+                <ul class="nav-list">
+                    <li><a class="each-nav a xd-pjax" data-index="0" href="{% url 'home:home_index' %}">首页</a></li>
+                    <li><a class="each-nav a xd-pjax" data-index="1" href="{% url 'article:article_view' %}">文章列表</a></li>
+                    <li><a class="each-nav a" data-index="2" href="#" disabled>账户中心</a></li>
+                    <li><a class="each-nav a" data-index="3" href="#" disabled>关于我</a></li>
+                </ul>
+            </div>
 		</nav>
 	</header>
 	<article class="container" id="PJAX_CONTAINER">

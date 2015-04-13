@@ -41,6 +41,7 @@ define(['pages/pageRouter', '../../func'], function (pages, func) {
                 var data = func.getFormData('#REPLY_ARTICLE');
 
                 var postData = JSON.stringify(data);
+                window.XD.showIndicator();
 
                 window.XD.ajax({
                     method: 'POST',
@@ -52,8 +53,8 @@ define(['pages/pageRouter', '../../func'], function (pages, func) {
                     },
                     success: function (response, status, xhr) {
                         var response = JSON.parse(response);
+                        window.XD.hideIndicator();
                         if (response.status === true) {
-
                             window.XD.showIndicator();
                             window.XD.ajax({
                                 url: window.location.pathname,
@@ -63,14 +64,15 @@ define(['pages/pageRouter', '../../func'], function (pages, func) {
                                 },
                                 success: function (response, status, xhr) {
 
-                                    window.XD.hideIndicator();
-
                                     func.$q('#PJAX_CONTAINER').innerHTML = response;
                                     pages.init();
                                 },
                                 error: function(response, status, xhr) {
                                     window.location.reload();
                                     window.XD.alert('请求出错，请重新尝试。');
+                                },
+                                complete: function() {
+                                    window.XD.hideIndicator();
                                 }
                             });
                         } else {
