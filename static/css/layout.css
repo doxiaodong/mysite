@@ -117,6 +117,10 @@ a.active,
 .active-color {
   color: #ff6347;
 }
+textarea,
+input {
+  border-radius: 0;
+}
 .indicator {
   position: fixed;
   top: 0;
@@ -1087,8 +1091,5 @@ footer.footer .content {
 }
 .icon.active {
   color: #ff6347;
-}
-textarea {
-  border-radius: 0;
 }
 /*# sourceMappingURL=layout.css.map */
