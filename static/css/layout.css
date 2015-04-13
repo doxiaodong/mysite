@@ -1088,4 +1088,7 @@ footer.footer .content {
 .icon.active {
   color: #ff6347;
 }
+textarea {
+  border-radius: 0;
+}
 /*# sourceMappingURL=layout.css.map */
