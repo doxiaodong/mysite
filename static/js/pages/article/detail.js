@@ -74,10 +74,19 @@ define(['pages/pageRouter', '../../func'], function (pages, func) {
                                 }
                             });
                         } else {
-                            window.XD.alert(response.data.error, {
-                                title: '出错啦',
-                                ok: '确认'
-                            });
+                            if (response.data.not_login) {
+                                window.XD.alert(response.data.error, {
+                                    title: '出错啦',
+                                    ok: '登录'
+                                }, function() {
+                                    window.XD.modules.Modal.show('#SIGN');
+                                });
+                            } else {
+                                window.XD.alert(response.data.error, {
+                                    title: '出错啦',
+                                    ok: '确认'
+                                });
+                            }
                         }
                     }
                 });

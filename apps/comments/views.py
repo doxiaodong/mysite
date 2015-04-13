@@ -39,7 +39,7 @@ def add_reply(request, article):
                 respose = {'status': True, 'data': {'error': '成功！'}}
                 return JsonResponse(respose)
         else:
-            respose = {'status': False, 'data': {'error': '请先登录！'}}
+            respose = {'status': False, 'data': {'error': '请先登录！', 'not_login': True}}
             return JsonResponse(respose)
 
 
