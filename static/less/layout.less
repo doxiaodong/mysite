@@ -8,7 +8,7 @@
   .slider(@num - 1);
   .nav[index='@{num}'] {
     .slider-nav {
-      .transform-translate3d(@num*100%, 0, 0);
+      .transform-translate(@num*100%, 0);
     }
     a[data-index='@{num}'] {
       color: darken(#fff, 10%);
@@ -80,22 +80,10 @@ header.header {
         width: 0;
       }
     }
-    .nav-list {
+    .nav-list-container {
       height: 100%;
       width: 100%;
       position: relative;
-      .each-nav {
-        float: left;
-        cursor: pointer;
-        color: darken(rgb(255, 255, 255), 10%);
-        width: 25%;
-        height: 100%;
-        line-height: @header_height;
-        text-align: center;
-        &:hover {
-          color: @active_color;
-        }
-      }
       .slider-nav {
         background-color: @header-active;
         width: 25%;
@@ -104,13 +92,30 @@ header.header {
         top: 0;
         left: 0;
         opacity: 0.5;
-        z-index: -1;
+//        z-index: -1;
         .transition(@base_duration);
         -webkit-transition-property: -webkit-transform;
         transition-property: transform;
       }
-
+      .nav-list {
+        height: 100%;
+        width: 100%;
+        position: relative;
+        .each-nav {
+          float: left;
+          cursor: pointer;
+          color: darken(rgb(255, 255, 255), 10%);
+          width: 25%;
+          height: 100%;
+          line-height: @header_height;
+          text-align: center;
+          &:hover {
+            color: @active_color;
+          }
+        }
+      }
     }
+
   }
 
 }

@@ -121,6 +121,10 @@ textarea,
 input {
   border-radius: 0;
 }
+.desktop .indicator .preloader {
+  position: absolute;
+  top: 73px;
+}
 .indicator {
   position: fixed;
   top: 0;
@@ -153,8 +157,6 @@ input {
   font-size: 14px;
 }
 .indicator .preloader {
-  position: absolute;
-  top: 73px;
   display: inline-block;
   width: 30px;
   height: 30px;
@@ -392,6 +394,11 @@ input {
   -o-transform: rotateX(0) rotateY(0) rotateZ(360deg);
   -ms-transform: rotateX(0) rotateY(0) rotateZ(360deg);
   transform: rotateX(0) rotateY(0) rotateZ(360deg);
+}
+.mobile .xd-modal .xd-container {
+  top: 120px;
+  margin: 0 auto;
+  display: block;
 }
 .xd-modal {
   position: fixed;
@@ -861,41 +868,41 @@ body::-webkit-resizer {
   background-repeat: no-repeat;
 }
 .nav[index='0'] .slider-nav {
-  -webkit-transform: translate3d(0%, 0, 0);
-  -moz-transform: translate3d(0%, 0, 0);
-  -o-transform: translate3d(0%, 0, 0);
-  -ms-transform: translate3d(0%, 0, 0);
-  transform: translate3d(0%, 0, 0);
+  -webkit-transform: translate(0%, 0);
+  -moz-transform: translate(0%, 0);
+  -o-transform: translate(0%, 0);
+  -ms-transform: translate(0%, 0);
+  transform: translate(0%, 0);
 }
 .nav[index='0'] a[data-index='0'] {
   color: #e6e6e6;
 }
 .nav[index='1'] .slider-nav {
-  -webkit-transform: translate3d(100%, 0, 0);
-  -moz-transform: translate3d(100%, 0, 0);
-  -o-transform: translate3d(100%, 0, 0);
-  -ms-transform: translate3d(100%, 0, 0);
-  transform: translate3d(100%, 0, 0);
+  -webkit-transform: translate(100%, 0);
+  -moz-transform: translate(100%, 0);
+  -o-transform: translate(100%, 0);
+  -ms-transform: translate(100%, 0);
+  transform: translate(100%, 0);
 }
 .nav[index='1'] a[data-index='1'] {
   color: #e6e6e6;
 }
 .nav[index='2'] .slider-nav {
-  -webkit-transform: translate3d(200%, 0, 0);
-  -moz-transform: translate3d(200%, 0, 0);
-  -o-transform: translate3d(200%, 0, 0);
-  -ms-transform: translate3d(200%, 0, 0);
-  transform: translate3d(200%, 0, 0);
+  -webkit-transform: translate(200%, 0);
+  -moz-transform: translate(200%, 0);
+  -o-transform: translate(200%, 0);
+  -ms-transform: translate(200%, 0);
+  transform: translate(200%, 0);
 }
 .nav[index='2'] a[data-index='2'] {
   color: #e6e6e6;
 }
 .nav[index='3'] .slider-nav {
-  -webkit-transform: translate3d(300%, 0, 0);
-  -moz-transform: translate3d(300%, 0, 0);
-  -o-transform: translate3d(300%, 0, 0);
-  -ms-transform: translate3d(300%, 0, 0);
-  transform: translate3d(300%, 0, 0);
+  -webkit-transform: translate(300%, 0);
+  -moz-transform: translate(300%, 0);
+  -o-transform: translate(300%, 0);
+  -ms-transform: translate(300%, 0);
+  transform: translate(300%, 0);
 }
 .nav[index='3'] a[data-index='3'] {
   color: #e6e6e6;
@@ -960,12 +967,32 @@ header.header .nav .header-side .signout {
     width: 0;
   }
 }
-header.header .nav .nav-list {
+header.header .nav .nav-list-container {
   height: 100%;
   width: 100%;
   position: relative;
 }
-header.header .nav .nav-list .each-nav {
+header.header .nav .nav-list-container .slider-nav {
+  background-color: #ff6347;
+  width: 25%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0.5;
+  -webkit-transition: 0.5s;
+  -moz-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s;
+  -webkit-transition-property: -webkit-transform;
+  transition-property: transform;
+}
+header.header .nav .nav-list-container .nav-list {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+header.header .nav .nav-list-container .nav-list .each-nav {
   float: left;
   cursor: pointer;
   color: #e6e6e6;
@@ -974,24 +1001,8 @@ header.header .nav .nav-list .each-nav {
   line-height: 50px;
   text-align: center;
 }
-header.header .nav .nav-list .each-nav:hover {
+header.header .nav .nav-list-container .nav-list .each-nav:hover {
   color: #ff6347;
-}
-header.header .nav .nav-list .slider-nav {
-  background-color: #ff6347;
-  width: 25%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  opacity: 0.5;
-  z-index: -1;
-  -webkit-transition: 0.5s;
-  -moz-transition: 0.5s;
-  -o-transition: 0.5s;
-  transition: 0.5s;
-  -webkit-transition-property: -webkit-transform;
-  transition-property: transform;
 }
 article.container {
   padding: 50px 0 5px 0;
