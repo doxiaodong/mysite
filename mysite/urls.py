@@ -17,5 +17,8 @@ urlpatterns = patterns(
     url(r'^account/', include('apps.account.urls', namespace="account")),
     url(r'^comments/', include('apps.comments.urls', namespace="comments")),
 
+    # plugins
+    url(r'^ueditor/', include('DjangoUeditor.urls')),
+
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

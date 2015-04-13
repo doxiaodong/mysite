@@ -47,6 +47,7 @@ LOCAL_APPS = (
 )
 
 THIRD_APPS = (
+    'DjangoUeditor',
 )
 
 INSTALLED_APPS = DEFAULT_APPS + LOCAL_APPS + THIRD_APPS
