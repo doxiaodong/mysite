@@ -15,3 +15,5 @@ dist/
 mm
 
 db.sqlite3
+
+mysite/setting.py
