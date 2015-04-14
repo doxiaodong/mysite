@@ -1,5 +1,6 @@
 from django.contrib import admin
-# from .profile import *
+from django.contrib.auth.models import User
+from .models import *
 
 # Register your models here.
 
@@ -7,8 +8,10 @@ from django.contrib import admin
 class ProfileAdmin(admin.ModelAdmin):
     fieldsets = [
         ('账户增加', {
-            'fields': ['user', 'sex', 'pic'],
+            'fields': ['sex', 'pic'],
         }),
     ]
 
-# admin.site.register(Profile, ProfileAdmin)
+
+# admin.site.register(User)
+admin.site.register(Profile)

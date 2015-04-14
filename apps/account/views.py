@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseNotAllowed
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from apps.account.models import Profile
 
 
 # functions
@@ -26,7 +27,7 @@ def register(request):
 
         # create_user(username, email=None, password=None, **extra_fields)
         try:
-            new_user = User.objects.create_user(
+            new_user = Profile.objects.create_user(
                 username=r_username,
                 email=r_email,
                 password=r_password,

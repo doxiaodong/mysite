@@ -30,7 +30,11 @@
 			<ul class="replys">
                 {% for reply in replys %}
                 <li class="each-reply">
-					<img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">
+                    {% if reply.reply_user.pic %}
+					    <img src="/media/{{ reply.reply_user.pic }}" alt="" class="pic left">
+                    {% else %}
+                        <img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">
+                    {% endif %}
 					<div class="right">
 						<div class="word">
 							<div class="user">
@@ -59,7 +63,11 @@
                             {% ifequal head reply  %}
                                 {% for sub_reply in sub %}
                                     <li class="each-reply">
-                                        <img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">
+                                        {% if sub_reply.reply_user.pic %}
+                                            <img src="/media/{{ sub_reply.reply_user.pic }}" alt="" class="pic left">
+                                        {% else %}
+                                            <img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">
+                                        {% endif %}
                                         <div class="right">
                                             <div class="word">
                                                 <div class="user">

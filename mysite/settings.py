@@ -101,7 +101,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-AUTH_PROFILE_MODULE = 'apps.account.profile.Profile'
+AUTH_USER_MODEL = 'account.Profile'
+
 
 # Template
 TEMPLATE_DIRS = (
@@ -122,9 +123,11 @@ STATICFILES_DIRS = (
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
+# DEFAULT_USER = STATIC_URL + 'img/user-default.jpg'
+
 """
-superuser: admin
-pwd: admin
+superuser: duxiaodong
+pwd: shiwei122
 """
 
 

@@ -1,7 +1,8 @@
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseNotAllowed
 from django.utils import timezone
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from apps.account.models import Profile
 from apps.article.models import Article
 from .models import Comment, SubComment
 
@@ -22,7 +23,7 @@ def add_reply(request, article):
             else:
                 url = timezone.now().strftime('%Y%m%d%H%M%S')
                 reply_time = timezone.now()
-                user = User.objects.get(username=request.user.username)
+                user = Profile.objects.get(username=request.user.username)
                 article = Article.objects.get(url=article)
 
                 try:
@@ -56,9 +57,9 @@ def add_sub_reply(request, head):
                 return JsonResponse(respose)
             else:
                 reply_time = timezone.now()
-                user = User.objects.get(username=request.user)
+                user = Profile.objects.get(username=request.user)
 
-                reply_object = User.objects.get(username=reply_object_str)
+                reply_object = Profile.objects.get(username=reply_object_str)
                 head = Comment.objects.get(url=head)
 
                 try:

@@ -16,5 +16,5 @@ mm
 
 db.sqlite3
 
-mysite/setting.py
+mysite/settings.py
 test.py
