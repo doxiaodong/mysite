@@ -1,7 +1,7 @@
 'use strict';
 
 // page_article_detail
-define(['pages/pageRouter', '../../func'], function (pages, func) {
+define(['../../func'], function (func) {
     var page_article_detail = {
         init: function () {
             console.log("==this is page_article_detail==");
@@ -65,7 +65,9 @@ define(['pages/pageRouter', '../../func'], function (pages, func) {
                                 success: function (response, status, xhr) {
 
                                     func.$q('#PJAX_CONTAINER').innerHTML = response;
-                                    pages.init();
+                                    page_article_detail.init();
+                                    angular.bootstrap(func.$id("MAIN_APP"));
+
                                 },
                                 error: function(response, status, xhr) {
                                     window.location.reload();

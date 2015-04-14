@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .profile import *
+# from .profile import *
 
 # Register your models here.
 
@@ -11,4 +11,4 @@ class ProfileAdmin(admin.ModelAdmin):
         }),
     ]
 
-admin.site.register(Profile, ProfileAdmin)
+# admin.site.register(Profile, ProfileAdmin)

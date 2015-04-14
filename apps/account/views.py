@@ -25,14 +25,26 @@ def register(request):
         r_lastname = post_data.get('lastname', None)
 
         # create_user(username, email=None, password=None, **extra_fields)
-        user = User.objects.create_user(r_username, r_email, r_password)
-        user.first_name = r_firstname
-        user.last_name = r_lastname
+        try:
+            new_user = User.objects.create_user(
+                username=r_username,
+                email=r_email,
+                password=r_password,
+            )
+        except Exception as err:
+            print(err)
 
-        user.save()
+        if r_firstname:
+            new_user.first_name = r_firstname
+        else:
+            new_user.first_name = r_username
+
+        new_user.last_name = r_lastname
+
+        new_user.save()
 
         i_user = authenticate(username=r_username, password=r_password)
-        login(request, user)
+        login(request, i_user)
         respose = login_show(i_user)
         return JsonResponse(respose)
 
