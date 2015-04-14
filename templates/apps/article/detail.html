@@ -35,7 +35,6 @@
 						<div class="word">
 							<div class="user">
                                 {% with r_user=reply.reply_user %}
-                                    {{ user_profile.pic }}
                                     {% if r_user.first_name %}
                                         {{ r_user.last_name }}{{ r_user.first_name }}
                                     {% else %}
@@ -49,7 +48,7 @@
 						</div>
 						<div class="message">
 							<span class="time">{{ reply.reply_time|date:'Y年m月d日' }}</span>
-							<span ng-click="show='';placeholder{{ forloop.counter }}='{% with r_user=reply.reply_user %}{{ user_profile.pic }}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ reply.reply_user.username }}" floor="{{ forloop.counter }}">回复</span>
+							<span ng-click="reply_object{{ forloop.counter }}='{{ reply.reply_user.username }}';placeholder{{ forloop.counter }}='{% with r_user=reply.reply_user %}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ reply.reply_user.username }}" floor="{{ forloop.counter }}">回复</span>
 {#							<span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
 							<span class="floor">{{ forloop.counter }}楼</span>
 						</div>
@@ -65,7 +64,6 @@
                                             <div class="word">
                                                 <div class="user">
                                                     {% with r_user=sub_reply.reply_user %}
-                                                        {{ user_profile.pic }}
                                                         {% if r_user.first_name %}
                                                             {{ r_user.last_name }}{{ r_user.first_name }}
                                                         {% else %}
@@ -74,7 +72,6 @@
                                                     {% endwith %}
                                                     <span style="color: #000011">回复</span>
                                                     {% with r_user=sub_reply.reply_object %}
-                                                        {{ user_profile.pic }}
                                                         {% if r_user.first_name %}
                                                             {{ r_user.last_name }}{{ r_user.first_name }}
                                                         {% else %}
@@ -88,18 +85,18 @@
                                             </div>
                                             <div class="message">
                                                 <span class="time">{{ sub_reply.reply_time|date:'Y年m月d日' }}</span>
-                                                <span ng-click="placeholder{{ floor }}='{% with r_user=sub_reply.reply_user %}{{ user_profile.pic }}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ sub_reply.reply_user.username }}" floor="{{ floor }}">回复</span>
+                                                <span ng-click="reply_object{{ floor }}='{{ sub_reply.reply_user.username }}';placeholder{{ floor }}='{% with r_user=sub_reply.reply_user %}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ sub_reply.reply_user.username }}" floor="{{ floor }}">回复</span>
 {#                                                <span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
                                             </div>
                                         </div>
                                     </li>
                                 {% endfor %}
                                 <li class="floor-{{ floor }} reply-floor">
-                                    <form class="form" name="REPLY_ARTICLE_{{ floor }}" action="{% url 'comments:add_sub_reply' head.url %}">
+                                    <form id="REPLY_COMMENT_{{ floor }}" ng-init="reply_object{{ floor }}='admin'" class="form" name="REPLY_COMMENT_{{ floor }}" reply-person="{% templatetag openvariable %}reply_object{{ floor }}{% templatetag closevariable %}" action="{% url 'comments:add_sub_reply' head.url %}">
                                         {% csrf_token %}
                                         <div class="form-group clearfix">
-                                            <textarea ng-model="reply_article_{{ floor }}.content" class="form-control reply-textarea" name="content" type="text" ng-init="placeholder{{ floor }}='我'" placeholder="回复{% templatetag openvariable %}placeholder{{ floor }}{% templatetag closevariable %}：" required></textarea>
-                                            <button ng-disabled="!REPLY_ARTICLE_{{ floor }}.$valid" class="add-subreply-button main btn reply-button" type="submit">回复</button>
+                                            <textarea ng-model="reply_article_{{ floor }}.content" class="form-control reply-textarea" name="content" type="text" ng-init="placeholder{{ floor }}='admin'" placeholder="回复{% templatetag openvariable %}placeholder{{ floor }}{% templatetag closevariable %}：" required></textarea>
+                                            <button ng-disabled="!REPLY_COMMENT_{{ floor }}.$valid" class="add-subreply-button main btn reply-button" floor="{{ floor }}" type="submit">回复</button>
                                         </div>
                                     </form>
                                 </li>

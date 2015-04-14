@@ -53,7 +53,7 @@ define(['../../func'], function (func) {
                     },
                     success: function (response, status, xhr) {
                         var response = JSON.parse(response);
-                        window.XD.hideIndicator();
+
                         if (response.status === true) {
                             window.XD.showIndicator();
                             window.XD.ajax({
@@ -92,6 +92,9 @@ define(['../../func'], function (func) {
                                 });
                             }
                         }
+                    },
+                    complete: function () {
+                        window.XD.hideIndicator();
                     }
                 });
 
@@ -119,36 +122,77 @@ define(['../../func'], function (func) {
                         floorObj.classList.add('show');
                     }
                 }
-                //if (tar.classList.contains('add-subreply-button')) {
-                //    var url = id.getAttribute('action');
-                //    var data = func.getFormData('#REPLY_ARTICLE');
-                //
-                //    var postData = JSON.stringify(data);
-                //
-                //    window.XD.ajax({
-                //        method: 'POST',
-                //        url: url,
-                //        data: postData,
-                //        contentType: 'application/json;charset=UTF-8',
-                //        beforeSend: function (xhr) {
-                //            xhr.setRequestHeader('X-CSRFToken', func.getCookie('csrftoken'));
-                //        },
-                //        success: function (response, status, xhr) {
-                //            console.log('===signin complete===');
-                //            var response = JSON.parse(response);
-                //            if (response.status === true) {
-                //                console.log(response);
-                //            } else {
-                //                window.XD.alert(response.data.error, {
-                //                    title: '出错啦',
-                //                    ok: '确认'
-                //                });
-                //            }
-                //        }
-                //    });
-                //
-                //    e.preventDefault();
-                //}
+                if (tar.classList.contains('add-subreply-button')) {
+                    var floor = tar.getAttribute('floor');
+                    var id = func.$id('REPLY_COMMENT_' + floor);
+                    var url = id.getAttribute('action');
+                    var data = func.getFormData('#REPLY_COMMENT_' + floor);
+
+                    func.extend({
+                        reply_object: id.getAttribute('reply-person')
+                    } ,data)
+
+                    var postData = JSON.stringify(data);
+                    window.XD.showIndicator();
+
+                    window.XD.ajax({
+                        method: 'POST',
+                        url: url,
+                        data: postData,
+                        contentType: 'application/json;charset=UTF-8',
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('X-CSRFToken', func.getCookie('csrftoken'));
+                        },
+                        success: function (response, status, xhr) {
+                            console.log('===signin complete===');
+                            var response = JSON.parse(response);
+                            if (response.status === true) {
+                                console.log(response);
+                                window.XD.showIndicator();
+                                window.XD.ajax({
+                                    url: window.location.pathname,
+                                    contentType: 'text/html;charset=utf-8',
+                                    beforeSend: function (xhr) {
+                                        xhr.setRequestHeader('XD-PJAX', 'true');
+                                    },
+                                    success: function (response, status, xhr) {
+
+                                        func.$q('#PJAX_CONTAINER').innerHTML = response;
+                                        page_article_detail.init();
+                                        angular.bootstrap(func.$id("MAIN_APP"));
+
+                                    },
+                                    error: function(response, status, xhr) {
+                                        window.location.reload();
+                                        window.XD.alert('请求出错，请重新尝试。');
+                                    },
+                                    complete: function() {
+                                        window.XD.hideIndicator();
+                                    }
+                                });
+                            } else {
+                                if (response.data.not_login) {
+                                    window.XD.alert(response.data.error, {
+                                        title: '出错啦',
+                                        ok: '登录'
+                                    }, function() {
+                                        window.XD.modules.Modal.show('#SIGN');
+                                    });
+                                } else {
+                                    window.XD.alert(response.data.error, {
+                                        title: '出错啦',
+                                        ok: '确认'
+                                    });
+                                }
+                            }
+                        },
+                        complete: function () {
+                            window.XD.hideIndicator();
+                        }
+                    });
+
+                    e.preventDefault();
+                }
             });
         }
     };
