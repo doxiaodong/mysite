@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+
     require.config({
         paths: {
             angular: 'lib/angular'
@@ -32,11 +33,8 @@
 
                 var c = func.$id("header_nav");
                 c.addEventListener('click', function (e) {
-                    var index = e.target.getAttribute('data-index');
                     if (e.target.hasAttribute('disabled')) {
                         window.XD.alert('等等哟～');
-                    } else if (index !== null) {
-                        this.setAttribute('index', index);
                     }
                 });
 
@@ -63,7 +61,7 @@
             initPages: function () {
                 page.init();
             },
-            initPlatform: function() {
+            initPlatform: function () {
                 var htmlClass = func.$q('html').classList;
                 if (window.XD.modules.platform.hasTouch) {
                     htmlClass.add('touch');
@@ -84,4 +82,5 @@
         };
         app.init();
     });
+
 })();

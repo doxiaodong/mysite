@@ -1,12 +1,15 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
 
+{% block title %}
+    {{ article.title }}
+{% endblock %}
 {% block css %}
     <link rel="stylesheet" href="{% static 'ueditor/third-party/SyntaxHighlighter/shCoreDefault.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="pages" id="MAIN_APP">
+<div class="pages" id="MAIN_APP" title="{{ article.title }}">
 	<div class="page-block">
 		<div class="each-header">
 			<span class="full-title big-size">{{ article.title }}</span>

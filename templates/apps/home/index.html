@@ -1,12 +1,15 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
 
+{% block title %}
+    热门文章
+{% endblock %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/pages/home/index.css' %}">
 {% endblock %}
 
 {% block content %}
-<div class="pages" id="MAIN_APP">
+<div class="pages" id="MAIN_APP" title="热门文章">
 	<div class="page-block">
 		<div class="each-header">
 			<span class="big-size">热门文章</span>

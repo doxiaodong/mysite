@@ -1,6 +1,7 @@
 'use strict';
 
 define([
+    '../func',
     'modules/xd.ajax',
     'modules/xd.alert',
     'modules/xd.confirm',
@@ -8,7 +9,8 @@ define([
     'modules/xd.modal',
     'modules/xd.pjax',
     'modules/xd.platform'
-], function (xdAjax,
+], function (func,
+             xdAjax,
              xdAlert,
              xdConfirm,
              xdIndicator,
@@ -23,7 +25,12 @@ define([
             xdConfirm.init();
             xdIndicator.init();
             xdModal.init();
-            xdPjax.init('#PJAX_CONTAINER', 'indicator', function (page) {
+            xdPjax.init('#PJAX_CONTAINER', 'indicator', function (page, index) {
+                if (index) {
+                    var c = func.$id("header_nav");
+                    c.setAttribute('index', index);
+                }
+                document.title = func.$id('MAIN_APP').getAttribute('title') + '--darlin.me';
                 page.init();
             });
             xdPlatform.init();

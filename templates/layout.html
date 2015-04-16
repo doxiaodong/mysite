@@ -7,7 +7,8 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<meta charset="UTF-8">
-	<title>mysite</title>
+	<title>{% block title %}苏打琳{% endblock %}--darlin.me</title>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
 	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/web-app/touch-icon-iphone-retina.png' %}">
 	<link rel="apple-touch-startup-image" href="{% static 'img/web-app/startup.png' %}">
 	<link rel="stylesheet" href="{% static 'fonts/ionicons-2.0.0/css/ionicons.min.css' %}">
@@ -52,7 +53,9 @@
 {% if not_pjax %}
 	</article>
 	<footer class="footer">
-		copyright jjccdd
+		<div class="content">
+            All rights@<a href="{% url 'home:home_index' %}">www.darlin.me</a>
+        </div>
 	</footer>
 
 	<div id="SIGN" class="xd-modal">

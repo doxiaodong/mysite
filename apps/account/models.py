@@ -7,7 +7,7 @@ from django.contrib.auth.models import AbstractUser
 class Profile(AbstractUser):
 
     # user = models.ForeignKey(settings.AUTH_USER_MODEL)
-    sex = models.IntegerField('性别', null=True, blank=True)
+    sex = models.IntegerField('性别', default=0)
     pic = models.ImageField('头像', upload_to='user/', null=True, blank=True)
 
     class Meta:

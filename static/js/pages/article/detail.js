@@ -120,6 +120,9 @@ define(['../../func'], function (func) {
                             }
                         }
                         floorObj.classList.add('show');
+                        var textarea = floorObj.querySelector('.reply-textarea');
+                        //textarea.blur();
+                        textarea.focus();
                     }
                 }
                 if (tar.classList.contains('add-subreply-button')) {

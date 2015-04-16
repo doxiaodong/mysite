@@ -4,11 +4,13 @@
 define(['../pages/pageRouter', '../func'], function (page, func) {
     var xdPjax = {
         init: function (ele, indicator, callback) {
+            var head_nav = func.$id('header_nav');
             // first page state
             window.history.replaceState({
                 url: window.location.href,
                 time: new Date().getTime(),
-                container: ele
+                container: ele,
+                index: head_nav.getAttribute('index')
             }, 'first', window.location.href);
 
             //var container = func.$q(ele);
@@ -36,13 +38,15 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
 
                             func.$q(pjaxContainerString).innerHTML = response;
                             //window.localStorage.setItem('XD.page-' + href, response);
+
                             window.history.pushState({
                                 url: href,
                                 time: new Date().getTime(),
-                                container: pjaxContainerString
+                                container: pjaxContainerString,
+                                index: head_nav.getAttribute('index')
                             }, '', href);
 
-                            callback(page);
+                            callback(page, dom.getAttribute('data-index'));
                         },
                         error: function(response, status, xhr) {
                             if (indicator) {
@@ -83,7 +87,9 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
                         }
 
                         func.$q(state.container).innerHTML = response;
-                        callback(page);
+                        callback(page, state.index);
+
+
                     },
                     error: function(response, status, xhr) {
                         if (indicator) {
