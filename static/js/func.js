@@ -1,6 +1,6 @@
 'use strict';
 
-define([], function () {
+define(['angular'], function () {
     var func = {
         // normal
         $id: function (ele) {

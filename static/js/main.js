@@ -4,7 +4,7 @@
 
     require.config({
         paths: {
-            angular: 'lib/angular',
+            angular: './lib/angular',
             shCore: '../plugins/ueditor/third-party/SyntaxHighlighter/shCore'
         },
         shim: {
@@ -13,7 +13,7 @@
         }
     });
 
-    require(['angular', 'modules/module', 'pages/pageRouter', 'func'], function (angular, module, page, func) {
+    require(['modules/module', 'pages/pageRouter', 'func'], function (module, page, func) {
         var app = {
             init: function () {
                 window.XD = {
