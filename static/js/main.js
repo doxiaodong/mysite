@@ -4,10 +4,12 @@
 
     require.config({
         paths: {
-            angular: 'lib/angular'
+            angular: 'lib/angular',
+            shCore: '../plugins/ueditor/third-party/SyntaxHighlighter/shCore'
         },
         shim: {
-            'angular': {exports: 'angular'}
+            'angular': {exports: 'angular'},
+            'shCore': {exports: 'shCore'}
         }
     });
 
