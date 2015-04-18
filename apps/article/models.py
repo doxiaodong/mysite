@@ -34,3 +34,6 @@ class Article(models.Model):
     was_created_recently.boolean = True
     was_created_recently.short_description = "最近发布"
 
+    class Meta:
+        ordering = ["-create_time"]
+
