@@ -598,6 +598,9 @@ body::-webkit-resizer {
   margin-top: 5px;
   color: #838383;
 }
+.pages .page-block .each-header .type {
+  padding: 0 5px;
+}
 .pages .page-block .each-inner {
   padding: 10px;
   background-color: #ffffff;
@@ -1100,5 +1103,11 @@ footer.footer .content a:hover {
 }
 .icon.active {
   color: #ff6347;
+}
+.pull-left {
+  float: left!important;
+}
+.pull-right {
+  float: right!important;
 }
 /*# sourceMappingURL=layout.css.map */

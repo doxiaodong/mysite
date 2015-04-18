@@ -10,11 +10,11 @@
 {% block content %}
 <div class="pages" id="MAIN_APP" title="{{ category.name|default:'全部' }}文章">
 	<div class="page-block">
-		<div class="each-header">
+		<div class="each-header clearfix">
 			<span class="big-size">文章列表</span>
-            <a class="xd-pjax" href="{% url 'article:article_view' %}">全部分类</a>
+            <a class="xd-pjax pull-right type" href="{% url 'article:article_view' %}">全部</a>
             {% for category in articleCategory %}
-                <a class="xd-pjax" href="{% url 'article:article_list' category.url %}">{{ category.name }}类</a>
+                <a class="xd-pjax pull-right type" href="{% url 'article:article_list' category.url %}">{{ category.name }}</a>
             {% endfor %}
 		</div>
 		<div class="each-inner">
