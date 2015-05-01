@@ -16,6 +16,13 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
             //var container = func.$q(ele);
             document.addEventListener('click', function (e) {
                 var dom = e.target;
+                for (var i in e.path) {
+                    var element = e.path[i];
+                    if (element.classList.contains('xd-pjax')) {
+                        dom = element;
+                        break;
+                    }
+                }
                 if (dom.classList.contains('xd-pjax')) {
                     var pjaxContainerString = dom.getAttribute('pjax-container') || ele;
                     var href = dom.getAttribute('href');
@@ -39,14 +46,20 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
                             func.$q(pjaxContainerString).innerHTML = response;
                             //window.localStorage.setItem('XD.page-' + href, response);
 
+
+                            callback(dom.getAttribute('data-index'));
+
+                            var index = head_nav.getAttribute('index');
+
                             window.history.pushState({
                                 url: href,
                                 time: new Date().getTime(),
                                 container: pjaxContainerString,
-                                index: head_nav.getAttribute('index')
+                                index: index
                             }, '', href);
 
-                            callback(page, dom.getAttribute('data-index'));
+                            page.init();
+
                         },
                         error: function(response, status, xhr) {
                             if (indicator) {
@@ -87,7 +100,8 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
                         }
 
                         func.$q(state.container).innerHTML = response;
-                        callback(page, state.index);
+                        callback(state.index);
+                        page.init();
 
 
                     },

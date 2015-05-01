@@ -1,0 +1,66 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+
+{% block title %}
+    账户中心
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/pages/account/account.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="pages account" id="MAIN_APP" title="账户中心">
+        <div class="page-block">
+            <div class="each-header">
+                <span class="big-size">个人资料</span>
+                <a class="xd-pjax pull-right" href="{% url 'account:setting' %}">修改</a>
+            </div>
+            <div class="each-inner">
+                <div class="head clearfix">
+                    <div class="head-pic pull-left"><img src="/media/{{ profile.pic }}" alt=""></div>
+                    <span class="name pull-left">{{ profile.last_name }}{{ profile.first_name }}</span>
+                </div>
+                <div class="sex">
+                    {% ifequal profile.sex 0 %}
+                        男
+                    {% else %}
+                        女
+                    {% endifequal %}
+                </div>
+                {% if profile.email %}
+                    <div class="email line">邮箱：<a href="mailto:{{ profile.email }}">{{ profile.email }}</a></div>
+                {% endif %}
+                <div class="last-login line">上次登录：{{ profile.last_login|date:'Y-m-d H:i:s' }}</div>
+            </div>
+        </div>
+        <div class="page-block reply">
+            <div class="each-header">
+                <span class="big-size">消息中心</span>
+            </div>
+            <div class="each-inner">
+                <ul class="replys" id="replys">
+                    {% for reply in replys %}
+                        <li class="each-reply xd-pjax" href="{% url 'article:article_detail' reply.head.article.category.url reply.head.article.id %}">
+                            <img src="/media/{{ reply.reply_user.pic }}" alt="" class="pic left">
+                            <div class="right">
+                                <div class="word">
+                                    <div class="user">
+                                        {{ reply.reply_user.last_name }}{{ reply.reply_user.first_name }}
+                                        <span class="nomal-color">在<a href="{% url 'article:article_detail' reply.head.article.category.url reply.head.article.id %}">{{ reply.head.article }}</a>中回复您：</span>
+                                    </div>
+                                    <div class="mes">
+                                        {{ reply.content }}
+                                    </div>
+                                </div>
+                                <div class="message">
+                                    <span class="time">{{ reply.reply_time|date:'Y-m-d H:i:s' }}</span>
+                                </div>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

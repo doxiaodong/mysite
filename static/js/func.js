@@ -121,7 +121,7 @@ define(['angular'], function () {
 
             }
 
-            signin.querySelector('.signin-button').addEventListener('click', function (e) {
+            signin.addEventListener('submit', function (e) {
 
                 var url = signin.getAttribute('action');
                 var data = self.getFormData('#SIGNIN');
@@ -157,6 +157,9 @@ define(['angular'], function () {
 
         afterSignin: function (user) {
             var c = this.$id('USER');
+            var account = this.$id('account_nav');
+            account.getElementsByClassName('account')[0].classList.remove('hide');
+            account.getElementsByClassName('sign')[0].classList.add('hide');
             c.innerHTML = '<div class="header-side"><span>' + user + '</span><span class="signout a">退出</span></div>';
             window.XD.modules.Modal.close();
         },
@@ -190,6 +193,9 @@ define(['angular'], function () {
 
         afterSignout: function () {
             var c = this.$id('USER');
+            var account = this.$id('account_nav');
+            account.getElementsByClassName('account')[0].classList.add('hide');
+            account.getElementsByClassName('sign')[0].classList.remove('hide');
             c.innerHTML = '<div class="a header-side" xd-modal="#SIGN">登录</div>';
         },
 
@@ -197,7 +203,7 @@ define(['angular'], function () {
             var self = this;
             var register = self.$id('REGISTER');
 
-            register.querySelector('.register-button').addEventListener('click', function (e) {
+            register.addEventListener('submit', function (e) {
 
                 var url = register.getAttribute('action');
                 var data = self.getFormData('#REGISTER');
@@ -216,6 +222,11 @@ define(['angular'], function () {
                         var response = JSON.parse(response);
                         if (response.status === true) {
                             self.afterSignin(response.data.user);
+                        } else {
+                            window.XD.alert(response.data.error, {
+                                title: '提示',
+                                ok: '确认'
+                            });
                         }
                     }
                 });

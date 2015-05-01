@@ -29,6 +29,12 @@ gulp.task('lessarticle', function() {
 	.pipe(gulp.dest('static/css/pages/article'));
 });
 
+gulp.task('lessaccount', function() {
+	return gulp.src('static/less/pages/account/**/*.less')
+	.pipe(less())
+	.pipe(gulp.dest('static/css/pages/account'));
+});
+
 gulp.task('watch', function() {
 	gulp.watch(layoutLessSrc, ['less']);
 	gulp.watch('static/less/pages/home/**/*.less', ['lesshome']);

@@ -39,8 +39,13 @@
                 <div class="slider-nav"></div>
                 <ul class="nav-list">
                     <li><a class="each-nav a xd-pjax" data-index="0" href="{% url 'home:home_index' %}">首页</a></li>
-                    <li><a class="each-nav a xd-pjax" data-index="1" href="{% url 'article:article_view' %}">文章列表</a></li>
-                    <li><a class="each-nav a" data-index="2" href="#" disabled>账户中心</a></li>
+                    <li><a class="each-nav a xd-pjax" data-index="1" href="{% url 'article:article_view' %}">文章列表</a>
+                    </li>
+                    <li id="account_nav">
+
+                        <a class="each-nav account a xd-pjax{% if not user.is_authenticated %} hide{% endif %}" data-index="2" href="{% url 'account:account' %}">账户中心</a>
+                        <a class="each-nav sign a{% if user.is_authenticated %} hide{% endif %}" xd-modal="#SIGN">账户中心</a>
+                    </li>
                     <li><a class="each-nav a" data-index="3" href="#" disabled>关于我</a></li>
                 </ul>
             </div>

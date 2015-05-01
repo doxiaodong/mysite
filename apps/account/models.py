@@ -8,7 +8,7 @@ class Profile(AbstractUser):
 
     # user = models.ForeignKey(settings.AUTH_USER_MODEL)
     sex = models.IntegerField('性别', default=0)
-    pic = models.ImageField('头像', upload_to='user/', null=True, blank=True)
+    pic = models.ImageField('头像', upload_to='user/', default='user/user-default.jpg')
 
     class Meta:
         db_table = 'account_profile'
