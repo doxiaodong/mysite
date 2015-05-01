@@ -18,7 +18,7 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
                 var dom = e.target;
                 for (var i in e.path) {
                     var element = e.path[i];
-                    if (element.classList.contains('xd-pjax')) {
+                    if (element.classList && element.classList.contains('xd-pjax')) {
                         dom = element;
                         break;
                     }
