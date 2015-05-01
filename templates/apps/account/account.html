@@ -46,7 +46,7 @@
                                 <div class="word">
                                     <div class="user">
                                         {{ reply.reply_user.last_name }}{{ reply.reply_user.first_name }}
-                                        <span class="nomal-color">在<a href="{% url 'article:article_detail' reply.head.article.category.url reply.head.article.id %}">{{ reply.head.article }}</a>中回复您：</span>
+                                        <span class="nomal-color">在<a class="xd-pjax" href="{% url 'article:article_detail' reply.head.article.category.url reply.head.article.id %}">{{ reply.head.article }}</a>中回复您：</span>
                                     </div>
                                     <div class="mes">
                                         {{ reply.content }}
