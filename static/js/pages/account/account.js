@@ -4,9 +4,9 @@
 define(['../../func'], function (func) {
     var account_setting = {
         init: function () {
-            if (!window.history.replaceState) {
-                this.reply();
-            }
+            //if (!window.history.replaceState) {
+            //    this.reply();
+            //}
         },
         reply: function () {
             var replys = func.$id("replys");

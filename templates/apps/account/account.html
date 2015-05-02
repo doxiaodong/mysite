@@ -40,7 +40,8 @@
             <div class="each-inner">
                 <ul class="replys" id="replys">
                     {% for reply in replys %}
-                        <li class="each-reply xd-pjax" href="{% url 'article:article_detail' reply.head.article.category.url reply.head.article.id %}">
+                        <!--use class .nota on a pjax without <a>-->
+                        <li class="each-reply xd-pjax nota" href="{% url 'article:article_detail' reply.head.article.category.url reply.head.article.id %}">
                             <img src="/media/{{ reply.reply_user.pic }}" alt="" class="pic left">
                             <div class="right">
                                 <div class="word">

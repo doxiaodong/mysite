@@ -27,7 +27,10 @@ define(['../../func'], function (func) {
                 return;
             }
             var form = document.forms.namedItem("SETTING");
+            var button = saveForm.querySelector('button[type="submit"]');
             saveForm.addEventListener('submit', function (e) {
+                button.setAttribute('disabled', 'disabled');
+                button.innerHTML = '保存中...';
                 var formData = new FormData(form);
                 var url = saveForm.getAttribute('action');
 
@@ -37,6 +40,8 @@ define(['../../func'], function (func) {
                     var response = xhr.response;
                     if (xhr.readyState == 4) {
                         console.log("complete");
+                        button.removeAttribute('disabled');
+                        button.innerHTML = '保存设置';
                     }
                     if (xhr.readyState == 4 && xhr.status == 200) {
                         console.log("success");

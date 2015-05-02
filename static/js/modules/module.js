@@ -2,25 +2,27 @@
 
 define([
     '../func',
+    'modules/xd.platform',
     'modules/xd.ajax',
     'modules/xd.alert',
     'modules/xd.confirm',
     'modules/xd.indicator',
     'modules/xd.modal',
-    'modules/xd.pjax',
-    'modules/xd.platform'
+    'modules/xd.pjax'
 ], function (func,
+             xdPlatform,
              xdAjax,
              xdAlert,
              xdConfirm,
              xdIndicator,
              xdModal,
-             xdPjax,
-             xdPlatform) {
+             xdPjax
+             ) {
     var module = {
 
         init: function () {
             xdAjax.init();
+            xdPlatform.init();
             xdAlert.init();
             xdConfirm.init();
             xdIndicator.init();
@@ -32,7 +34,6 @@ define([
                 }
                 document.title = func.$id('MAIN_APP').getAttribute('title') + '--darlin.me';
             });
-            xdPlatform.init();
         }
     };
     return module;

@@ -700,6 +700,9 @@ body::-webkit-resizer {
 .pages .page-block .each-inner .replys .each-reply .sub-reply .each-reply:first-child {
   padding-top: 10px;
 }
+.pages .page-block .each-inner .replys .each-reply > .left {
+  height: 50px;
+}
 .pages .page-block .each-inner .replys .each-reply > .right .word {
   min-height: 50px;
 }

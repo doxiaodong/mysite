@@ -22,10 +22,10 @@
                     tmp: {}
                 };
                 this.initModules();
+                this.initPlatform();
+                this.initLayout();
                 this.initPages();
 
-                this.initLayout();
-                this.initPlatform();
             },
             initLayout: function () {
                 //window.XD.angular.mainApp = angular.module('mainApp', []);
