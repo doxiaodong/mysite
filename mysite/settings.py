@@ -128,6 +128,15 @@ LOGIN_URL = '/'
 # DEFAULT_USER = STATIC_URL + 'img/user-default.jpg'
 
 """
+QQ and Weibo
+"""
+QQ = {
+    'APP_ID': '101210479',
+    'URL': 'https://graph.qq.com/oauth2.0/authorize',
+    'APP_KEY': 'ca2571d6fe227084942862edd2367191',
+}
+
+"""
 superuser: duxiaodong
 pwd: shiwei122
 """
