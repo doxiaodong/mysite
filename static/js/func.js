@@ -160,7 +160,7 @@ define(['angular'], function () {
             var account = this.$id('account_nav');
             account.getElementsByClassName('account')[0].classList.remove('hide');
             account.getElementsByClassName('sign')[0].classList.add('hide');
-            c.innerHTML = '<div class="header-side"><span>' + user + '</span><span class="signout a">退出</span></div>';
+            c.innerHTML = '<div class="header-side"><span class="xd-pjax nota" href="/account/">' + user + '</span><span class="signout a">退出</span></div>';
             window.XD.modules.Modal.close();
         },
 

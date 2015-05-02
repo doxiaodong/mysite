@@ -29,7 +29,7 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
                     if (!dom) {
                         break;
                     }
-                    if (dom.classList.contains('xd-pjax')) {
+                    if (dom.classList && dom.classList.contains('xd-pjax')) {
                         break;
                     } else {
                         dom = dom.parentNode;
@@ -47,7 +47,7 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
                 if (click === 'click') {
                     xdPjax.pjax(dom, self, ele, indicator, callback);
                 }
-                if ((dom && dom.classList.contains('xd-pjax')) && !dom.classList.contains('nota')) {
+                if ((dom && dom.classList && dom.classList.contains('xd-pjax')) && !dom.classList.contains('nota')) {
                     e.preventDefault();
                 }
             });
@@ -113,7 +113,7 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
 
         },
         pjax: function (dom, self, ele, indicator, callback) {
-            if (dom && dom.classList.contains('xd-pjax')) {
+            if (dom && dom.classList && dom.classList.contains('xd-pjax')) {
                 var pjaxContainerString = dom.getAttribute('pjax-container') || ele;
                 var href = dom.getAttribute('href');
 
