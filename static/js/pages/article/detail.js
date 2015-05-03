@@ -35,6 +35,11 @@ define(['../../func', 'shCore'], function (func) {
             count.innerHTML = res;
         },
         replyArticle: function() {
+            var page = func.$id('total_page').getAttribute('page') - 0;
+            var thePage = func.getSearch('page') - 0;
+            var rootReply = func.$qa('.root-reply').length === 10;
+            var new_page = ((page === thePage) && rootReply) ? (page + 1) : page;
+            var new_href = window.location.href.replace(/page=\d/, 'page=' + new_page);
             var id = func.$id('REPLY_ARTICLE');
             func.$id('ADD_REPLY_BUTTON').addEventListener('click', function(e) {
                 var url = id.getAttribute('action');
@@ -57,7 +62,7 @@ define(['../../func', 'shCore'], function (func) {
                         if (response.status === true) {
                             window.XD.showIndicator();
                             window.XD.ajax({
-                                url: window.location.pathname,
+                                url: new_href,
                                 contentType: 'text/html;charset=utf-8',
                                 beforeSend: function (xhr) {
                                     xhr.setRequestHeader('XD-PJAX', 'true');
@@ -153,7 +158,7 @@ define(['../../func', 'shCore'], function (func) {
                                 console.log(response);
                                 window.XD.showIndicator();
                                 window.XD.ajax({
-                                    url: window.location.pathname,
+                                    url: window.location.href,
                                     contentType: 'text/html;charset=utf-8',
                                     beforeSend: function (xhr) {
                                         xhr.setRequestHeader('XD-PJAX', 'true');

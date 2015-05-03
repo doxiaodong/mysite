@@ -112,6 +112,19 @@ define(['angular'], function () {
 
         },
 
+        getSearch: function (key) {
+            var n = key.length;
+            var searchArr = window.location.search.slice(1).split('&');
+            var result = {};
+            searchArr.forEach(function (self) {
+               if (key === self.slice(0, n)) {
+                   result[key] = self.slice(n+1);
+                   return;
+               }
+            });
+            return result[key];
+        },
+
         ajaxSignin: function () {
             var self = this;
             var signin = self.$id('SIGNIN');

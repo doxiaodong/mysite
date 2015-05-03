@@ -34,7 +34,7 @@
 			<ul class="replys">
                 {% autopaginate replys 10 %}
                 {% for reply in replys %}
-                <li class="each-reply">
+                <li class="each-reply root-reply">
                     {% if reply.reply_user.pic %}
 					    <img src="/media/{{ reply.reply_user.pic }}" alt="" class="pic left">
                     {% else %}
@@ -59,7 +59,7 @@
 							<span class="time">{{ reply.reply_time|date:'Y年m月d日' }}</span>
 							<span ng-click="reply_object{{ forloop.counter }}='{{ reply.reply_user.username }}';placeholder{{ forloop.counter }}='{% with r_user=reply.reply_user %}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ reply.reply_user.username }}" floor="{{ forloop.counter }}">回复</span>
 {#							<span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
-							<span class="floor">{{ forloop.counter }}楼</span>
+							<span class="floor">{{ reply.index }}楼</span>
 						</div>
 					</div>
                     <ul class="sub-reply">

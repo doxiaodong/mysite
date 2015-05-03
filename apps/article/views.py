@@ -16,13 +16,15 @@ def detail(request, category, pk):
     comment = Comment.objects.filter(article=article)
     subreplys = {}
 
+    index = 1
     for head in comment:
         sub = SubComment.objects.filter(head=head)
         subreplys[head] = sub
+        head.index = index
+        index += 1
 
     context = {
         'not_pjax': not_pjax,
-        'articleCategory': ArticleCategory.objects.all(),
         'article': article,
         'category': category,
         'replys': comment,
