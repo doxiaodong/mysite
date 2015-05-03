@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
+{% load pagination_tags %}
 
 {% block title %}
     {{ article.title }}
@@ -31,6 +32,7 @@
 		</div>
 		<div class="each-inner">
 			<ul class="replys">
+                {% autopaginate replys 10 %}
                 {% for reply in replys %}
                 <li class="each-reply">
                     {% if reply.reply_user.pic %}
@@ -95,7 +97,7 @@
                                                 </div>
                                             </div>
                                             <div class="message">
-                                                <span class="time">{{ sub_reply.reply_time|date:'Y年m月d日' }}</span>
+                                                    <span class="time">{{ sub_reply.reply_time|date:'Y年m月d日' }}</span>
                                                 <span ng-click="reply_object{{ floor }}='{{ sub_reply.reply_user.username }}';placeholder{{ floor }}='{% with r_user=sub_reply.reply_user %}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ sub_reply.reply_user.username }}" floor="{{ floor }}">回复</span>
 {#                                                <span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
                                             </div>
@@ -118,6 +120,9 @@
 				</li>
                 {% endfor %}
 			</ul>
+            <div class="text-center">
+                {% paginate %}
+            </div>
 		</div>
         <div class="each-inner">
             <p>发表评论：</p>

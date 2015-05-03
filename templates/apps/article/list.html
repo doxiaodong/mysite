@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
+{% load pagination_tags %}
 
 {% block title %}
     {{ category.name|default:'全部' }}文章
@@ -19,6 +20,7 @@
 		</div>
 		<div class="each-inner">
 			<ul class="articles">
+            {% autopaginate articles 20 %}
                 {% for article in articles %}
                 <li class="article">
 					<div class="title">
@@ -28,6 +30,9 @@
 				</li>
                 {% endfor %}
 			</ul>
+            <div class="text-center">
+                {% paginate %}
+            </div>
 		</div>
 	</div>
 </div>

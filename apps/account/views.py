@@ -88,7 +88,7 @@ def account(request):
     profile = None
     if request.user:
         profile = Profile.objects.get(username=request.user.username)
-        replys = SubComment.objects.filter(reply_object=request.user)
+        replys = SubComment.objects.filter(reply_object=request.user).order_by('-reply_time')
 
     context = {
         'not_pjax': not_pjax,

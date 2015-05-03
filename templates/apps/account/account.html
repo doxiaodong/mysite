@@ -1,5 +1,6 @@
 {% extends 'layout.html' %}
 {% load staticfiles %}
+{% load pagination_tags %}
 
 {% block title %}
     账户中心
@@ -39,6 +40,7 @@
             </div>
             <div class="each-inner">
                 <ul class="replys" id="replys">
+                    {% autopaginate replys 20 %}
                     {% for reply in replys %}
                         <!--use class .nota on a pjax without <a>-->
                         <li class="each-reply xd-pjax nota" href="{% url 'article:article_detail' reply.head.article.category.url reply.head.article.id %}">
@@ -60,7 +62,9 @@
                         </li>
                     {% endfor %}
                 </ul>
-
+                <div class="text-center">
+                    {% paginate %}
+                </div>
             </div>
         </div>
     </div>

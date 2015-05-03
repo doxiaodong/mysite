@@ -254,3 +254,19 @@ footer.footer {
 .text-right {
   text-align: right!important;
 }
+
+.pagination {
+  margin: 10px auto 0;
+  display: inline-block;
+  .clearfix;
+  & > li {
+    float: left;
+    &.active a {
+      color: @active_color;
+    }
+    a {
+      padding: 5px 8px;
+      line-height: 22px;
+    }
+  }
+}
