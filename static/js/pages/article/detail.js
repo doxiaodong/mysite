@@ -36,7 +36,7 @@ define(['../../func', 'shCore'], function (func) {
         },
         replyArticle: function() {
             var totalPage = func.$id('total_page');
-            var page = totalPage.length ? totalPage.getAttribute('page') - 0 : 1;
+            var page = totalPage ? totalPage.getAttribute('page') - 0 : 1;
             var thePage = func.getSearch('page') - 0;
             var rootReply = func.$qa('.root-reply').length === 10;
             var new_page = ((page === thePage) && rootReply) ? (page + 1) : page;
