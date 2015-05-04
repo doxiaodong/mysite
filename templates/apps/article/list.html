@@ -13,9 +13,9 @@
 	<div class="page-block">
 		<div class="each-header clearfix">
 			<span class="big-size">文章列表</span>
-            <a class="xd-pjax pull-right type" href="{% url 'article:article_view' %}">全部</a>
+            <a class="xd-pjax pull-right type{% ifequal PATH.2 'all' %} active{% endifequal %}" href="{% url 'article:article_view' %}">全部</a>
             {% for category in articleCategory %}
-                <a class="xd-pjax pull-right type" href="{% url 'article:article_list' category.url %}">{{ category.name }}</a>
+                <a class="xd-pjax pull-right type{% ifequal PATH.2 category.url %} active{% endifequal %}" href="{% url 'article:article_list' category.url %}">{{ category.name }}</a>
             {% endfor %}
 		</div>
 		<div class="each-inner">
