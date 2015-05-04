@@ -1,3 +1,4 @@
+# coding:utf-8
 from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseNotAllowed
 from django.contrib.auth import authenticate, login, logout
@@ -5,6 +6,10 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from apps.account.models import Profile
 from apps.comments.models import SubComment
+from PIL import Image
+from django.conf import settings
+import os
+from django.utils import timezone
 
 
 # functions
@@ -14,6 +19,43 @@ def login_show(user):
         user_show = user.last_name + user.first_name
     respose = {'status': True, 'data': {'user': user_show}}
     return respose
+
+
+def clip_resize_img(ori_img, dst_w, dst_h):
+    im = Image.open(ori_img)
+    ori_w, ori_h = im.size
+
+    dst_scale = float(dst_h) / dst_w  #目标高宽比
+    ori_scale = float(ori_h) / ori_w  #原高宽比
+    if ori_scale >= dst_scale:
+        #过高
+        width = ori_w
+        height = int(width * dst_scale)
+
+        ww = dst_w
+
+    else:
+        #过宽
+        height = ori_h
+        width = int(height * dst_scale)
+
+        ww = int(100 / ori_scale)
+
+    dst_w = ww
+
+    new_im = im
+
+    ratio = float(dst_w) / width
+    new_width = int(width * ratio)
+    if ori_w < new_width:
+        new_width = ori_w
+
+    new_height = int(height * ratio)
+    if ori_h < new_height:
+        new_height = ori_h
+
+    new_im.thumbnail((new_width, new_height), Image.ANTIALIAS)
+    return new_im
 
 
 # Create your views here.
@@ -118,7 +160,19 @@ def setting(request):
             s_user = Profile.objects.get(username=request.user.username)
 
             if s_pic:
-                s_user.pic = s_pic
+                n_s_pic = clip_resize_img(s_pic, 100, 100)
+
+                url = 'user/' + s_pic.name
+                name = settings.MEDIA_ROOT + '/' + url
+                if os.path.exists(name):
+                    file, ext = os.path.splitext(s_pic.name)
+                    file += (timezone.now().strftime("%Y-%m-%d_%H_%s"))
+                    s_pic.name = file + ext
+                    url = 'user/' + s_pic.name
+                    name = settings.MEDIA_ROOT + '/' + url
+                n_s_pic.save(name)
+
+                s_user.pic = url
             if s_username:
                 s_user.username = s_username
             if s_email:
