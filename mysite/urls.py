@@ -4,6 +4,7 @@ from django.contrib import admin
 from . import settings
 from . import views
 
+handler404 = views.page_not_found
 
 urlpatterns = patterns(
     '',
@@ -22,5 +23,3 @@ urlpatterns = patterns(
 
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-handler404 = views.page_not_found

@@ -6,6 +6,7 @@ def config(request):
     content = {
         'BASE_DIR': settings.BASE_DIR,
         'PATH': request.path.split('/'),
+        'not_pjax': True,
         # 'QQ': {
         #     'response_type': 'code',
         #     'client_id': settings.QQ['APP_ID'],
