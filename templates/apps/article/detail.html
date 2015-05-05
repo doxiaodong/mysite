@@ -56,7 +56,13 @@
 							</div>
 						</div>
 						<div class="message">
-							<span class="time">{{ reply.reply_time|date:'Y年m月d日' }}</span>
+							<span class="time">
+                                {% if reply.was_reply_recently %}
+                                    {{ reply.reply_time|date:'d日H时i分s秒' }}
+                                {% else %}
+                                    {{ reply.reply_time|date:'Y年m月d日' }}
+                                {% endif %}
+                            </span>
 							<span ng-click="reply_object{{ forloop.counter }}='{{ reply.reply_user.username }}';placeholder{{ forloop.counter }}='{% with r_user=reply.reply_user %}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ reply.reply_user.username }}" floor="{{ forloop.counter }}">回复</span>
 {#							<span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
 							<span class="floor">{{ reply.index }}楼</span>
@@ -97,7 +103,13 @@
                                                 </div>
                                             </div>
                                             <div class="message">
-                                                    <span class="time">{{ sub_reply.reply_time|date:'Y年m月d日' }}</span>
+                                                    <span class="time">
+                                                        {% if sub_reply.was_subreply_recently %}
+                                                            {{ sub_reply.reply_time|date:'d日H时i分s秒' }}
+                                                        {% else %}
+                                                            {{ sub_reply.reply_time|date:'Y年m月d日' }}
+                                                        {% endif %}
+                                                    </span>
                                                 <span ng-click="reply_object{{ floor }}='{{ sub_reply.reply_user.username }}';placeholder{{ floor }}='{% with r_user=sub_reply.reply_user %}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ sub_reply.reply_user.username }}" floor="{{ floor }}">回复</span>
 {#                                                <span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
                                             </div>

@@ -1,3 +1,5 @@
+import datetime
+from django.utils import timezone
 from django.conf import settings
 from django.db import models
 from apps.article.models import Article
@@ -17,6 +19,13 @@ class Comment(models.Model):
     def __str__(self):
         return self.content
 
+    def was_reply_recently(self):
+        return self.reply_time >= timezone.now() - datetime.timedelta(days=1)
+
+    was_reply_recently.admin_order_field = "reply_time"
+    was_reply_recently.boolean = True
+    was_reply_recently.short_description = "最近评论"
+
 
 class SubComment(models.Model):
     head = models.ForeignKey(Comment)
@@ -25,3 +34,13 @@ class SubComment(models.Model):
 
     content = models.TextField('内容')
     reply_time = models.DateTimeField('回复时间')
+
+    def __str__(self):
+        return self.content
+
+    def was_subreply_recently(self):
+        return self.reply_time >= timezone.now() - datetime.timedelta(days=1)
+
+    was_subreply_recently.admin_order_field = "reply_time"
+    was_subreply_recently.boolean = True
+    was_subreply_recently.short_description = "最近回复"
