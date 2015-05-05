@@ -105,7 +105,7 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
                     error: function(response, status, xhr) {
                         if (indicator) {
                             window.XD.hideIndicator();
-                            window.XD.alert('请求出错，请重新尝试。');
+                            window.XD.alert('请求出错或页面不存在。');
                         }
                     }
                 });
@@ -153,7 +153,7 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
 
                     },
                     error: function(response, status, xhr) {
-                        window.XD.alert('请求出错，请重新尝试。');
+                        window.XD.alert('请求出错或页面不存在。');
                     }
                 });
             }

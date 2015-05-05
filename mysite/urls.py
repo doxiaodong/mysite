@@ -2,6 +2,7 @@ from django.conf.urls import patterns, include, url
 from django.conf.urls.static import static
 from django.contrib import admin
 from . import settings
+from . import views
 
 
 urlpatterns = patterns(
@@ -21,3 +22,5 @@ urlpatterns = patterns(
 
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler404 = views.page_not_found
