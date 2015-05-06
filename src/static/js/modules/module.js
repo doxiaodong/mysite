@@ -29,6 +29,7 @@ define([
             xdModal.init();
             xdPjax.init('#PJAX_CONTAINER', 'indicator', function (index) {
                 if (index) {
+                    console.log(index)
                     var c = func.$id("header_nav");
                     c.setAttribute('index', index);
                 }

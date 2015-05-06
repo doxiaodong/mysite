@@ -137,8 +137,23 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
                         func.$q(pjaxContainerString).innerHTML = response;
                         //window.localStorage.setItem('XD.page-' + href, response);
 
+                        var new_index = dom.getAttribute('data-index');
+                        if (!new_index) {
+                            if (href.split('/')[1] === '') {
+                                new_index = '0';
+                            }
+                            if (href.split('/')[1] === 'article') {
+                                new_index = '1';
+                            }
+                            if (href.split('/')[1] === 'account') {
+                                new_index = '2';
+                            }
+                            if (href.split('/')[1] === 'about') {
+                                new_index = '3';
+                            }
+                        }
 
-                        callback(dom.getAttribute('data-index'));
+                        callback(new_index);
 
                         var index = func.$id('header_nav').getAttribute('index');
 
