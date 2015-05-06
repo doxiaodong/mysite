@@ -2,43 +2,43 @@ var gulp = require('gulp');
 var less = require('gulp-less-sourcemap');
 var minifycss = require('gulp-minify-css');
 
-var layoutLessSrc = ['static/less/partless/**/*.less', 'static/less/layout.less', 'static/less/pages/_pages_layout.less'];
+var layoutLessSrc = ['src/static/less/partless/**/*.less', 'src/static/less/layout.less', 'src/static/less/pages/_pages_layout.less'];
 
 gulp.task('less', function() {
-	return gulp.src('static/less/layout.less')
+	return gulp.src('src/static/less/layout.less')
 	.pipe(less())
-	.pipe(gulp.dest('static/css'));
+	.pipe(gulp.dest('src/static/css'));
 });
 
 // use this online
 gulp.task('css', function() {
-	return gulp.src('static/css/layout.css')
+	return gulp.src('src/static/css/layout.css')
 	.pipe(minifycss())
-	.pipe(gulp.dest('static/css'));
+	.pipe(gulp.dest('src/static/css'));
 });
 
 gulp.task('lesshome', function() {
-	return gulp.src('static/less/pages/home/**/*.less')
+	return gulp.src('src/static/less/pages/home/**/*.less')
 	.pipe(less())
-	.pipe(gulp.dest('static/css/pages/home'));
+	.pipe(gulp.dest('src/static/css/pages/home'));
 });
 
 gulp.task('lessarticle', function() {
-	return gulp.src('static/less/pages/article/**/*.less')
+	return gulp.src('src/static/less/pages/article/**/*.less')
 	.pipe(less())
-	.pipe(gulp.dest('static/css/pages/article'));
+	.pipe(gulp.dest('src/static/css/pages/article'));
 });
 
 gulp.task('lessaccount', function() {
-	return gulp.src('static/less/pages/account/**/*.less')
+	return gulp.src('src/static/less/pages/account/**/*.less')
 	.pipe(less())
-	.pipe(gulp.dest('static/css/pages/account'));
+	.pipe(gulp.dest('src/static/css/pages/account'));
 });
 
 gulp.task('watch', function() {
 	gulp.watch(layoutLessSrc, ['less']);
-	gulp.watch('static/less/pages/home/**/*.less', ['lesshome']);
-	gulp.watch('static/less/pages/article/*.less', ['lessarticle']);
+	gulp.watch('src/static/less/pages/home/**/*.less', ['lesshome']);
+	gulp.watch('src/static/less/pages/article/*.less', ['lessarticle']);
 });
 
 gulp.task('default', function() {

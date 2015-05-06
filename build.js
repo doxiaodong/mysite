@@ -1,5 +1,5 @@
 ({
-    appDir: './',
+    appDir: './src',
     baseUrl: './static/js',
     dir: './dist',
     modules: [
