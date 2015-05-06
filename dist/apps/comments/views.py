@@ -2,8 +2,8 @@ from django.shortcuts import render
 from django.http import JsonResponse, HttpResponseNotAllowed
 from django.utils import timezone
 # from django.contrib.auth.models import User
-from apps.account.models import Profile
-from apps.article.models import Article
+from ..account.models import Profile
+from ..article.models import Article
 from .models import Comment, SubComment
 
 

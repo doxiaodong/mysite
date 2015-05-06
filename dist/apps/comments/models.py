@@ -1,8 +1,9 @@
+# coding:utf-8
 import datetime
 from django.utils import timezone
 from django.conf import settings
 from django.db import models
-from apps.article.models import Article
+from ..article.models import Article
 # from django.contrib.auth.models import User
 
 
@@ -16,7 +17,7 @@ class Comment(models.Model):
     content = models.TextField('内容')
     reply_time = models.DateTimeField('回复时间')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.content
 
     def was_reply_recently(self):
@@ -35,7 +36,7 @@ class SubComment(models.Model):
     content = models.TextField('内容')
     reply_time = models.DateTimeField('回复时间')
 
-    def __str__(self):
+    def __unicode__(self):
         return self.content
 
     def was_subreply_recently(self):

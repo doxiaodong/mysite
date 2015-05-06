@@ -1,6 +1,7 @@
+# coding:utf-8
 from django.shortcuts import render
 from .models import *
-from apps.comments.models import *
+from ..comments.models import *
 
 
 # Create your views here.

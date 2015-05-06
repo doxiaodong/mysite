@@ -4,8 +4,8 @@ from django.http import JsonResponse, HttpResponseNotAllowed
 from django.contrib.auth import authenticate, login, logout
 # from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
-from apps.account.models import Profile
-from apps.comments.models import SubComment
+from ..account.models import Profile
+from ..comments.models import SubComment
 from PIL import Image
 from django.conf import settings
 import os

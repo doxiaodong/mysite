@@ -1,3 +1,4 @@
+# coding:utf-8
 import datetime
 from django.utils import timezone
 from DjangoUeditor.models import UEditorField
@@ -24,7 +25,7 @@ class Article(models.Model):
     pic = models.ImageField("图片", null=True, blank=True, upload_to='article/')
     hot = models.BooleanField("热门")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def was_created_recently(self):
