@@ -1,0 +1,25 @@
+{% if is_paginated %}
+{% load i18n %}
+<ul class="pagination">
+    {% if page_obj.has_previous %}
+        <li><a href="?page=1{{ getvars }}{{ hashtag }}" class="xd-pjax">首页</a></li>
+        <li><a href="?page={{ page_obj.previous_page_number }}{{ getvars }}{{ hashtag }}" class="prev xd-pjax">上一页</a></li>
+    {% endif %}
+    {% for page in pages %}
+        {% if page %}
+            {% ifequal page page_obj.number %}
+                <li class="active"><a href="javascript:;">{{ page }}</a></li>
+            {% else %}
+                <li><a href="?page={{ page }}{{ getvars }}{{ hashtag }}" class="page xd-pjax">{{ page }}</a></li>
+            {% endifequal %}
+        {% else %}
+            <li><a href="javascript:;">...</a></li>
+        {% endif %}
+    {% endfor %}
+    {% if page_obj.has_next %}
+        <li><a href="?page={{ page_obj.next_page_number }}{{ getvars }}{{ hashtag }}" class="next xd-pjax">下一页</a></li>
+        <li><a href="?page={{ paginator.num_pages }}{{ getvars }}{{ hashtag }}" class="xd-pjax">末页</a></li>
+    {% endif %}
+    <li><a id="total_page" href="?page={{ paginator.num_pages }}{{ getvars }}{{ hashtag }}" class="hide" page="{{ paginator.num_pages }}{{ getvars }}{{ hashtag }}">新增判断总页数</a></li>
+</ul>
+{% endif %}

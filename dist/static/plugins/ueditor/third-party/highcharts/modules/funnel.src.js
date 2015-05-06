@@ -1,0 +1,10 @@
+/**
+ * @license 
+ * Highcharts funnel module, Beta
+ *
+ * (c) 2010-2012 Torstein Hønsi
+ *
+ * License: www.highcharts.com/license
+ */
+
+(function(e){var t=e.getOptions(),n=t.plotOptions,r=e.seriesTypes,i=e.merge,s=function(){},o=e.each;n.funnel=i(n.pie,{center:["50%","50%"],width:"90%",neckWidth:"30%",height:"100%",neckHeight:"25%",dataLabels:{connectorWidth:1,connectorColor:"#606060"},size:!0,states:{select:{color:"#C0C0C0",borderColor:"#000000",shadow:!1}}}),r.funnel=e.extendClass(r.pie,{type:"funnel",animate:s,translate:function(){var e=function(e,t){return/%$/.test(e)?t*parseInt(e,10)/100:parseInt(e,10)},t=0,n=this,r=n.chart,i=r.plotWidth,u=r.plotHeight,a=0,f=n.options,l=f.center,c=e(l[0],i),h=e(l[0],u),p=e(f.width,i),d,v,m=e(f.height,u),g=e(f.neckWidth,i),y=e(f.neckHeight,u),b=m-y,w=n.data,E,S,x=f.dataLabels.position==="left"?1:0,T,N,C,k,L,A,O;n.getWidthAt=v=function(e){return e>m-y||m===y?g:g+(p-g)*((m-y-e)/(m-y))},n.getX=function(e,t){return c+(t?-1:1)*(v(e)/2+f.dataLabels.distance)},n.center=[c,h,m],n.centerX=c,o(w,function(e){t+=e.y}),o(w,function(e){O=null,S=t?e.y/t:0,N=h-m/2+a*m,L=N+S*m,d=v(N),T=c-d/2,C=T+d,d=v(L),k=c-d/2,A=k+d,N>b?(T=k=c-g/2,C=A=c+g/2):L>b&&(O=L,d=v(b),k=c-d/2,A=k+d,L=b),E=["M",T,N,"L",C,N,A,L],O&&E.push(A,O,k,O),E.push(k,L,"Z"),e.shapeType="path",e.shapeArgs={d:E},e.percentage=S*100,e.plotX=c,e.plotY=(N+(O||L))/2,e.tooltipPos=[c,e.plotY],e.slice=s,e.half=x,a+=S}),n.setTooltipPoints()},drawPoints:function(){var e=this,t=e.options,n=e.chart,r=n.renderer;o(e.data,function(n){var i=n.graphic,s=n.shapeArgs;i?i.animate(s):n.graphic=r.path(s).attr({fill:n.color,stroke:t.borderColor,"stroke-width":t.borderWidth}).add(e.group)})},sortByAngle:s,drawDataLabels:function(){var e=this.data,t=this.options.dataLabels.distance,n,i,s,o=e.length,u,a;this.center[2]-=2*t;while(o--)s=e[o],n=s.half,i=n?1:-1,a=s.plotY,u=this.getX(a,n),s.labelPos=[0,a,u+(t-5)*i,a,u+t*i,a,n?"right":"left",0];r.pie.prototype.drawDataLabels.call(this)}})})(Highcharts);

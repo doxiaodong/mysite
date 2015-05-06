@@ -1,0 +1,157 @@
+{% extends 'layout.html' %}
+{% load staticfiles %}
+{% load pagination_tags %}
+
+{% block title %}
+    {{ article.title }}
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="{% static 'ueditor/third-party/SyntaxHighlighter/shCoreDefault.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="pages" id="MAIN_APP" title="{{ article.title }}">
+	<div class="page-block">
+		<div class="each-header">
+			<span class="full-title big-size">{{ article.title }}</span>
+			<div class="changes">{{ article.create_time|date:'Y-m-d H:i:s' }}</div>
+		</div>
+		<div class="each-inner">
+			<div class="each-article">
+                {% autoescape off %}
+				{{ article.content }}
+                {% endautoescape %}
+			</div>
+		</div>
+	</div>
+	<div class="page-block">
+		<div class="each-header">
+			<span class="active-color count-replys" ng-init="count={{ replys.count }}{% for head, sub in subreplys.items %}+{{ sub.count }}{% endfor %}">
+            {% templatetag openvariable %}count{% templatetag closevariable %}
+            </span>回复
+		</div>
+		<div class="each-inner">
+			<ul class="replys">
+                {% autopaginate replys 10 %}
+                {% for reply in replys %}
+                <li class="each-reply root-reply">
+                    {% if reply.reply_user.pic %}
+					    <img src="/media/{{ reply.reply_user.pic }}" alt="" class="pic left">
+                    {% else %}
+                        <img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">
+                    {% endif %}
+					<div class="right">
+						<div class="word">
+							<div class="user">
+                                {% with r_user=reply.reply_user %}
+                                    {% if r_user.first_name %}
+                                        {{ r_user.last_name }}{{ r_user.first_name }}
+                                    {% else %}
+                                        {{ r_user.username }}
+                                    {% endif %}
+                                {% endwith %}
+                            </div>
+							<div class="mes">
+                                {{ reply.content }}
+							</div>
+						</div>
+						<div class="message">
+							<span class="time">
+                                {% if reply.was_reply_recently %}
+                                    {{ reply.reply_time|date:'d日H时i分s秒' }}
+                                {% else %}
+                                    {{ reply.reply_time|date:'Y年m月d日' }}
+                                {% endif %}
+                            </span>
+							<span ng-click="reply_object{{ forloop.counter }}='{{ reply.reply_user.username }}';placeholder{{ forloop.counter }}='{% with r_user=reply.reply_user %}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ reply.reply_user.username }}" floor="{{ forloop.counter }}">回复</span>
+{#							<span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
+							<span class="floor">{{ reply.index }}楼</span>
+						</div>
+					</div>
+                    <ul class="sub-reply">
+                    {% with floor=forloop.counter %}
+                        {% for head, sub in subreplys.items %}
+                            {% ifequal head reply  %}
+                                {% for sub_reply in sub %}
+                                    <li class="each-reply">
+                                        {% if sub_reply.reply_user.pic %}
+                                            <img src="/media/{{ sub_reply.reply_user.pic }}" alt="" class="pic left">
+                                        {% else %}
+                                            <img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">
+                                        {% endif %}
+                                        <div class="right">
+                                            <div class="word">
+                                                <div class="user">
+                                                    {% with r_user=sub_reply.reply_user %}
+                                                        {% if r_user.first_name %}
+                                                            {{ r_user.last_name }}{{ r_user.first_name }}
+                                                        {% else %}
+                                                            {{ r_user.username }}
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                    <span class="nomal-color">回复</span>
+                                                    {% with r_user=sub_reply.reply_object %}
+                                                        {% if r_user.first_name %}
+                                                            {{ r_user.last_name }}{{ r_user.first_name }}
+                                                        {% else %}
+                                                            {{ r_user.username }}
+                                                        {% endif %}
+                                                    {% endwith %}
+                                                </div>
+                                                <div class="mes">
+                                                    {{ sub_reply.content }}
+                                                </div>
+                                            </div>
+                                            <div class="message">
+                                                    <span class="time">
+                                                        {% if sub_reply.was_subreply_recently %}
+                                                            {{ sub_reply.reply_time|date:'d日H时i分s秒' }}
+                                                        {% else %}
+                                                            {{ sub_reply.reply_time|date:'Y年m月d日' }}
+                                                        {% endif %}
+                                                    </span>
+                                                <span ng-click="reply_object{{ floor }}='{{ sub_reply.reply_user.username }}';placeholder{{ floor }}='{% with r_user=sub_reply.reply_user %}{% if r_user.first_name %}{{ r_user.last_name }}{{ r_user.first_name }}{% else %}{{ r_user.username }}{% endif %}{% endwith %}'" class="pointer icon ion-reply a" reply-object="{{ sub_reply.reply_user.username }}" floor="{{ floor }}">回复</span>
+{#                                                <span class="pointer icon ion-android-share a" xd-model="#id_model">转发</span>#}
+                                            </div>
+                                        </div>
+                                    </li>
+                                {% endfor %}
+                                <li class="floor-{{ floor }} reply-floor">
+                                    <form id="REPLY_COMMENT_{{ floor }}" ng-init="reply_object{{ floor }}='admin'" class="form" name="REPLY_COMMENT_{{ floor }}" reply-person="{% templatetag openvariable %}reply_object{{ floor }}{% templatetag closevariable %}" action="{% url 'comments:add_sub_reply' head.url %}">
+                                        {% csrf_token %}
+                                        <div class="form-group clearfix">
+                                            <textarea ng-model="reply_article_{{ floor }}.content" class="form-control reply-textarea" name="content" type="text" ng-init="placeholder{{ floor }}='admin'" placeholder="回复{% templatetag openvariable %}placeholder{{ floor }}{% templatetag closevariable %}：" required></textarea>
+                                            <button ng-disabled="!REPLY_COMMENT_{{ floor }}.$valid" class="add-subreply-button main btn reply-button" floor="{{ floor }}" type="submit">回复</button>
+                                        </div>
+                                    </form>
+                                </li>
+                            {% endifequal %}
+                        {% endfor %}
+                    {% endwith %}
+                    </ul>
+				</li>
+                {% endfor %}
+			</ul>
+            <div class="text-center">
+                {% paginate %}
+            </div>
+		</div>
+        <div class="each-inner">
+            <p>发表评论：</p>
+            <form id="REPLY_ARTICLE" name="REPLY_ARTICLE" class="form" action="{% url 'comments:add_reply' article.url  %}">
+                {% csrf_token %}
+                <div class="form-group clearfix">
+                    <label for="add_content"></label>
+                    <textarea ng-model="reply_article.content" class="form-control reply-textarea" id="add_content" cols="30" rows="10" name="content" type="text" placeholder="来交流下吧～" required></textarea>
+                    <button ng-disabled="!REPLY_ARTICLE.$valid" id="ADD_REPLY_BUTTON" class="main btn reply-button" type="submit">发布</button>
+                </div>
+            </form>
+        </div>
+	</div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+
+{% endblock %}

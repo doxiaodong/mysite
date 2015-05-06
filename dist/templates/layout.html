@@ -1,0 +1,152 @@
+{% load staticfiles %}
+{% if not_pjax %}
+<!DOCTYPE html>
+<html ng-app="mainApp">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta charset="UTF-8">
+    <meta name="baidu-site-verification" content="OhD4riwaXL">
+    <meta property="qc:admins" content="14017424212416655">
+    <meta property="wb:webmaster" content="5995f2eea2891250">
+    <meta name="google-site-verification" content="AHsVHst6i7pazaEBGvMMiBLEo9XYNor1SBoajrwQaFg">
+	<title>{% block title %}苏打琳{% endblock %}--darlin.me</title>
+    <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}">
+	<link rel="apple-touch-icon" sizes="120x120" href="{% static 'img/web-app/touch-icon-iphone-retina.png' %}">
+	<link rel="apple-touch-startup-image" href="{% static 'img/web-app/startup.png' %}">
+	<link rel="stylesheet" href="{% static 'fonts/ionicons-2.0.0/css/ionicons.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/layout.css' %}">
+{% endif %}
+	{% block css %}
+	{% endblock %}
+{% if not_pjax %}
+</head>
+<body>
+	<header class="header">
+		<nav id="header_nav" class="nav" index="{% ifequal PATH.1 '' %}0{% endifequal %}{% ifequal PATH.1 'article' %}1{% endifequal %}{% ifequal PATH.1 'account' %}2{% endifequal %}{% ifequal PATH.1 'about' %}3{% endifequal %}">
+			<div id="USER" ajax-out="{% url 'account:signout' %}">
+				{% if user.is_authenticated %}
+                <div class="header-side">
+					{% if user.first_name %}
+					<span class="xd-pjax nota" href="{% url 'account:account' %}">{{ user.last_name }}{{ user.first_name }}</span>
+					{% else %}
+					<span>{{ user.username }}</span>
+					{% endif %}
+					<span class="signout a">退出</span>
+				</div>
+				{% else %}
+				<div class="a header-side" xd-modal="#SIGN">登录</div>
+				{% endif %}
+			</div>
+            <div class="nav-list-container">
+                <div class="slider-nav"></div>
+                <ul class="nav-list">
+                    <li><a class="each-nav a xd-pjax" data-index="0" href="{% url 'home:home_index' %}">首页</a></li>
+                    <li><a class="each-nav a xd-pjax" data-index="1" href="{% url 'article:article_view' %}">文章列表</a>
+                    </li>
+                    <li id="account_nav">
+
+                        <a class="each-nav account a xd-pjax{% if not user.is_authenticated %} hide{% endif %}" data-index="2" href="{% url 'account:account' %}">账户中心</a>
+                        <a class="each-nav sign a{% if user.is_authenticated %} hide{% endif %}" xd-modal="#SIGN">账户中心</a>
+                    </li>
+                    <li><a class="each-nav a" data-index="3" href="#" disabled>关于我</a></li>
+                </ul>
+            </div>
+		</nav>
+	</header>
+	<article class="container" id="PJAX_CONTAINER">
+{% endif %}
+		{% block content %}
+		{% endblock %}
+{% if not_pjax %}
+	</article>
+	<footer class="footer">
+		<div class="content">
+            All rights@<a href="{% url 'home:home_index' %}">www.darlin.me</a>
+        </div>
+	</footer>
+
+	<div id="SIGN" class="xd-modal">
+		<div class="xd-container">
+			<!-- use xd-form-store to store form data -->
+			<form id="SIGNIN" name="SIGNIN" class="form active xd-form-store" action="{% url 'account:signin' %}">
+				{% csrf_token %}
+				<header class="xd-header">登录</header>
+				<article class="xd-article">
+					<div class="form-group">
+						<label for="username"></label>
+						<input ng-model="user.username" ng-minlength="6" ng-maxlength="20" class="form-control" id="username" name="username" type="text" placeholder="用户名" required>
+                        <span ng-show="SIGNIN.username.$dirty && SIGNIN.username.$valid" class="icon ion-checkmark active"></span>
+{#                        <span ng-show="SIGNIN.$error" class="icon ion-ios-close-empty active"></span>#}
+					</div>
+					<div class="form-group">
+						<label for="password"></label>
+						<input ng-model="user.password" ng-minlength="6" ng-maxlength="20" class="form-control" id="password" name="password" type="password" placeholder="密码" required>
+                        <span ng-show="SIGNIN.password.$dirty && SIGNIN.password.$valid" class="icon ion-checkmark active"></span>
+					</div>
+				</article>
+				<footer class="xd-footer">
+					<button class="signin-button main btn" type="submit">登录</button>
+					<span class="a aside other-side">注册</span>
+                    <a href="{{ QQ_URL }}" class="a aside qq-weibo"><img src="{% static 'img/qq.png' %}" alt=""></a>
+                    <a class="a aside qq-weibo"><img src="{% static 'img/weibo.png' %}" alt=""></a>
+                    <span onclick="XD.alert('加油加油')" class="a aside">忘记密码</span>
+				</footer>
+
+				<i class="xd-modal-close icon ion-ios-close-empty"></i>
+			</form>
+			<form id="REGISTER" class="form" name="REGISTER" action="{% url 'account:register' %}">
+				{% csrf_token %}
+				<header class="xd-header">注册</header>
+				<article class="xd-article">
+					<div class="form-group">
+						<label for="register_username"></label>
+						<input ng-model="register.username" ng-minlength="6" ng-maxlength="20" class="form-control" id="register_username" name="username" type="text" placeholder="用户名" required>
+                        <span ng-show="REGISTER.username.$dirty && REGISTER.username.$valid" class="icon ion-checkmark active"></span>
+					</div>
+					<div class="form-group">
+						<label for="register_email"></label>
+						<input ng-model="register.email" ng-minlength="6" ng-maxlength="20" class="form-control" id="register_email" name="email" type="email" placeholder="邮箱" required>
+                        <span ng-show="REGISTER.email.$dirty && REGISTER.email.$valid" class="icon ion-checkmark active"></span>
+					</div>
+					<div class="form-group">
+						<label for="register_pwd"></label>
+						<input ng-model="register.password" ng-minlength="6" ng-maxlength="20" class="form-control" id="register_pwd" name="password" type="password" placeholder="密码" required>
+                        <span ng-show="REGISTER.password.$dirty && REGISTER.password.$valid" class="icon ion-checkmark active"></span>
+					</div>
+					<div class="form-group">
+						<label for="register_firstname"></label>
+						<input ng-model="register.firstname" ng-maxlength="10" class="form-control" id="register_firstname" name="firstname" type="text" placeholder="名">
+                        <span ng-show="REGISTER.firstname.$dirty && REGISTER.firstname.$valid" class="icon ion-checkmark active"></span>
+					</div>
+					<div class="form-group">
+						<label for="register_lastname"></label>
+						<input ng-model="register.lastname" ng-maxlength="10" class="form-control" id="register_lastname" name="lastname" type="text" placeholder="姓">
+                        <span ng-show="REGISTER.lastname.$dirty && REGISTER.lastname.$valid" class="icon ion-checkmark active"></span>
+					</div>
+				</article>
+				<footer class="xd-footer">
+					<button ng-disabled="!REGISTER.$valid" class="register-button main btn" type="submit">注册</button>
+					<span class="a aside other-side">登录</span>
+				</footer>
+				<i class="xd-modal-close xd-close icon ion-ios-close-empty"></i>
+			</form>
+		</div>
+	</div>
+{#    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>#}
+    <script>
+{#    console.log(window.angular)#}
+    </script>
+{#    <script src="{% static 'js/lib/angular.js' %}"></script>#}
+    <script src="{% static 'plugins/ueditor/third-party/SyntaxHighlighter/shCore.js' %}"></script>
+    <script data-main="{% static 'js/main' %}" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+{#    <script data-main="{% static 'js/main' %}" src="{% static 'js/require.js' %}"></script>#}
+{% endif %}
+    {% block js %}
+{#        js用require加载,不要用在这里#}
+    {% endblock %}
+{% if not_pjax %}
+</body>
+</html>
+{% endif %}

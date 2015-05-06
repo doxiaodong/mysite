@@ -1,0 +1,1 @@
+define(["../func"],function(e){var t={init:function(){console.log("==this is page1==")}};return t});
