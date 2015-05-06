@@ -41,14 +41,13 @@
                     }
                 });
 
-                var MAIN_APP = func.$id('MAIN_APP');
                 document.addEventListener('visibilitychange', function() {
                     var state = document.visibilityState;
                     if (state === 'hidden') {
                         document.title = '点我啊，草泥马！！';
                     }
                     if (state === 'visible') {
-                        document.title = MAIN_APP.getAttribute('title');
+                        document.title = func.$id('MAIN_APP').getAttribute('title') + '--darlin.me';
                     }
                 });
 
