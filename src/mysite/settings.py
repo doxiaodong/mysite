@@ -20,11 +20,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(__file__)).replace('\\', '/')
 SECRET_KEY = 'wf#4#1(!g4mg0#=wy^52m8g=j6kpf^v%p87sernvp9%yqaly#a'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+import socket
+hostname = socket.gethostname()
+if hostname == 'iZ94zbdp1q5Z':
+    USER_SESSION_EXPIRE = 10 * 60
+    DEBUG = False
+    EMPLATE_DEBUG = False
+else:
+    # 会话有效期
+    USER_SESSION_EXPIRE = None
+    DEBUG = True
+    TEMPLATE_DEBUG = True
 
-TEMPLATE_DEBUG = True
-
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'darlin.me', 'www.darlin.me']
 
 
 # Application definition
