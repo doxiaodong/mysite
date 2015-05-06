@@ -8,7 +8,7 @@ static/css/partcss/
 
 node_modules/
 env
-env2
+env
 .idea/
 
 *.pyc
