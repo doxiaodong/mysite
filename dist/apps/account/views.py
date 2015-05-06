@@ -11,6 +11,10 @@ from django.conf import settings
 import os
 from django.utils import timezone
 
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
+
 
 # functions
 def login_show(user):
@@ -127,7 +131,7 @@ def account(request):
         if request.META['HTTP_XD_PJAX'] == 'true':
             not_pjax = False
 
-    profile = None
+    global profile
     if request.user:
         profile = Profile.objects.get(username=request.user.username)
         replys = SubComment.objects.filter(reply_object=request.user).order_by('-reply_time')

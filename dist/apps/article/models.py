@@ -25,7 +25,7 @@ class Article(models.Model):
     pic = models.ImageField("图片", null=True, blank=True, upload_to='article/')
     hot = models.BooleanField("热门")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def was_created_recently(self):

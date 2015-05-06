@@ -17,7 +17,7 @@ class Comment(models.Model):
     content = models.TextField('内容')
     reply_time = models.DateTimeField('回复时间')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.content
 
     def was_reply_recently(self):
@@ -36,7 +36,7 @@ class SubComment(models.Model):
     content = models.TextField('内容')
     reply_time = models.DateTimeField('回复时间')
 
-    def __unicode__(self):
+    def __str__(self):
         return self.content
 
     def was_subreply_recently(self):
