@@ -12,7 +12,7 @@ env
 
 *.pyc
 
-dist/.git
+dist/.git/
 
 mm
 
