@@ -21,5 +21,7 @@ urlpatterns = patterns(
     # plugins
     url(r'^ueditor/', include('DjangoUeditor.urls')),
 
+    url(r'^socket/', include('socket_io.urls', namespace="socket_io")),
+
 
 ) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

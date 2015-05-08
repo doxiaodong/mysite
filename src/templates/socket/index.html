@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Socket.io</title>
+</head>
+<body>
+<ul id="message"></ul>
+<form action=""><input type="text">
+    <button type="submit">点击点击</button>
+</form>
+<script src="https://socket/darlin.me/socket.io/socket.io.js"></script>
+<script>var socket = io.connect('https://socket/darlin.me');
+var message = document.getElementById('message');
+var form = document.getElementsByTagName('form')[0];
+var input = document.getElementsByTagName('input')[0];
+form.addEventListener('submit', function (e) {
+    socket.emit('add data', {
+        msg: input.value
+    });
+    e.preventDefault();
+});
+socket.on('add to ul', function (data) {
+    console.log(data);
+    var li = document.createElement('li');
+    li.innerHTML = data.msg;
+    message.appendChild(li);
+});</script>
+</body>
+</html>

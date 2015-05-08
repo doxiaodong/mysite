@@ -52,6 +52,7 @@ LOCAL_APPS = (
     'apps.article',
     'apps.account',
     'apps.comments',
+    'socket_io'
 )
 
 THIRD_APPS = (
