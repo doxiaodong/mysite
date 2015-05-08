@@ -21,6 +21,7 @@ window.onload = function () {
             user: user,
             msg: input.value
         });
+        input.value = '';
         e.preventDefault();
     });
 
