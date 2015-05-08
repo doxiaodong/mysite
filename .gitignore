@@ -18,5 +18,4 @@ mm
 
 *.sqlite3
 
-mysite/settings.py
 test.py
