@@ -24,10 +24,12 @@ SECRET_KEY = 'wf#4#1(!g4mg0#=wy^52m8g=j6kpf^v%p87sernvp9%yqaly#a'
 import socket
 hostname = socket.gethostname()
 if hostname == 'iZ94zbdp1q5Z':
+    IS_LOCAL = False
     USER_SESSION_EXPIRE = 10 * 60
     DEBUG = False
     EMPLATE_DEBUG = False
 else:
+    IS_LOCAL = True
     # 会话有效期
     USER_SESSION_EXPIRE = None
     DEBUG = True

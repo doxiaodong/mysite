@@ -24,7 +24,7 @@
 </head>
 <body>
 	<header class="header">
-		<nav id="header_nav" class="nav" index="{% ifequal PATH.1 '' %}0{% endifequal %}{% ifequal PATH.1 'article' %}1{% endifequal %}{% ifequal PATH.1 'account' %}2{% endifequal %}{% ifequal PATH.1 'about' %}3{% endifequal %}">
+		<nav id="header_nav" class="nav" index="{% ifequal PATH.1 '' %}0{% endifequal %}{% ifequal PATH.1 'article' %}1{% endifequal %}{% ifequal PATH.1 'account' %}2{% endifequal %}{% ifequal PATH.1 'about' %}3{% endifequal %}{% ifequal PATH.1 'socket' %}4{% endifequal %}">
 			<div id="USER" ajax-out="{% url 'account:signout' %}">
 				{% if user.is_authenticated %}
                 <div class="header-side">
@@ -36,7 +36,11 @@
 					<span class="signout a">退出</span>
 				</div>
 				{% else %}
-				<div class="a header-side" xd-modal="#SIGN">登录</div>
+                    {% if NOJS %}
+                        <a class="header-side a" data-index="2" href="{% url 'account:account' %}">登录</a>
+                    {% else %}
+                        <div class="a header-side" xd-modal="#SIGN">登录</div>
+                    {% endif %}
 				{% endif %}
 			</div>
             <div class="nav-list-container">
@@ -48,9 +52,12 @@
                     <li id="account_nav">
 
                         <a class="each-nav account a xd-pjax{% if not user.is_authenticated %} hide{% endif %}" data-index="2" href="{% url 'account:account' %}">账户中心</a>
-                        <a class="each-nav sign a{% if user.is_authenticated %} hide{% endif %}" xd-modal="#SIGN">账户中心</a>
+                        <a class="each-nav sign a{% if user.is_authenticated %} hide{% endif %}{% if NOJS %} hide{% endif %}" xd-modal="#SIGN">账户中心</a>
+                        {% if NOJS %}
+                            <a class="each-nav account a" data-index="2" href="{% url 'account:account' %}">账户中心</a>
+                        {% endif %}
                     </li>
-                    <li><a class="each-nav a" data-index="3" href="#" disabled>关于我</a></li>
+                    <li><a class="each-nav a" data-index="3" href="{% url 'socket_io:index' %}">来来聊天</a></li>
                 </ul>
             </div>
 		</nav>
@@ -136,11 +143,13 @@
 	</div>
 {#    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min.js"></script>#}
 {#    <script src="{% static 'js/lib/angular.js' %}"></script>#}
-    <script src="{% static 'plugins/ueditor/third-party/SyntaxHighlighter/shCore.js' %}"></script>
-    <script data-main="{% static 'js/main' %}" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
+{#    <script src="{% static 'plugins/ueditor/third-party/SyntaxHighlighter/shCore.js' %}"></script>#}
+{#    <script data-main="{% static 'js/main' %}" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>#}
 {#    <script data-main="{% static 'js/main' %}" src="{% static 'js/require.js' %}"></script>#}
 {% endif %}
     {% block js %}
+        <script src="{% static 'plugins/ueditor/third-party/SyntaxHighlighter/shCore.js' %}"></script>
+        <script data-main="{% static 'js/main' %}" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
 {#        js用require加载,不要用在这里#}
     {% endblock %}
 {% if not_pjax %}

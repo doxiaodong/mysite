@@ -35,6 +35,12 @@ gulp.task('lessaccount', function() {
 	.pipe(gulp.dest('src/static/css/pages/account'));
 });
 
+gulp.task('lesssocket', function() {
+	return gulp.src('src/static/less/pages/socket.less')
+	.pipe(less())
+	.pipe(gulp.dest('src/static/css/pages'));
+});
+
 gulp.task('watch', function() {
 	gulp.watch(layoutLessSrc, ['less']);
 	gulp.watch('src/static/less/pages/home/**/*.less', ['lesshome']);

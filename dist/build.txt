@@ -11,6 +11,10 @@ static/css/pages/home/index.css
 ----------------
 static/css/pages/home/index.css
 
+static/css/pages/socket.css
+----------------
+static/css/pages/socket.css
+
 static/fonts/font-awesome/css/font-awesome.css
 ----------------
 static/fonts/font-awesome/css/font-awesome.css

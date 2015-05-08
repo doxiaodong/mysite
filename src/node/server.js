@@ -3,17 +3,19 @@ var app = http.createServer();
 
 var io = require('socket.io')(app);
 
-app.listen(3000);
+app.listen(3030);
 
-io.sockets.on('connection', function(socket){
-  console.log('a user connected');
+io.sockets.on('connection', function (socket) {
 
-  socket.on('add data', function(msg){
-    console.log('message: ' + msg.msg);
+    socket.emit('add to ul', {
+        user: '毒枭东',
+        msg: 'Hi!你们好呀～'
+    });
+    socket.on('send message', function (data) {
 
-    socket.emit('add to ul', msg);
-    socket.broadcast.emit('add to ul', msg);
+        socket.emit('add to ul', data);
+        socket.broadcast.emit('add to ul', data);
 
-  });
+    });
 
 });
