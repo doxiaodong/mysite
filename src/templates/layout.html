@@ -24,7 +24,7 @@
 </head>
 <body>
 	<header class="header">
-		<nav id="header_nav" class="nav" index="{% ifequal PATH.1 '' %}0{% endifequal %}{% ifequal PATH.1 'article' %}1{% endifequal %}{% ifequal PATH.1 'account' %}2{% endifequal %}{% ifequal PATH.1 'about' %}3{% endifequal %}{% ifequal PATH.1 'socket' %}4{% endifequal %}">
+		<nav id="header_nav" class="nav" index="{% ifequal PATH.1 '' %}0{% endifequal %}{% ifequal PATH.1 'article' %}1{% endifequal %}{% ifequal PATH.1 'account' %}2{% endifequal %}{% ifequal PATH.1 'about' %}3{% endifequal %}{% ifequal PATH.1 'socket' %}3{% endifequal %}">
 			<div id="USER" ajax-out="{% url 'account:signout' %}">
 				{% if user.is_authenticated %}
                 <div class="header-side">
