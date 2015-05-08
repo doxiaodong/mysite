@@ -54,10 +54,12 @@
                         <a class="each-nav account a xd-pjax{% if not user.is_authenticated %} hide{% endif %}" data-index="2" href="{% url 'account:account' %}">账户中心</a>
                         <a class="each-nav sign a{% if user.is_authenticated %} hide{% endif %}{% if NOJS %} hide{% endif %}" xd-modal="#SIGN">账户中心</a>
                         {% if NOJS %}
+                            {% if not user.is_authenticated %}
                             <a class="each-nav account a" data-index="2" href="{% url 'account:account' %}">账户中心</a>
+                            {% endif %}
                         {% endif %}
                     </li>
-                    <li><a class="each-nav a" data-index="3" href="{% url 'socket_io:index' %}">来来聊天</a></li>
+                    <li><a class="each-nav a" data-index="3" href="{% url 'socket_io:index' %}">大伙儿来版聊</a></li>
                 </ul>
             </div>
 		</nav>

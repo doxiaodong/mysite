@@ -34,5 +34,15 @@ window.onload = function () {
         li.innerHTML = template;
         message.appendChild(li);
     });
+
+    document.addEventListener('visibilitychange', function() {
+        var state = document.visibilityState;
+        if (state === 'hidden') {
+            document.title = '点我啊，草泥马！！';
+        }
+        if (state === 'visible') {
+            document.title = document.getElementById('MAIN_APP').getAttribute('title') + '--darlin.me';
+        }
+    });
 };
 
