@@ -33,7 +33,7 @@
 					{% else %}
 					<span>{{ user.username }}</span>
 					{% endif %}
-					<span class="signout a">退出</span>
+					<span class="signout a{% if NOJS %} hide{% endif %}">退出</span>
 				</div>
 				{% else %}
                     {% if NOJS %}
