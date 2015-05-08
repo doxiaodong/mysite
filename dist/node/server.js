@@ -1,1 +1,1 @@
-var http=require("http"),app=http.createServer(),io=require("socket.io")(app);app.listen(3e3),io.sockets.on("connection",function(e){console.log("a user connected"),e.on("add data",function(t){console.log("message: "+t.msg),e.emit("add to ul",t),e.broadcast.emit("add to ul",t)})});
+var http=require("http"),app=http.createServer(),io=require("socket.io")(app);app.listen(3000),io.sockets.on("connection",function(e){console.log("a user connected"),e.on("add data",function(t){console.log("message: "+t.msg),e.emit("add to ul",t),e.broadcast.emit("add to ul",t)})});
