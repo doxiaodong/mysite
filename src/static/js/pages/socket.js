@@ -1,6 +1,7 @@
 window.onload = function () {
     var form = document.getElementById('write_form');
     var message = document.getElementById('message');
+    var user_list = document.getElementById('user_list');
     var host = form.getAttribute('host');
     var user = form.getAttribute('user');
     var socket = io.connect(host);
@@ -19,6 +20,7 @@ window.onload = function () {
         }
         socket.emit('send message', {
             user: user,
+            id: socket.id,
             msg: input.value
         });
         input.value = '';
@@ -33,6 +35,23 @@ window.onload = function () {
                 '<span class="right content">' + data.msg + '</span>';
         li.innerHTML = template;
         message.appendChild(li);
+    });
+
+    socket.on('add person', function (data) {
+        if (document.getElementById(data.id)) {
+            return;
+        } else {
+            var li = document.createElement('li');
+            li.classList.add('nowrap');
+            li.id = data.id;
+            li.innerHTML = data.user;
+            user_list.appendChild(li);
+        }
+    });
+
+    socket.on('remove person', function (data) {
+        var remove = document.getElementById(data);
+        remove.remove();
     });
 
     document.addEventListener('visibilitychange', function() {

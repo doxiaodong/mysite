@@ -16,6 +16,13 @@ io.sockets.on('connection', function (socket) {
         socket.emit('add to ul', data);
         socket.broadcast.emit('add to ul', data);
 
+        socket.emit('add person', data);
+        socket.broadcast.emit('add person', data);
+    });
+    socket.on('disconnect', function (data) {
+        console.log(data, socket.id);
+        socket.emit('remove person', socket.id);
+        socket.broadcast.emit('remove person', socket.id);
     });
 
 });

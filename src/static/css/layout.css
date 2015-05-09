@@ -1178,4 +1178,9 @@ footer.footer .content a:hover {
   padding: 5px 8px;
   line-height: 22px;
 }
+.nowrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 /*# sourceMappingURL=layout.css.map */

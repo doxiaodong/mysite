@@ -15,9 +15,26 @@
     padding-left: @left + 10px;
   }
 }
+.right-left(@right) {
+  & {
+    position: relative;
+  }
+  & > .right {
+    display: inline-block;
+    float: right;
+    width: @right;
+  }
+  & > .left {
+    display: block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    padding-right: @right + 10px;
+  }
+}
 
 #message {
-  margin: 10px 0;
+  margin: 0 0 10px;
   .each-message {
     padding: 5px;
     border-bottom: 1px solid #eee;
@@ -33,5 +50,18 @@
   }
   .main.btn {
     margin-top: 10px;
+  }
+}
+
+.pages {
+  .right-left(200px);
+  .side {
+    margin: 0;
+  }
+  #user_list {
+    li {
+      margin: 10px 0;
+      color: rgb(255, 99, 71);
+    }
   }
 }
