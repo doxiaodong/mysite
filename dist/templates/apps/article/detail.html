@@ -30,7 +30,7 @@
             {% templatetag openvariable %}count{% templatetag closevariable %}
             </span>回复
 		</div>
-		<div class="each-inner">
+		<div class="each-inner" id="reply_comments">
 			<ul class="replys">
                 {% autopaginate replys 10 %}
                 {% for reply in replys %}
@@ -149,9 +149,5 @@
         </div>
 	</div>
 </div>
-
-{% endblock %}
-
-{% block js %}
 
 {% endblock %}

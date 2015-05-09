@@ -43,7 +43,7 @@
                     {% autopaginate replys 20 %}
                     {% for reply in replys %}
                         <!--use class .nota on a pjax without <a>-->
-                        <li class="each-reply xd-pjax nota" href="{% url 'article:article_detail' reply.head.article.category.url reply.head.article.id %}">
+                        <li class="each-reply xd-pjax nota" comments="true" href="{% url 'article:article_detail' reply.head.article.category.url reply.head.article.id %}">
                             <img src="/media/{{ reply.reply_user.pic }}" alt="" class="pic left">
                             <div class="right">
                                 <div class="word">

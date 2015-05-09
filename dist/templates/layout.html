@@ -59,7 +59,7 @@
                             {% endif %}
                         {% endif %}
                     </li>
-                    <li><a class="each-nav a" target="_blank" data-index="3" href="{% url 'socket_io:index' %}">大伙儿来版聊</a></li>
+                    <li><a class="each-nav a" target="_blank" data-index="3" href="{% url 'socket_io:index' %}">来扯淡</a></li>
                 </ul>
             </div>
 		</nav>
@@ -148,13 +148,12 @@
 {#    <script src="{% static 'plugins/ueditor/third-party/SyntaxHighlighter/shCore.js' %}"></script>#}
 {#    <script data-main="{% static 'js/main' %}" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>#}
 {#    <script data-main="{% static 'js/main' %}" src="{% static 'js/require.js' %}"></script>#}
-{% endif %}
     {% block js %}
         <script src="{% static 'plugins/ueditor/third-party/SyntaxHighlighter/shCore.js' %}"></script>
         <script data-main="{% static 'js/main' %}" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
 {#        js用require加载,不要用在这里#}
     {% endblock %}
-{% if not_pjax %}
+
 </body>
 </html>
 {% endif %}

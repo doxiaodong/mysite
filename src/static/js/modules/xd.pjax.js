@@ -116,11 +116,12 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
             if (dom && dom.classList && dom.classList.contains('xd-pjax')) {
                 var pjaxContainerString = dom.getAttribute('pjax-container') || ele;
                 var href = dom.getAttribute('href');
-
                 if (indicator) {
                     window.XD.showIndicator();
                 }
-
+                if (dom.getAttribute('comments')) {
+                    var comments = true;
+                }
                 window.XD.modules.Ajax({
                     url: href,
                     contentType: 'text/html;charset=utf-8',
@@ -165,6 +166,9 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
                         }, '', href);
 
                         page.init();
+                        if (comments) {
+                            document.body.scrollTop = func.$id('reply_comments').getBoundingClientRect().top-100;
+                        }
 
                     },
                     error: function(response, status, xhr) {

@@ -58,7 +58,7 @@
 .reply .user {
   color: tomato;
 }
-.each-reply:hover {
+.account .each-reply:hover {
   background-color: #eee;
 }
 /*# sourceMappingURL=account.css.map */
