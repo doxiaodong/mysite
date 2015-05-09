@@ -21,6 +21,9 @@
 #message .each-message .username {
   color: #ff6347;
 }
+#message .each-message .content {
+  min-height: 18px;
+}
 #write_form #write_input {
   max-width: 768px;
 }
