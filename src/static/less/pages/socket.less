@@ -54,14 +54,23 @@
 }
 
 .pages {
-  .right-left(200px);
-  .side {
-    margin: 0;
-  }
   #user_list {
     li {
-      margin: 10px 0;
+      float: left;
+      margin-right: 10px;
       color: rgb(255, 99, 71);
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .right-left(200px);
+    .side {
+      margin: 0;
+    }
+    #user_list {
+      li {
+        margin: 10px 0;
+        float: none;
+      }
     }
   }
 }

@@ -27,26 +27,33 @@
 #write_form .main.btn {
   margin-top: 10px;
 }
-.pages {
-  position: relative;
-}
-.pages > .right {
-  display: inline-block;
-  float: right;
-  width: 200px;
-}
-.pages > .left {
-  display: block;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  width: 100%;
-  padding-right: 210px;
-}
-.pages .side {
-  margin: 0;
-}
 .pages #user_list li {
-  margin: 10px 0;
+  float: left;
+  margin-right: 10px;
   color: #ff6347;
+}
+@media screen and (min-width: 768px) {
+  .pages {
+    position: relative;
+  }
+  .pages > .right {
+    display: inline-block;
+    float: right;
+    width: 200px;
+  }
+  .pages > .left {
+    display: block;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    width: 100%;
+    padding-right: 210px;
+  }
+  .pages .side {
+    margin: 0;
+  }
+  .pages #user_list li {
+    margin: 10px 0;
+    float: none;
+  }
 }
 /*# sourceMappingURL=socket.css.map */
