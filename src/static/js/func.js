@@ -151,7 +151,7 @@ define(['angular'], function () {
                         xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
                     },
                     success: function (response, status, xhr) {
-                        console.log('===signin complete===');
+                        //console.log('===signin complete===');
                         var response = JSON.parse(response);
                         if (response.status === true) {
                             self.afterSignin(response.data.user);
@@ -193,7 +193,7 @@ define(['angular'], function () {
                             xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
                         },
                         complete: function (response, status, xhr) {
-                            console.log('===signout complete===');
+                            //console.log('===signout complete===');
                             var response = JSON.parse(response);
                             if (response.status === true) {
                                 self.afterSignout();
@@ -231,7 +231,7 @@ define(['angular'], function () {
                         xhr.setRequestHeader('X-CSRFToken', self.getCookie('csrftoken'));
                     },
                     success: function (response, status, xhr) {
-                        console.log('===register complete===');
+                        //console.log('===register complete===');
                         var response = JSON.parse(response);
                         if (response.status === true) {
                             self.afterSignin(response.data.user);

@@ -76,7 +76,7 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
                     return;
                 }
                 if (e.title === 'first') {
-                    console.log("first");
+                    //console.log("first");
                     window.location.reload();
                     return;
                 }

@@ -4,7 +4,7 @@
 define(['../../func'], function (func) {
     var page_article_detail = {
         init: function () {
-            console.log("==this is page_article_detail==");
+            //console.log("==this is page_article_detail==");
             if (!window.XD.modules.platform.isMobile) {
                 SyntaxHighlighter.highlight();
             }
@@ -153,10 +153,10 @@ define(['../../func'], function (func) {
                             xhr.setRequestHeader('X-CSRFToken', func.getCookie('csrftoken'));
                         },
                         success: function (response, status, xhr) {
-                            console.log('===signin complete===');
+                            //console.log('===signin complete===');
                             var response = JSON.parse(response);
                             if (response.status === true) {
-                                console.log(response);
+                                //console.log(response);
                                 window.XD.showIndicator();
                                 window.XD.ajax({
                                     url: window.location.href,

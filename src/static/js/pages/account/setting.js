@@ -39,12 +39,12 @@ define(['../../func'], function (func) {
                 xhr.onreadystatechange = function () {
                     var response = xhr.response;
                     if (xhr.readyState == 4) {
-                        console.log("complete");
+                        //console.log("complete");
                         button.removeAttribute('disabled');
                         button.innerHTML = '保存设置';
                     }
                     if (xhr.readyState == 4 && xhr.status == 200) {
-                        console.log("success");
+                        //console.log("success");
                         var response = JSON.parse(response);
                         if (response.status === true) {
                             window.XD.alert("修改成功", {
@@ -61,7 +61,7 @@ define(['../../func'], function (func) {
                     }
                     if (xhr.readyState == 4) {
                         if (xhr.status >= 400) {
-                            console.log("error");
+                            //console.log("error");
                         }
                     }
                 };
