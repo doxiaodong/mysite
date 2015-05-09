@@ -8,97 +8,86 @@
 
 <url>
   <loc>https://darlin.me/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/all/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/?next=/account/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://darlin.me/socket/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://darlin.me/article/poyi/16/</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/poyi/15/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/poyi/14/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-</url>
-<url>
-  <loc>https://darlin.me/article/front/13/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
-  <changefreq>weekly</changefreq>
-</url>
-<url>
-  <loc>https://darlin.me/article/front/12/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/poyi/11/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/front/5/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/aijl/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/front/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/poyi/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://darlin.me/article/front/13/</loc>
+  <changefreq>weekly</changefreq>
+</url>
+<url>
+  <loc>https://darlin.me/article/front/12/</loc>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/front/10/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/front/9/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/front/8/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/front/7/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/front/6/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/aijl/4/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 <url>
   <loc>https://darlin.me/article/front/3/</loc>
-  <lastmod>2015-05-04T07:10:28+00:00</lastmod>
   <changefreq>weekly</changefreq>
 </url>
 </urlset>
