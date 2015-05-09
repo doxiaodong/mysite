@@ -51,7 +51,9 @@ window.onload = function () {
 
     socket.on('remove person', function (data) {
         var remove = document.getElementById(data);
-        remove.remove();
+        if (remove) {
+            remove.remove();
+        }
     });
 
     document.addEventListener('visibilitychange', function() {
