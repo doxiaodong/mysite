@@ -2,9 +2,17 @@ var WebSocketServer = require('ws').Server,
     io = new WebSocketServer({port: 3030});
 
 io.broadcast = function broadcast(data) {
-  io.clients.forEach(function each(client) {
-    client.send(data);
-  });
+    io.clients.forEach(function each(client) {
+        var id;
+        try {
+            id = JSON.parse(data).id;
+        } catch (e) {
+
+        }
+        if (id !== 'socket_id_' + client._ultron.id) {
+            client.send(data);
+        }
+    });
 };
 
 io.on('connection', function (socket) {
@@ -13,7 +21,12 @@ io.on('connection', function (socket) {
     });
 
     socket.on('message', function (message) {
-        var data = JSON.parse(message);
+        var data = message;
+        try {
+            data = JSON.parse(message);
+        } catch (e) {
+
+        }
         switch (data.type) {
             case 'add message':
                 data.type = 'add to ul';

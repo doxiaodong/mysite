@@ -8,7 +8,7 @@ window.onload = function () {
         var user = form.getAttribute('user');
         var input = document.getElementById('write_input');
 
-
+        var first_socket = true;
         var protocol = window.location.protocol;
         var ws_protocol = (protocol === 'https:') ? 'wss' : 'ws';
         var socket = new WebSocket(ws_protocol + host);
@@ -48,32 +48,36 @@ window.onload = function () {
             switch (data.type) {
                 case 'add to ul':
                     var addMessage = function () {
-                        if (data.me === 'me') {
-                            return;
-                        } else {
-                            var li = document.createElement('li');
-                            li.classList.add('each-message');
-                            var template =
-                                '<span class="left username">' + data.user + ':</span>' +
-                                '<span class="right content">' + data.msg + '</span>';
-                            li.innerHTML = template;
-                            message.appendChild(li);
-                        }
+
+                        var li = document.createElement('li');
+                        li.classList.add('each-message');
+                        var template =
+                            '<span class="left username">' + data.user + ':</span>' +
+                            '<span class="right content">' + data.msg + '</span>';
+                        li.innerHTML = template;
+                        message.appendChild(li);
                     };
 
                     var addPerson = function () {
-                        var hasPerson = document.getElementById(data.id);
-                        if (hasPerson) {
-                            if (data.me === 'me') {
-                                hasPerson.classList.add('me');
-                            }
-                            return;
-                        } else {
+                        var addRightPerson = function() {
                             var li = document.createElement('li');
                             li.classList.add('nowrap');
                             li.id = data.id;
                             li.innerHTML = data.user;
                             user_list.appendChild(li);
+                        };
+                        if (document.getElementById(data.id)) {
+                            return;
+                        } else {
+                            if (data.me === 'me') {
+                                if (first_socket) {
+                                    addRightPerson();
+                                    document.getElementById(data.id).classList.add('me');
+                                    first_socket = false;
+                                }
+                            } else {
+                                addRightPerson();
+                            }
                         }
                     };
 
@@ -91,6 +95,10 @@ window.onload = function () {
 
         socket.addEventListener('close', function () {
             console.log('close');
+
+            setTimeout(function() {
+                socket = new WebSocket(ws_protocol + host);
+            }, 1000);
         });
     };
 
