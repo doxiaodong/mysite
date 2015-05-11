@@ -6,9 +6,9 @@ from django.conf import settings
 
 def socket(request):
     if settings.IS_LOCAL:
-        host = 'http://localhost:3030'
+        host = '://localhost:3030'
     else:
-        host = 'https://www.darlin.me'
+        host = '://www.darlin.me'
     context = {'host': host, 'NOJS': True}
     template = 'socket/index.html'
     return render(request, template, context)

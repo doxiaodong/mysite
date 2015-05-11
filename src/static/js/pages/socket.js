@@ -1,11 +1,13 @@
 window.onload = function () {
+    var protocol = window.location.protocol;
     var form = document.getElementById('write_form');
     var message = document.getElementById('message');
     var user_list = document.getElementById('user_list');
     var host = form.getAttribute('host');
     var user = form.getAttribute('user');
-    var socket = io.connect(host);
+    var socket = io.connect(protocol + host);
     var input = document.getElementById('write_input');
+
 
     if (!user) {
         user = prompt('请输入你的昵称！');
