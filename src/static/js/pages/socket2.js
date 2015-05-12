@@ -1,5 +1,7 @@
 window.onload = function () {
 
+    var num_mes = 0;
+    var html = document.getElementsByTagName('html')[0];
     var socket = function () {
         var form = document.getElementById('write_form');
         var message = document.getElementById('message');
@@ -56,6 +58,10 @@ window.onload = function () {
                             '<span class="right content">' + data.msg + '</span>';
                         li.innerHTML = template;
                         message.appendChild(li);
+                        num_mes++;
+                        if (html.classList.contains('hidden')) {
+                            document.title = '你有' + num_mes + '条新消息喔～～'
+                        }
                     };
 
                     var addPerson = function () {
@@ -105,12 +111,22 @@ window.onload = function () {
     socket();
 
     document.addEventListener('visibilitychange', function () {
+
         var state = document.visibilityState;
         if (state === 'hidden') {
             document.title = '点我啊，草泥马！！';
+            if (html.classList.contains('visible')) {
+                html.classList.remove('visible');
+            }
+            html.classList.add('hidden');
+            num_mes = 0;
         }
         if (state === 'visible') {
             document.title = document.getElementById('MAIN_APP').getAttribute('title') + '--darlin.me';
+            if (html.classList.contains('hidden')) {
+                html.classList.remove('hidden');
+            }
+            html.classList.add('visible');
         }
     });
 };

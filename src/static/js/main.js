@@ -33,7 +33,7 @@
                     angular.bootstrap(func.$id("SIGN"));
                     func.$q('body').classList.remove('loading');
                     func.$id('page_loading').remove();
-                    console.log('加载完成');
+                    console.log('初始化完成');
                 });
 
                 var c = func.$id("header_nav");

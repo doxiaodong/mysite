@@ -144,22 +144,22 @@
 		</div>
 	</div>
 
-    {% if not NOJS %}<div id="page_loading">页面拼命加载中...</div>{% endif %}
+    {% if not NOJS %}<div id="page_loading">请使劲等待，页面就要出生啦...</div>{% endif %}
 
     {% block js %}
         <script src="{% static 'plugins/ueditor/third-party/SyntaxHighlighter/shCore.js' %}"></script>
         <script data-main="{% static 'js/main' %}" src="//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.17/require.min.js"></script>
 {#        js用require加载,不要用在这里#}
     {% endblock %}
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-          var hm = document.createElement("script");
-          hm.src = "//hm.baidu.com/hm.js?d3addb2bc52c74b3ce8f28bca14b08c9";
-          var s = document.getElementsByTagName("script")[0];
-          s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
+{#    <script>#}
+{#        var _hmt = _hmt || [];#}
+{#        (function() {#}
+{#          var hm = document.createElement("script");#}
+{#          hm.src = "//hm.baidu.com/hm.js?d3addb2bc52c74b3ce8f28bca14b08c9";#}
+{#          var s = document.getElementsByTagName("script")[0];#}
+{#          s.parentNode.insertBefore(hm, s);#}
+{#        })();#}
+{#    </script>#}
 
 </body>
 </html>
