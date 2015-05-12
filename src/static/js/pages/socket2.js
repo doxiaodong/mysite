@@ -48,7 +48,7 @@ window.onload = function () {
                             var li = document.createElement('li');
                             li.classList.add('each-message');
                             var template =
-                                '<span class="left username">' + data.user + ':</span>' +
+                                '<span class="left username nowrap">' + data.user + ':</span>' +
                                 '<span class="right content">' + data.msg + '</span>';
                             li.innerHTML = template;
                             message.appendChild(li);
