@@ -3,8 +3,9 @@ window.onload = function () {
     var num_mes = 0;
     var html = document.getElementsByTagName('html')[0];
     var socket = function () {
+        var ip = document.getElementById('MAIN_APP').getAttribute('ip_md5');
         var socket_id = null;
-        var random = 'id' + new Date().getTime() + Math.random();
+        var random = 'id' + ip;
         var form = document.getElementById('write_form');
         var message = document.getElementById('message');
         var user_list = document.getElementById('user_list');
@@ -98,8 +99,12 @@ window.onload = function () {
                 console.log('close');
 
                 setTimeout(function () {
-                    out_socket = new_socket();
-                    console.log('reopen');
+                    try {
+                        out_socket = new_socket();
+                        console.log('reopen');
+                    } catch (e) {
+
+                    }
                 }, 1000);
             });
             return socket;
@@ -119,14 +124,12 @@ window.onload = function () {
                 user: user,
                 msg: input.value
             };
-            socket_id = random;
+            socket_id = random + user;
             data.new_id = socket_id;
             out_socket.send(JSON.stringify(data));
             input.value = '';
             e.preventDefault();
         });
-
-
     };
 
     socket();
