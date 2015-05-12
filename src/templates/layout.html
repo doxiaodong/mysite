@@ -22,7 +22,7 @@
 	{% endblock %}
 {% if not_pjax %}
 </head>
-<body class="loading">
+<body{% if not NOJS %} class="loading"{% endif %}>
 	<header class="header">
 		<nav id="header_nav" class="nav" index="{% ifequal PATH.1 '' %}0{% endifequal %}{% ifequal PATH.1 'article' %}1{% endifequal %}{% ifequal PATH.1 'account' %}2{% endifequal %}{% ifequal PATH.1 'about' %}3{% endifequal %}{% ifequal PATH.1 'socket' %}3{% endifequal %}">
 			<div id="USER" ajax-out="{% url 'account:signout' %}">
@@ -144,7 +144,7 @@
 		</div>
 	</div>
 
-    <div id="page_loading">页面拼命加载中...</div>
+    {% if not NOJS %}<div id="page_loading">页面拼命加载中...</div>{% endif %}
 
     {% block js %}
         <script src="{% static 'plugins/ueditor/third-party/SyntaxHighlighter/shCore.js' %}"></script>
