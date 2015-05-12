@@ -5,22 +5,24 @@ window.onload = function () {
     var socket = function () {
         var ip = document.getElementById('MAIN_APP').getAttribute('ip_md5');
         var socket_id = null;
-        var random = 'id' + ip;
+        var random = ip;
+        var user_random = '(' + random.slice(0, 4) + ')';
         var form = document.getElementById('write_form');
         var message = document.getElementById('message');
         var user_list = document.getElementById('user_list');
         var host = form.getAttribute('host');
         var user = form.getAttribute('user');
+        var show_user = user + user_random;
         var input = document.getElementById('write_input');
         var out_socket;
 
-        var first_socket = true;
         var protocol = window.location.protocol;
         var ws_protocol = (protocol === 'https:') ? 'wss' : 'ws';
 
 
         if (!user) {
             user = prompt('请输入你的昵称！');
+            show_user = user + user_random;
         }
 
 
@@ -72,14 +74,9 @@ window.onload = function () {
                                 }
                                 return;
                             } else {
+                                addRightPerson();
                                 if (data.me === 'me') {
-                                    if (first_socket) {
-                                        addRightPerson();
-                                        document.getElementById(data.new_id).classList.add('me');
-                                        first_socket = false;
-                                    }
-                                } else {
-                                    addRightPerson();
+                                    document.getElementById(data.new_id).classList.add('me');
                                 }
                             }
                         };
@@ -114,17 +111,19 @@ window.onload = function () {
         form.addEventListener('submit', function (e) {
             if (!user) {
                 user = prompt('请输入你的昵称！');
+                show_user = user + user_random;
             }
             if (!user) {
                 user = '大傻逼';
+                show_user = user + user_random;
             }
 
             var data = {
                 type: 'add message',
-                user: user,
+                user: show_user,
                 msg: input.value
             };
-            socket_id = random + user;
+            socket_id = 'id' + random + user;
             data.new_id = socket_id;
             out_socket.send(JSON.stringify(data));
             input.value = '';
