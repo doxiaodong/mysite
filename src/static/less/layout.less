@@ -34,6 +34,9 @@
 body {
   background: url(/static/img/bodybg.jpg) center;
 //  background: #ccc;
+  &.loading {
+    overflow: hidden;
+  }
 }
 
 header.header {
@@ -275,4 +278,15 @@ footer.footer {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+#page_loading {
+  position: absolute;
+  z-index: 99999999+1;
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  background-color: #fff;
+  top: 0;
+  left: 0;
 }

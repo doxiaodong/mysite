@@ -29,10 +29,12 @@
 
             },
             initLayout: function () {
-                //window.XD.angular.mainApp = angular.module('mainApp', []);
-                //window.XD.angular.mainApp.run();
-
-                angular.bootstrap(func.$id("SIGN"));
+                angular.element(document).ready(function() {
+                    angular.bootstrap(func.$id("SIGN"));
+                    func.$q('body').classList.remove('loading');
+                    func.$id('page_loading').remove();
+                    console.log('加载完成');
+                });
 
                 var c = func.$id("header_nav");
                 c.addEventListener('click', function (e) {
