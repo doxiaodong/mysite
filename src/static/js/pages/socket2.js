@@ -3,6 +3,8 @@ window.onload = function () {
     var num_mes = 0;
     var html = document.getElementsByTagName('html')[0];
     var socket = function () {
+        var socket_id = null;
+        var random = new Date().getTime() + Math.random();
         var form = document.getElementById('write_form');
         var message = document.getElementById('message');
         var user_list = document.getElementById('user_list');
@@ -22,7 +24,9 @@ window.onload = function () {
 
 
         var new_socket = function () {
-            var socket = new WebSocket(ws_protocol + host);
+            var url;
+            url = ws_protocol + host;
+            var socket = new WebSocket(url);
             socket.addEventListener('open', function () {
                 console.log('open');
             });
@@ -59,13 +63,14 @@ window.onload = function () {
                                 li.innerHTML = data.user;
                                 user_list.appendChild(li);
                             };
-                            if (document.getElementById(data.id)) {
+                            if (user_list.getElementsByClassName('me')[0]) {
                                 return;
                             } else {
                                 if (data.me === 'me') {
                                     if (first_socket) {
-                                        addRightPerson();
+                                        //addRightPerson();
                                         document.getElementById(data.id).classList.add('me');
+                                        socket_id = data.id + random;
                                         first_socket = false;
                                     }
                                 } else {
@@ -73,8 +78,9 @@ window.onload = function () {
                                 }
                             }
                         };
-
-                        addMessage();
+                        if (data.me !== 'me') {
+                            addMessage();
+                        }
                         addPerson();
 
                         break;
@@ -105,12 +111,16 @@ window.onload = function () {
             if (!user) {
                 user = '大傻逼';
             }
-            var data = JSON.stringify({
+
+            var data = {
                 type: 'add message',
                 user: user,
                 msg: input.value
-            });
-            out_socket.send(data);
+            };
+            if (socket_id) {
+                data.id = socket_id;
+            }
+            out_socket.send(JSON.stringify(data));
             input.value = '';
             e.preventDefault();
         });
