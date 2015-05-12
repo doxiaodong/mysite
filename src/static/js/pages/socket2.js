@@ -48,7 +48,7 @@ window.onload = function () {
                             var li = document.createElement('li');
                             li.classList.add('each-message');
                             var template =
-                                '<span class="left username nowrap">' + data.user + ':</span>' +
+                                '<span class="left username nowrap" title="' + data.user + '">' + data.user + ':</span>' +
                                 '<span class="right content">' + data.msg + '</span>';
                             li.innerHTML = template;
                             message.appendChild(li);
@@ -64,6 +64,7 @@ window.onload = function () {
                                 li.classList.add('nowrap');
                                 li.id = data.new_id;
                                 li.setAttribute('data-id', data.id);
+                                li.setAttribute('title', data.user);
                                 li.innerHTML = data.user;
                                 user_list.appendChild(li);
                             };
