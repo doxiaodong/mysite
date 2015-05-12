@@ -7,17 +7,16 @@ console.log('server start at port %d', 3030);
 
 io.broadcast = function broadcast(data) {
     io.clients.forEach(function each(client) {
-        //var id;
-        //try {
-        //    id = JSON.parse(data).id;
-        //} catch (e) {
-        //
-        //}
-        //if (id !== 'socket_id_' + client._ultron.id) {
-        //    client.send(data);
-        //}
+        var id;
+        try {
+            id = JSON.parse(data).id;
+        } catch (e) {
 
-        client.send(data);
+        }
+        if (id !== 'socket_id_' + client._ultron.id) {
+            client.send(data);
+        }
+
     });
 };
 
@@ -37,9 +36,7 @@ io.on('connection', function (socket) {
         switch (data.type) {
             case 'add message':
                 data.type = 'add to ul';
-                if (!data.id) {
-                    data.id = 'socket_id_' + socket._ultron.id;
-                }
+                data.id = 'socket_id_' + socket._ultron.id;
                 io.broadcast(JSON.stringify(data));
 
                 data.me = 'me';

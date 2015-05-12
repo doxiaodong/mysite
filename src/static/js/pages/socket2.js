@@ -4,7 +4,7 @@ window.onload = function () {
     var html = document.getElementsByTagName('html')[0];
     var socket = function () {
         var socket_id = null;
-        var random = new Date().getTime() + Math.random();
+        var random = 'id' + new Date().getTime() + Math.random();
         var form = document.getElementById('write_form');
         var message = document.getElementById('message');
         var user_list = document.getElementById('user_list');
@@ -59,18 +59,22 @@ window.onload = function () {
                             var addRightPerson = function () {
                                 var li = document.createElement('li');
                                 li.classList.add('nowrap');
-                                li.id = data.id;
+                                li.id = data.new_id;
+                                li.setAttribute('data-id', data.id);
                                 li.innerHTML = data.user;
                                 user_list.appendChild(li);
                             };
-                            if (user_list.getElementsByClassName('me')[0]) {
+                            var new_id = document.getElementById(data.new_id);
+                            if (new_id) {
+                                if (new_id.getAttribute('data-id') !== data.id) {
+                                    new_id.setAttribute('data-id', data.id);
+                                }
                                 return;
                             } else {
                                 if (data.me === 'me') {
                                     if (first_socket) {
-                                        //addRightPerson();
-                                        document.getElementById(data.id).classList.add('me');
-                                        socket_id = data.id + random;
+                                        addRightPerson();
+                                        document.getElementById(data.new_id).classList.add('me');
                                         first_socket = false;
                                     }
                                 } else {
@@ -78,14 +82,12 @@ window.onload = function () {
                                 }
                             }
                         };
-                        if (data.me !== 'me') {
-                            addMessage();
-                        }
+                        addMessage();
                         addPerson();
 
                         break;
                     case 'remover person':
-                        var remove = document.getElementById(data.id);
+                        var remove = document.querySelector('[data-id="' + data.id +'"]');
                         if (remove) {
                             remove.remove();
                         }
@@ -117,9 +119,8 @@ window.onload = function () {
                 user: user,
                 msg: input.value
             };
-            if (socket_id) {
-                data.id = socket_id;
-            }
+            socket_id = random;
+            data.new_id = socket_id;
             out_socket.send(JSON.stringify(data));
             input.value = '';
             e.preventDefault();
