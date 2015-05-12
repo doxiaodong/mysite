@@ -6,13 +6,12 @@ window.onload = function () {
         var ip = document.getElementById('MAIN_APP').getAttribute('ip_md5');
         var socket_id = null;
         var random = ip;
-        var user_random = '(' + random.slice(0, 4) + ')';
+        var user_color = '#' + parseInt(random.replace(/^0+/, '').slice(0, 6), 36).toString(16).slice(0, 6);
         var form = document.getElementById('write_form');
         var message = document.getElementById('message');
         var user_list = document.getElementById('user_list');
         var host = form.getAttribute('host');
         var user = form.getAttribute('user');
-        var show_user = user + user_random;
         var input = document.getElementById('write_input');
         var out_socket;
 
@@ -22,7 +21,6 @@ window.onload = function () {
 
         if (!user) {
             user = prompt('请输入你的昵称！');
-            show_user = user + user_random;
         }
 
 
@@ -47,8 +45,9 @@ window.onload = function () {
 
                             var li = document.createElement('li');
                             li.classList.add('each-message');
+                            //li.style.color = data.color;
                             var template =
-                                '<span class="left username nowrap" title="' + data.user + '">' + data.user + ':</span>' +
+                                '<span style="color: ' + data.color + '" class="left username nowrap" title="' + data.user + '">' + data.user + ':</span>' +
                                 '<span class="right content">' + data.msg + '</span>';
                             li.innerHTML = template;
                             message.appendChild(li);
@@ -63,6 +62,7 @@ window.onload = function () {
                                 var li = document.createElement('li');
                                 li.classList.add('nowrap');
                                 li.id = data.new_id;
+                                li.style.color = data.color;
                                 li.setAttribute('data-id', data.id);
                                 li.setAttribute('title', data.user);
                                 li.innerHTML = data.user;
@@ -112,16 +112,15 @@ window.onload = function () {
         form.addEventListener('submit', function (e) {
             if (!user) {
                 user = prompt('请输入你的昵称！');
-                show_user = user + user_random;
             }
             if (!user) {
                 user = '大傻逼';
-                show_user = user + user_random;
             }
 
             var data = {
                 type: 'add message',
-                user: show_user,
+                user: user,
+                color: user_color,
                 msg: input.value
             };
             socket_id = 'id' + random + user;
