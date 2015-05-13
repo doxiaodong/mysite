@@ -121,7 +121,7 @@ AUTH_USER_MODEL = 'account.Profile'
 
 # Template
 TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'templates'),
+    os.path.join(BASE_DIR, 'dist_templates'),
 )
 
 

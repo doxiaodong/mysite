@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var less = require('gulp-less-sourcemap');
 var minifycss = require('gulp-minify-css');
+var htmlmin = require('gulp-htmlmin');
 
 var layoutLessSrc = ['src/static/less/partless/**/*.less', 'src/static/less/layout.less', 'src/static/less/pages/_pages_layout.less'];
 
@@ -39,6 +40,13 @@ gulp.task('lesssocket', function() {
 	return gulp.src('src/static/less/pages/socket.less')
 	.pipe(less())
 	.pipe(gulp.dest('src/static/css/pages'));
+});
+
+
+gulp.task('html', function() {
+  return gulp.src('src/templates/**/*.html')
+    .pipe(htmlmin({collapseWhitespace: true}))
+    .pipe(gulp.dest('src/dist_templates'))
 });
 
 gulp.task('watch', function() {

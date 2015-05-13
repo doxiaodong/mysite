@@ -11,9 +11,9 @@
     optimizeCss: 'standard',
     removeCombined: true,
     paths: {
-        angular:'lib/angular'
+        //angular:'lib/angular'
     },
     shim: {
-        'angular':{exports: 'angular'}
+        //'angular':{exports: 'angular'}
     }
 })

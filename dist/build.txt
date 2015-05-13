@@ -113,7 +113,6 @@ static/plugins/ueditor/third-party/webuploader/webuploader.css
 
 static/js/main.js
 ----------------
-static/js/lib/angular.js
 static/js/func.js
 static/js/modules/xd.platform.js
 static/js/modules/xd.ajax.js

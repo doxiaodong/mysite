@@ -34,10 +34,10 @@
                             <label class="form-label" for="setting_lastname">姓</label>
                             <input class="form-control" id="setting_lastname" name="lastname" type="text" placeholder="姓" value="{{ profile.last_name }}">
                         </div>
-                        <div class="form-group">
+                        <div class="form-group" id="setting_sex">
                             <label class="form-label" for="setting_sex">性别</label>
-                            <input id="setting_sex" name="sex" type="radio" value="0"{% ifequal profile.sex 0 %} checked="checked"{% endifequal %}>男
-                            <input id="setting_sex" name="sex" type="radio" value="1"{% ifequal profile.sex 1 %} checked="checked"{% endifequal %}>女
+                            <input id="setting_sex_0" name="sex" type="radio" value="0" has-checked="{% ifequal profile.sex 0 %}true{% endifequal %}">男
+                            <input id="setting_sex_1" name="sex" type="radio" value="1" has-checked="{% ifequal profile.sex 1 %}true{% endifequal %}">女
                         </div>
                         <div class="form-group">
                             <label class="form-label" for="setting_pic">头像</label>
@@ -49,46 +49,6 @@
                             <button class="setting-button main btn" type="submit">保存设置</button>
                         </div>
                     </article>
-{#                    <article class="xd-article">#}
-{#                        <div class="form-group">#}
-{#                            <label class="form-label" for="setting_username">用户名</label>#}
-{#                            <input ng-model="setting.username" ng-minlength="6" ng-maxlength="20" class="form-control"#}
-{#                                   id="setting_username" name="username" type="text" placeholder="用户名" required>#}
-{#                            <span ng-show="SETTING.username.$dirty && SETTING.username.$valid"#}
-{#                                  class="icon ion-checkmark active"></span>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <label class="form-label" for="setting_email">邮箱</label>#}
-{#                            <input ng-model="setting.email" ng-minlength="6" ng-maxlength="20" class="form-control"#}
-{#                                   id="setting_email" name="email" type="email" placeholder="邮箱" required>#}
-{#                            <span ng-show="SETTING.email.$dirty && SETTING.email.$valid"#}
-{#                                  class="icon ion-checkmark active"></span>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <label class="form-label" for="setting_firstname">名</label>#}
-{#                            <input ng-model="setting.firstname" ng-maxlength="10" class="form-control"#}
-{#                                   id="setting_firstname" name="firstname" type="text" placeholder="名">#}
-{#                            <span ng-show="SETTING.firstname.$dirty && SETTING.firstname.$valid"#}
-{#                                  class="icon ion-checkmark active"></span>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <label class="form-label" for="setting_lastname">姓</label>#}
-{#                            <input ng-model="setting.lastname" ng-maxlength="10" class="form-control"#}
-{#                                   id="setting_lastname" name="lastname" type="text" placeholder="姓" value="ss">#}
-{#                            <span ng-show="SETTING.lastname.$dirty && SETTING.lastname.$valid"#}
-{#                                  class="icon ion-checkmark active"></span>#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <label class="form-label" for="setting_pic">头像</label>#}
-{#                            <label class="head-pic text-left" for="setting_pic"><img id="change_pic" src="http://120.25.230.110/media/user/23201393651036_OaWQtz0.jpg" alt=""></label>#}
-{#                            <input ng-model="setting.pic" class="hide" id="setting_pic" name="pic" type="file">#}
-{#                        </div>#}
-{#                        <div class="form-group">#}
-{#                            <label class="form-label"></label>#}
-{#                            <button ng-disabled="!SETTING.$valid" class="setting-button main btn" type="submit">保存设置</button>#}
-{#                        </div>#}
-{#                    </article>#}
-
                 </form>
             </div>
         </div>

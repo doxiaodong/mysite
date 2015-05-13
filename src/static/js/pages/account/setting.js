@@ -5,8 +5,19 @@ define(['../../func'], function (func) {
     var account_setting = {
         init: function () {
             this.changePic();
+            this.check();
             if (FormData) {
                 this.saveSetting();
+            }
+        },
+        check: function () {
+            var setting_sex_0 = func.$id('setting_sex_0');
+            var setting_sex_1 = func.$id('setting_sex_1');
+            if (setting_sex_0.getAttribute('has-checked') === 'true') {
+                setting_sex_0.setAttribute('checked', 'checked');
+            }
+            if (setting_sex_1.getAttribute('has-checked') === 'true') {
+                setting_sex_1.setAttribute('checked', 'checked');
             }
         },
         changePic: function () {

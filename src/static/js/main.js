@@ -5,11 +5,11 @@
     require.config({
         paths: {
             //angular: './lib/angular',
-            'angular': '//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min'
+            //'angular': '//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular.min'
             //'shCore': '../plugins/ueditor/third-party/SyntaxHighlighter/shCore'
         },
         shim: {
-            'angular': {exports: 'angular'}
+            //'angular': {exports: 'angular'}
             //'shCore': {exports: 'shCore'}
         }
     });
