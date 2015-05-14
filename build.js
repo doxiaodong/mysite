@@ -7,7 +7,7 @@
             name: 'main'
         }
     ],
-    fileExclusionRegExp: /^(r|build)\.js$/,
+    fileExclusionRegExp: /^plugins.+\.js$/,
     optimizeCss: 'standard',
     removeCombined: true,
     paths: {

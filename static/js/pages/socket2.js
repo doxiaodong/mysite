@@ -156,9 +156,10 @@ window.addEventListener('load', function () {
     var ua = navigator.userAgent;
     var platform = {
         isMobile: ua.match(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile/i) && ua.match(/Mobile/i) !== null,
-        isSafari: ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') == -1
+        isSafari: ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') == -1,
+        isSupportCanvas: document.createElement('canvas').getContext('2d')
     };
-    if (platform.isMobile || platform.isSafari) {
+    if (platform.isMobile || platform.isSafari || !platform.isSupportCanvas) {
 
     } else {
         (function () {
