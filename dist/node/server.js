@@ -1,1 +1,0 @@
-var http=require("http"),app=http.createServer(),io=require("socket.io")(app);app.listen(3030),io.sockets.on("connection",function(e){e.on("send message",function(t){e.emit("add to ul",t),e.broadcast.emit("add to ul",t),e.emit("add person",t),e.broadcast.emit("add person",t)}),e.on("disconnect",function(t){e.emit("remove person",e.id),e.broadcast.emit("remove person",e.id)})});

@@ -3,56 +3,56 @@ var less = require('gulp-less-sourcemap');
 var minifycss = require('gulp-minify-css');
 var htmlmin = require('gulp-htmlmin');
 
-var layoutLessSrc = ['src/static/less/partless/**/*.less', 'src/static/less/layout.less', 'src/static/less/pages/_pages_layout.less'];
+var layoutLessSrc = ['static/less/partless/**/*.less', 'static/less/layout.less', 'static/less/pages/_pages_layout.less'];
 
 gulp.task('less', function() {
-	return gulp.src('src/static/less/layout.less')
+	return gulp.src('static/less/layout.less')
 	.pipe(less())
-	.pipe(gulp.dest('src/static/css'));
+	.pipe(gulp.dest('static/css'));
 });
 
 // use this online
 gulp.task('css', function() {
-	return gulp.src('src/static/css/layout.css')
+	return gulp.src('static/css/layout.css')
 	.pipe(minifycss())
-	.pipe(gulp.dest('src/static/css'));
+	.pipe(gulp.dest('static/css'));
 });
 
 gulp.task('lesshome', function() {
-	return gulp.src('src/static/less/pages/home/**/*.less')
+	return gulp.src('static/less/pages/home/**/*.less')
 	.pipe(less())
-	.pipe(gulp.dest('src/static/css/pages/home'));
+	.pipe(gulp.dest('static/css/pages/home'));
 });
 
 gulp.task('lessarticle', function() {
-	return gulp.src('src/static/less/pages/article/**/*.less')
+	return gulp.src('static/less/pages/article/**/*.less')
 	.pipe(less())
-	.pipe(gulp.dest('src/static/css/pages/article'));
+	.pipe(gulp.dest('static/css/pages/article'));
 });
 
 gulp.task('lessaccount', function() {
-	return gulp.src('src/static/less/pages/account/**/*.less')
+	return gulp.src('static/less/pages/account/**/*.less')
 	.pipe(less())
-	.pipe(gulp.dest('src/static/css/pages/account'));
+	.pipe(gulp.dest('static/css/pages/account'));
 });
 
 gulp.task('lesssocket', function() {
-	return gulp.src('src/static/less/pages/socket.less')
+	return gulp.src('static/less/pages/socket.less')
 	.pipe(less())
-	.pipe(gulp.dest('src/static/css/pages'));
+	.pipe(gulp.dest('static/css/pages'));
 });
 
 
 gulp.task('html', function() {
-  return gulp.src('src/templates/**/*.html')
+  return gulp.src('templates/**/*.html')
     .pipe(htmlmin({collapseWhitespace: true}))
-    .pipe(gulp.dest('src/dist_templates'))
+    .pipe(gulp.dest('dist/templates'))
 });
 
 gulp.task('watch', function() {
 	gulp.watch(layoutLessSrc, ['less']);
-	gulp.watch('src/static/less/pages/home/**/*.less', ['lesshome']);
-	gulp.watch('src/static/less/pages/article/*.less', ['lessarticle']);
+	gulp.watch('static/less/pages/home/**/*.less', ['lesshome']);
+	gulp.watch('static/less/pages/article/*.less', ['lessarticle']);
 });
 
 gulp.task('default', function() {

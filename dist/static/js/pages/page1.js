@@ -1,1 +1,0 @@
-define(["../func"],function(e){var t={init:function(){}};return t});

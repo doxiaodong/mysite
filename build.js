@@ -1,7 +1,7 @@
 ({
-    appDir: './src',
-    baseUrl: './static/js',
-    dir: './dist',
+    appDir: './static',
+    baseUrl: './js',
+    dir: './dist/static',
     modules: [
         {
             name: 'main'
