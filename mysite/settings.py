@@ -119,11 +119,6 @@ USE_TZ = True
 AUTH_USER_MODEL = 'account.Profile'
 
 
-# Template
-TEMPLATE_DIRS = (
-    os.path.join(BASE_DIR, 'dist/templates'),
-)
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
@@ -131,10 +126,20 @@ TEMPLATE_DIRS = (
 STATIC_URL = '/static/'
 
 if IS_LOCAL:
+    # Template
+    TEMPLATE_DIRS = (
+        os.path.join(BASE_DIR, 'templates'),
+    )
+
     STATICFILES_DIRS = (
-        os.path.join(BASE_DIR, 'dist/static'),
+        os.path.join(BASE_DIR, 'static'),
     )
 else:
+    # Template
+    TEMPLATE_DIRS = (
+        os.path.join(BASE_DIR, 'dist/templates'),
+    )
+
     STATIC_ROOT = os.path.join(BASE_DIR, "dist/static")
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

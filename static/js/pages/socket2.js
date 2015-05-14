@@ -153,36 +153,67 @@ window.addEventListener('load', function () {
         }
     });
 
-
-    if (navigator.userAgent.match(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile/i) && navigator.userAgent.match(/Mobile/i) !== null) {
+    var ua = navigator.userAgent;
+    var platform = {
+        isMobile: ua.match(/Android|webOS|iPhone|iPod|BlackBerry|IEMobile/i) && ua.match(/Mobile/i) !== null,
+        isSafari: ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') == -1
+    };
+    if (platform.isMobile || platform.isSafari) {
 
     } else {
-        var hcanvas = document.createElement('canvas');
-        hcanvas.id = 'myCanvas';
-        document.getElementsByTagName('body')[0].appendChild(hcanvas);
+        (function () {
+            var lastTime = 0;
+            var vendors = ['ms', 'moz', 'webkit', 'o'];
+            for (var x = 0; x < vendors.length && !window.requestAnimationFrame; ++x) {
+                window.requestAnimationFrame = window[vendors[x] + 'RequestAnimationFrame'];
+                window.cancelAnimationFrame = window[vendors[x] + 'CancelAnimationFrame'] || window[vendors[x] + 'CancelRequestAnimationFrame'];
+            }
 
-        var toulaide = (function () {
-            // copy from http://www.html5tricks.com/demo/html5-canvas-fire-animation/index.html
+            if (!window.requestAnimationFrame)
+                window.requestAnimationFrame = function (callback, element) {
+                    var currTime = new Date().getTime();
+                    var timeToCall = Math.max(0, 16 - (currTime - lastTime));
+                    var id = window.setTimeout(function () {
+                            callback(currTime + timeToCall);
+                        }, timeToCall);
+                    lastTime = currTime + timeToCall;
+                    return id;
+                };
+
+            if (!window.cancelAnimationFrame)
+                window.cancelAnimationFrame = function (id) {
+                    clearTimeout(id);
+                };
+        })();
+
+        var Fire = (function () {
+            var fcanvas = document.createElement('canvas');
+            fcanvas.id = 'myCanvas';
+            document.getElementsByTagName('body')[0].appendChild(fcanvas);
+            // think from http://www.html5tricks.com/demo/html5-canvas-fire-animation/index.html
             var canvas = document.getElementById("myCanvas");
             var ctx = canvas.getContext("2d");
 
             //Make the canvas occupy the full page
-            var W = window.innerWidth, H = window.innerHeight;
-            canvas.width = W;
-            canvas.height = H;
+            var W, H;
 
             var particles = [];
             var mouse = {};
             var init = function () {
-
+                resize();
                 //Lets create some particles now
                 var particle_count = 50;
                 for (var i = 0; i < particle_count; i++) {
-                    particles.push(new particle());
+                    particles.push(particle());
                 }
-                //finally some mouse tracking
-                canvas.addEventListener('mousemove', track_mouse, false);
-                setInterval(draw, 30);
+                var len = particles.length;
+                window.addEventListener('mousemove', track_mouse, false);
+                window.addEventListener('resize', resize);
+                var interval = function () {
+                    draw(len);
+                    window.requestAnimationFrame(interval);
+                };
+                interval();
             };
 
             function track_mouse(e) {
@@ -192,32 +223,43 @@ window.addEventListener('load', function () {
                 mouse.y = e.pageY;
             }
 
+            function resize() {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = W;
+                canvas.height = H;
+            }
+
             function particle() {
+
+                var self = {};
                 //speed, life, location, life, colors
-                //speed.x range = -2.5 to 2.5
+                //speed.x range = -5 to 5
                 //speed.y range = -15 to -5 to make it move upwards
                 //lets change the Y speed to make it look like a flame
-                this.speed = {x: -2.5 + Math.random() * 5, y: -15 + Math.random() * 10};
+                self.speed = {x: -5 + Math.random() * 10, y: -15 + Math.random() * 10};
                 //location = mouse coordinates
                 //Now the flame follows the mouse coordinates
                 if (mouse.x && mouse.y) {
-                    this.location = {x: mouse.x, y: mouse.y};
+                    self.location = {x: mouse.x, y: mouse.y};
+                } else {
+                    self.location = {x: W / 2, y: H-50};
                 }
-                else {
-                    this.location = {x: W / 2, y: H / 2};
-                }
-                //radius range = 10-30
-                this.radius = 10 + Math.random() * 20;
-                //life range = 20-30
-                this.life = 20 + Math.random() * 10;
-                this.remaining_life = this.life;
+                //radius range = 10 to 30
+                self.radius = 10 + Math.random() * 20;
+                //life range = 20 to 30
+                self.life = 20 + Math.random() * 10;
+                self.remaining_life = self.life;
                 //colors
-                this.r = Math.round(Math.random() * 255);
-                this.g = Math.round(Math.random() * 255);
-                this.b = Math.round(Math.random() * 255);
+                self.r = Math.floor(Math.random() * 256);
+                self.g = Math.floor(Math.random() * 256);
+                self.b = Math.floor(Math.random() * 256);
+
+                return self;
             }
 
-            function draw() {
+
+            function draw(len) {
                 //Painting the canvas black
                 //Time for lighting magic
                 //particles are painted with "lighter"
@@ -228,7 +270,7 @@ window.addEventListener('load', function () {
                 ctx.fillRect(0, 0, W, H);
                 ctx.globalCompositeOperation = "lighter";
 
-                for (var i = 0; i < particles.length; i++) {
+                for (var i = 0; i < len; i++) {
                     var p = particles[i];
                     ctx.beginPath();
                     //changing opacity according to the life.
@@ -242,17 +284,17 @@ window.addEventListener('load', function () {
                     ctx.fillStyle = gradient;
                     ctx.arc(p.location.x, p.location.y, p.radius, Math.PI * 2, false);
                     ctx.fill();
-
+                    //
                     //lets move the particles
                     p.remaining_life--;
-                    p.radius--;
+                    p.radius++;
                     p.location.x += p.speed.x;
                     p.location.y += p.speed.y;
 
                     //regenerate particles
-                    if (p.remaining_life < 0 || p.radius < 0) {
+                    if (p.remaining_life <= 0 || p.radius >= 50) {
                         //a brand new particle replacing the dead one
-                        particles[i] = new particle();
+                        particles[i] = particle();
                     }
                 }
             }
@@ -261,6 +303,6 @@ window.addEventListener('load', function () {
                 init: init
             }
         })();
-        toulaide.init();
+        Fire.init();
     }
 });
