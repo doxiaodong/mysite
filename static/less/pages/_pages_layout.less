@@ -10,6 +10,7 @@
   margin: auto;
   .page-block {
     margin: 15px auto;
+    .opacity(0.7);
     .each-header, .each-inner {
 //      .opacity(0.9);
     }
@@ -144,6 +145,33 @@
   }
   .view-center {
     opacity: 1;
+  }
+
+  .side-list {
+    li {
+      float: left;
+      margin-right: 10px;
+      color: rgb(255, 99, 71);
+    }
+  }
+  @media screen and (min-width: 768px) {
+    .side-list {
+      li {
+        float: none;
+      }
+      li + li {
+        margin: 10px 0;
+      }
+    }
+    .right-left(200px);
+    .side {
+      margin: 0;
+      width: 100%;
+      max-width: 1024px;
+      position: fixed!important;
+      .right-left(200px);
+      height: 0;
+    }
   }
 }
 

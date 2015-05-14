@@ -10,13 +10,26 @@
 
 {% block content %}
 <div class="pages" id="MAIN_APP" title="{{ category.name|default:'全部' }}文章">
-	<div class="page-block">
-		<div class="each-header clearfix">
+    <div class="page-block side right">
+        <div class="right">
+            <div class="each-header clearfix">
+                <span class="big-size">分类</span>
+            </div>
+            <div class="each-inner">
+                <ul id="article_category" class="side-list clearfix">
+                    <li class="nowrap"><a class="xd-pjax type{% ifequal PATH.2 'all' %} active{% endifequal %}" href="{% url 'article:article_view' %}">全部</a></li>
+                {% for category in articleCategory %}
+                    <li class="nowrap"><a class="xd-pjax type{% ifequal PATH.2 category.url %} active{% endifequal %}" href="{% url 'article:article_list' category.url %}">{{ category.name }}</a></li>
+                {% endfor %}
+                </ul>
+            </div>
+        </div>
+        <div class="left">
+        </div>
+    </div>
+	<div class="page-block left">
+		<div class="each-header">
 			<span class="big-size">文章列表</span>
-            <a class="xd-pjax pull-right type{% ifequal PATH.2 'all' %} active{% endifequal %}" href="{% url 'article:article_view' %}">全部</a>
-            {% for category in articleCategory %}
-                <a class="xd-pjax pull-right type{% ifequal PATH.2 category.url %} active{% endifequal %}" href="{% url 'article:article_list' category.url %}">{{ category.name }}</a>
-            {% endfor %}
 		</div>
 		<div class="each-inner">
 			<ul class="articles">

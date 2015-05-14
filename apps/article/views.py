@@ -28,6 +28,7 @@ def detail(request, category, pk):
         'not_pjax': not_pjax,
         'article': article,
         'category': category,
+        'articleCategory': ArticleCategory.objects.all(),
         'replys': comment,
         'subreplys': subreplys
     }
