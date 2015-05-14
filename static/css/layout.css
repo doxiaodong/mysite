@@ -811,6 +811,10 @@ body::-webkit-resizer {
     box-sizing: border-box;
     margin-right: 210px;
   }
+  .pages .side .right .each-inner {
+    overflow: auto;
+    max-height: 400px;
+  }
 }
 .each-article .syntaxhighlighter {
   border-radius: 0 !important;
