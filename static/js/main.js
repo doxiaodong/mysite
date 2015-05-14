@@ -31,6 +31,8 @@
                     func.$q('body').classList.remove('loading');
                     func.$id('page_loading').remove();
                     console.log('初始化完成');
+                    // localStorage
+                    func.setFormData();
                 });
 
                 var c = func.$id("header_nav");
@@ -51,9 +53,6 @@
                 });
 
                 func.sign("SIGNIN", "REGISTER");
-
-                // localStorage
-                func.setFormData();
 
                 // signin
                 func.ajaxSignin();
