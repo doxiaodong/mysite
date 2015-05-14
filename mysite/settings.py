@@ -128,9 +128,10 @@ TEMPLATE_DIRS = (
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
+STATIC_URL = '/static/'
 
 if IS_LOCAL:
-    STATIC_URL = '/static/'
+    pass
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, "dist/static")
 
