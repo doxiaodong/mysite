@@ -131,13 +131,11 @@ TEMPLATE_DIRS = (
 STATIC_URL = '/static/'
 
 if IS_LOCAL:
-    pass
+    STATICFILES_DIRS = (
+        os.path.join(BASE_DIR, 'dist/static'),
+    )
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, "dist/static")
-
-STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'dist/static'),
-)
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
