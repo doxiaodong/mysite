@@ -12,7 +12,7 @@ class ArticleCategory(models.Model):
     name = models.CharField("文章类型", max_length=255)
     url = models.CharField("文章类型URL地址", max_length=100)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 
@@ -25,7 +25,7 @@ class Article(models.Model):
     pic = models.ImageField("图片", null=True, blank=True, upload_to='article/')
     hot = models.BooleanField("热门")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.title
 
     def was_created_recently(self):
