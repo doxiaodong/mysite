@@ -103,17 +103,30 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysite',
-        'USER': 'root',
-        'PASSWORD': 'shiwei122',
-        'HOST': '',
-        'CHARSET': 'utf8',
-        'PORT': '',
+if IS_LOCAL:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'mysite',
+            'USER': 'root',
+            'PASSWORD': 'shiwei122',
+            'HOST': '',
+            'CHARSET': 'utf8',
+            'PORT': '',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'mysite',
+            'USER': 'root',
+            'PASSWORD': 'Shiwei122',
+            'HOST': '',
+            'CHARSET': 'utf8',
+            'PORT': '',
+        }
+    }
 
 
 # Internationalization
