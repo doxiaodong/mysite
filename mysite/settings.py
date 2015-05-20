@@ -96,23 +96,24 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 #
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 
 if IS_LOCAL:
+    # DATABASES = {
+    #     'default': {
+    #         'ENGINE': 'django.db.backends.mysql',
+    #         'NAME': 'mysite',
+    #         'USER': 'root',
+    #         'PASSWORD': 'shiwei122',
+    #         'HOST': '',
+    #         'CHARSET': 'utf8',
+    #         'PORT': '',
+    #     }
+    # }
+
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'mysite',
-            'USER': 'root',
-            'PASSWORD': 'shiwei122',
-            'HOST': '',
-            'CHARSET': 'utf8',
-            'PORT': '',
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
     }
 else:
