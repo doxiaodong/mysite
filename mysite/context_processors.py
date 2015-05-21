@@ -1,11 +1,13 @@
 from django.conf import settings
 import uuid
+from django.utils import timezone
 
 
 def config(request):
     content = {
         'BASE_DIR': settings.BASE_DIR,
         'PATH': request.path.split('/'),
+        'VERSION': timezone.now().strftime("%Y-%m-%d"),
         'not_pjax': True,
         # 'QQ': {
         #     'response_type': 'code',

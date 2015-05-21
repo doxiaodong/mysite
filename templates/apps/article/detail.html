@@ -6,7 +6,7 @@
     {{ article.title }}
 {% endblock %}
 {% block css %}
-    <link rel="stylesheet" href="{% static 'plugins/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/ueditor/third-party/SyntaxHighlighter/shCoreDefault.css' %}?{{ VERSION }}">
 {% endblock %}
 
 {% block content %}
@@ -57,7 +57,7 @@
                     {% if reply.reply_user.pic %}
 					    <img src="/media/{{ reply.reply_user.pic }}" alt="" class="pic left">
                     {% else %}
-                        <img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">
+                        <img src="{% static 'img/user-default.jpg' %}?{{ VERSION }}" alt="" class="pic left">
                     {% endif %}
 					<div class="right">
 						<div class="word">
@@ -96,7 +96,7 @@
                                         {% if sub_reply.reply_user.pic %}
                                             <img src="/media/{{ sub_reply.reply_user.pic }}" alt="" class="pic left">
                                         {% else %}
-                                            <img src="{% static 'img/user-default.jpg' %}" alt="" class="pic left">
+                                            <img src="{% static 'img/user-default.jpg' %}?{{ VERSION }}" alt="" class="pic left">
                                         {% endif %}
                                         <div class="right">
                                             <div class="word">

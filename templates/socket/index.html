@@ -6,7 +6,7 @@
     瞎扯淡
 {% endblock %}
 {% block css %}
-    <link rel="stylesheet" href="{% static 'css/pages/socket.css' %}">
+    <link rel="stylesheet" href="{% static 'css/pages/socket.css' %}?{{ VERSION }}">
 {% endblock %}
 
 {% block content %}
@@ -49,6 +49,6 @@
 
 {% block js %}
 {#    <script src="{{ host }}/socket.io/socket.io.js"></script>#}
-    <script src="{% static 'js/pages/socket2.js' %}"></script>
+    <script src="{% static 'js/pages/socket2.js' %}?{{ VERSION }}"></script>
 {% endblock %}
 

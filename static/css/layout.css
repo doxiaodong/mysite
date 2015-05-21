@@ -638,6 +638,9 @@ body::-webkit-resizer {
   background-color: #ffffff;
   border-radius: 0 0 3px 3px;
 }
+.pages .page-block .each-inner .each-article {
+  overflow: auto;
+}
 .pages .page-block .each-inner .each-article pre {
   max-width: 100%;
   width: 100%;
