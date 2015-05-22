@@ -7,7 +7,7 @@ def config(request):
     content = {
         'BASE_DIR': settings.BASE_DIR,
         'PATH': request.path.split('/'),
-        'VERSION': timezone.now().strftime("%Y-%m-%d"),
+        'VERSION': timezone.now().strftime("%Y-%m-%d-%H"),
         'not_pjax': True,
         # 'QQ': {
         #     'response_type': 'code',

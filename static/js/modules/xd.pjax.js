@@ -167,7 +167,9 @@ define(['../pages/pageRouter', '../func'], function (page, func) {
 
                         page.init();
                         if (comments) {
-                            document.body.scrollTop = func.$id('reply_comments').getBoundingClientRect().top-100;
+                            document.body.scrollTop += func.$id('reply_comments').getBoundingClientRect().top-100;
+                        } else {
+                            document.body.scrollTop = 0;
                         }
 
                     },
