@@ -11,7 +11,7 @@ def socket(request):
     if settings.IS_LOCAL:
         host = '://localhost:3030'
     else:
-        host = '://socket.darlin.me'
+        host = '://www.darlin.me'
 
     if 'HTTP_X_FORWARDED_FOR' in request.META:
         ip = request.META.get('HTTP_X_FORWARDED_FOR', None)

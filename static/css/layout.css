@@ -630,13 +630,14 @@ body::-webkit-resizer {
   margin-top: 5px;
   color: #838383;
 }
-.pages .page-block .each-header .type {
-  padding: 0 5px;
-}
 .pages .page-block .each-inner {
   padding: 10px;
   background-color: #ffffff;
   border-radius: 0 0 3px 3px;
+}
+.pages .page-block .each-inner .type {
+  padding: 5px;
+  line-height: 18px;
 }
 .pages .page-block .each-inner .each-article {
   overflow: auto;
