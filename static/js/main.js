@@ -30,6 +30,8 @@
                     angular.bootstrap(func.$id("SIGN"));
                     func.$q('body').classList.remove('loading');
                     func.$id('page_loading').remove();
+                    var pageLoading = func.$id('page_loading');
+                    pageLoading.parentNode.removeChild(pageLoading);
                     console.log('初始化完成');
                     // localStorage
                     func.setFormData();
