@@ -161,7 +161,8 @@ AUTH_USER_MODEL = 'account.Profile'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 
-STATIC_URL = '//static.darlin.me/static/'
+# STATIC_URL = '//static.darlin.me/static/'
+STATIC_URL = '//dn-darlin.qbox.me/static/'
 
 if IS_LOCAL:
     # Template
